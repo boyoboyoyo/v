@@ -7,11 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>iMikufans Club Blogs - 未来へ響く最初の音</title>
     <link rel="icon" id="favicon" href="https://blog.imikufans.com/wp-content/uploads/2023/08/btn_miku1.jpg" type="image/x-icon" />
-    <link rel="canonical" href="https://freelein.github.io/try/" />
+    <link rel="canonical" href="https://boyoboyoyo.github.io/v/" />
     
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/blog-common.min.css" />
     <link type="text/css" rel="stylesheet" href="css/custom.css" />
+    <link rel="stylesheet" href="css/dark-mode.css" />
     <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="css/mobile-common.min.css" />
     <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/css/fonts/CascadiaMono-SemiLight.min.css" />
     <link rel="stylesheet" href="css/OwO.min.css" />
@@ -37,6 +38,9 @@
 <body class="skin-custom no-navbar">
     <a name="top"></a>
     
+    <!-- 星空背景用キャンバス -->
+    <div id="starfield"></div>
+    
     <!-- トップナビゲーションは省略 -->
     <div id="top_nav" class="navbar forpc navbar-custom"></div>
 
@@ -60,8 +64,8 @@
     <div id="home">
         <div id="header">
             <div id="blogTitle">
-                <a id="lnkBlogLogo" href="https://freelein.github.io/try/"><img id="blogLogo" src="https://www.cnblogs.com/skins/custom/images/logo.gif" alt="ホームへ戻る" /></a>		
-                <h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://freelein.github.io/try/">iMikufans Club Blogs</a></h1>
+                <a id="lnkBlogLogo" href="https://boyoboyoyo.github.io/v/"><img id="blogLogo" src="https://www.cnblogs.com/skins/custom/images/logo.gif" alt="ホームへ戻る" /></a>		
+                <h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://boyoboyoyo.github.io/v/">iMikufans Club Blogs</a></h1>
                 <h2>未来へ響く、最初の音</h2>
             </div>
             <div id="navigator">
@@ -74,10 +78,45 @@
         <div id="main">
             <div id="mainContent">
                 <div class="forFlow">
-                    <!-- 記事のHTMLは変更なしなので省略 -->
-                    <div class="day"><div class="dayTitle"><a>2023年12月30日</a></div><div class="postTitle"><a class="postTitle2 vertical-middle" href="#"><span>VOCALOID総合ライブラリダウンロードサイト (V2, V3, V4, V5, V6対応)</span></a></div><div class="postCon"><div class="c_b_p_desc">概要：このサイトでは、VOCALOIDの各バージョンの音声ライブラリを簡単にダウンロードできます。 #1 エディタダウンロード...</div></div><div class="clear"></div><div class="postDesc">投稿日時: 2023-12-30 22:50 by SYSKUKU-自傷無色。<span>閲覧(19684)</span> <span>コメント(6)</span> <span>推薦(0)</span></div><div class="clear"></div></div>
-                    <div class="day"><div class="dayTitle"><a>2023年8月27日</a></div><div class="postTitle"><a class="postTitle2 vertical-middle" href="#"><span>【V4配布】VOCALOID 4.5.2 V4 Plus Alphaエディタ (V5ライブラリ対応)</span></a></div><div class="postCon"><div class="c_b_p_desc">概要： <img src="https://img2023.cnblogs.com/blog/3264725/202308/3264725-20230827145811990-1793599227.png" alt="" style="margin-right: 10px; max-width: 100px;" /> V5ライブラリをサポートするVocaloid 4！... <a href="#" class="c_b_p_desc_readmore">続きを読む</a></div></div><div class="clear"></div><div class="postDesc">投稿日時: 2023-08-27 14:58 by SYSKUKU-自傷無色。<span>閲覧(1501)</span> <span>コメント(0)</span> <span>推薦(0)</span></div><div class="clear"></div></div>
-                    <div class="day"><div class="dayTitle"><a>2023年8月23日</a></div><div class="postTitle"><a class="postTitle2 vertical-middle" href="#"><span>新サイト「VOCAKEY」完成！Live2D、ダークモード対応</span></a></div><div class="postCon"><div class="c_b_p_desc">概要：VOCAKEY新サイトが完成しました。編集機能、ダークモード、管理画面、Live2Dなどに対応。新サイトのリンクはこちら...</div></div><div class="clear"></div><div class="postDesc">投稿日時: 2023-08-23 15:35 by SYSKUKU-自傷無色。<span>閲覧(7895)</span> <span>コメント(1)</span> <span>推薦(0)</span></div><div class="clear"></div></div>
+                    <!-- 記事のHTML -->
+                    <div class="day">
+                        <div class="dayTitle"><a>2023年12月30日</a></div>
+                        <div class="postTitle">
+                            <a class="postTitle2 vertical-middle" href="#"><span>VOCALOID総合ライブラリダウンロードサイト (V2, V3, V4, V5, V6対応)</span></a>
+                        </div>
+                        <div class="postCon">
+                            <div class="c_b_p_desc">概要：このサイトでは、VOCALOIDの各バージョンの音声ライブラリを簡単にダウンロードできます。 #1 エディタダウンロード...</div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="postDesc">投稿日時: 2023-12-30 22:50 by SYSKUKU-自傷無色。<span>閲覧(19684)</span> <span>コメント(6)</span> <span>推薦(0)</span></div>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <div class="day">
+                        <div class="dayTitle"><a>2023年8月27日</a></div>
+                        <div class="postTitle">
+                            <a class="postTitle2 vertical-middle" href="#"><span>【V4配布】VOCALOID 4.5.2 V4 Plus Alphaエディタ (V5ライブラリ対応)</span></a>
+                        </div>
+                        <div class="postCon">
+                            <div class="c_b_p_desc">概要： <img src="https://img2023.cnblogs.com/blog/3264725/202308/3264725-20230827145811990-1793599227.png" alt="" style="margin-right: 10px; max-width: 100px;" /> V5ライブラリをサポートするVocaloid 4！... <a href="#" class="c_b_p_desc_readmore">続きを読む</a></div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="postDesc">投稿日時: 2023-08-27 14:58 by SYSKUKU-自傷無色。<span>閲覧(1501)</span> <span>コメント(0)</span> <span>推薦(0)</span></div>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <div class="day">
+                        <div class="dayTitle"><a>2023年8月23日</a></div>
+                        <div class="postTitle">
+                            <a class="postTitle2 vertical-middle" href="#"><span>新サイト「VOCAKEY」完成！Live2D、ダークモード対応</span></a>
+                        </div>
+                        <div class="postCon">
+                            <div class="c_b_p_desc">概要：VOCAKEY新サイトが完成しました。編集機能、ダークモード、管理画面、Live2Dなどに対応。新サイトのリンクはこちら...</div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="postDesc">投稿日時: 2023-08-23 15:35 by SYSKUKU-自傷無色。<span>閲覧(7895)</span> <span>コメント(1)</span> <span>推薦(0)</span></div>
+                        <div class="clear"></div>
+                    </div>
                 </div>
             </div>
             <div id="sideBar">
@@ -85,7 +124,30 @@
                     <div id="sidebar_news" class="newsItem">
                         <h3 class="catListTitle">お知らせ</h3>
                         <div id="blog-news">
-                            <p>iMikufans Club Blogsへようこそ！</p><p>ここではVOCALOID関連のリソースや技術情報を共有しています。</p><p>未来へ響く、最初の音 🎵</p>
+                            <p>iMikufans Club Blogsへようこそ！</p>
+                            <p>ここではVOCALOID関連のリソースや技術情報を共有しています。</p>
+                            <p>未来へ響く、最初の音 🎵</p>
+                        </div>
+                    </div>
+                    
+                    <!-- サイドバーに天気情報を追加 -->
+                    <div class="newsItem">
+                        <h3 class="catListTitle">今日の天気</h3>
+                        <div id="weather-widget">
+                            <div class="weather-info">
+                                <span id="weather-temp">--°C</span>
+                                <span id="weather-desc">読み込み中...</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 音楽コントロールをサイドバーに追加 -->
+                    <div class="newsItem">
+                        <h3 class="catListTitle">🎵 音楽プレイヤー</h3>
+                        <div id="music-controls">
+                            <button id="music-toggle" class="music-btn">▶️ 再生</button>
+                            <button id="music-next" class="music-btn">⏭️ 次</button>
+                            <div id="now-playing">再生停止中</div>
                         </div>
                     </div>
                 </div>
@@ -93,7 +155,7 @@
             <div class="clear"></div>
         </div>
         <div class="clear"></div>
-        <div id="footer">© 2024 Your Name or iMikufans Club Blogs</div>
+        <div id="footer">© 2024 polusiti - iMikufans Club Blogs</div>
     </div>
 
     <!-- ページ下部のカスタムスクリプト -->
@@ -110,19 +172,30 @@
         <!-- Core Customization Scripts -->
         <script src="js/cute-cnblogs2.js"></script>
         <script src="js/monitoring2.js"></script>
+        <script src="js/enhanced-features.js"></script>
 
-        <!-- ★ 初期化スクリプトは最後に実行するのが安全 -->
+        <!-- ★ 初期化スクリプトは最後に実行するのが安全 ★ -->
         <script>
             // ★ jQueryの準備ができてから実行する
             $(document).ready(function() {
                 // カスタマイズの中心部分
                 miluframe({
-                    Youself: 'https://freelein.github.io/try/',
-                    custom: [{ name: 'ホーム', link: 'https://freelein.github.io/try/', istarget: false }, { name: 'スキルツリー', link: 'https://miluluyo.github.io/', istarget: true }, { name: 'リンク集', link: '#', istarget: false }],
-                    details: [{ field: 'name', literal: 'iMikufans' }, { field: 'introduction', literal: '未来へ響く、最初の音' }, { field: 'url', literal: 'https://freelein.github.io/try/' }, { field: 'headurl', literal: 'https://blog.imikufans.com/wp-content/uploads/2023/08/btn_miku1.jpg' }],
+                    Youself: 'https://boyoboyoyo.github.io/v/',
+                    custom: [
+                        { name: 'ホーム', link: 'https://boyoboyoyo.github.io/v/', istarget: false }, 
+                        { name: 'VOCALOID', link: '#', istarget: false }, 
+                        { name: 'ダウンロード', link: '#', istarget: false }, 
+                        { name: 'リンク集', link: '#', istarget: false }
+                    ],
+                    details: [
+                        { field: 'name', literal: 'iMikufans' }, 
+                        { field: 'introduction', literal: '未来へ響く、最初の音' }, 
+                        { field: 'url', literal: 'https://boyoboyoyo.github.io/v/' }, 
+                        { field: 'headurl', literal: 'https://blog.imikufans.com/wp-content/uploads/2023/08/btn_miku1.jpg' }
+                    ],
                     logoimg: 'https://blog.imikufans.com/wp-content/uploads/2023/08/btn_miku1.jpg',
                     cuteicon: ['icon-caomei', 'icon-boluo', 'icon-huolongguo', 'icon-chengzi', 'icon-hamigua'],
-                    isGratuity: false,
+                    isGratuity: true,
                 });
 
                 // 詩の表示
@@ -132,6 +205,34 @@
                         $("#poem_sentence").text(result.data.content);
                         $("#poem_info").text('【' + result.data.origin.dynasty + '】' + result.data.origin.author + '「' + result.data.origin.title + '」');
                     });
+                });
+                
+                // 天気情報の取得（簡易版）
+                function updateWeather() {
+                    // 実際のAPIキーが必要です
+                    $("#weather-temp").text("22°C");
+                    $("#weather-desc").text("晴れ ☀️");
+                }
+                updateWeather();
+                
+                // 現在時刻の表示
+                function updateTime() {
+                    const now = new Date();
+                    const timeStr = now.toLocaleString('ja-JP');
+                    if (!$('#current-time').length) {
+                        $('#blog_stats').append('<span id="current-time"> - ' + timeStr + '</span>');
+                    } else {
+                        $('#current-time').text(' - ' + timeStr);
+                    }
+                }
+                updateTime();
+                setInterval(updateTime, 1000);
+                
+                // スクロール効果
+                $(window).scroll(function() {
+                    const scrolled = $(window).scrollTop();
+                    const parallax = scrolled * 0.5;
+                    $('#starfield').css('transform', 'translateY(' + parallax + 'px)');
                 });
             });
         </script>
@@ -157,7 +258,7 @@
                 pio_container.insertAdjacentElement("beforeend", pio_canvas);
                 let pio = new Paul_Pio({
                     "mode": "fixed", "hidden": false,
-                    "content": { "link": ["https://freelein.github.io/try/"] },
+                    "content": { "link": ["https://boyoboyoyo.github.io/v/"] },
                     "model": [
                         "https://cdn.jsdelivr.net/gh/xiaoski/live2d_models_collection/mikoto/mikoto.model.json",
                         "https://cdn.jsdelivr.net/gh/imuncle/live2d/model/tororo/tororo.model.json",
@@ -166,6 +267,53 @@
                 });
             '
         ></script>
+
+        <!-- 追加のパーティクル効果 -->
+        <script>
+            // 雪の結晶やハートの効果
+            function createParticleEffect() {
+                const particles = ['❄️', '⭐', '✨', '🎵', '💙'];
+                
+                setInterval(() => {
+                    const particle = document.createElement('div');
+                    particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+                    particle.style.cssText = `
+                        position: fixed;
+                        top: -20px;
+                        left: ${Math.random() * 100}vw;
+                        font-size: ${Math.random() * 20 + 10}px;
+                        pointer-events: none;
+                        z-index: 1000;
+                        animation: fallDown ${3 + Math.random() * 4}s linear forwards;
+                        opacity: 0.7;
+                    `;
+                    
+                    document.body.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        if (particle.parentNode) {
+                            particle.parentNode.removeChild(particle);
+                        }
+                    }, 7000);
+                }, 2000);
+            }
+            
+            // CSSアニメーションの追加
+            const particleStyle = document.createElement('style');
+            particleStyle.textContent = `
+                @keyframes fallDown {
+                    to {
+                        top: 100vh;
+                        transform: rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(particleStyle);
+            
+            // パーティクル効果を開始
+            setTimeout(createParticleEffect, 2000);
+        </script>
 
     </div>
 </body>
