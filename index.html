@@ -38,101 +38,113 @@
             border: 0;
         }
 
-        /* === 上部動く星空背景（控えめ） === */
-        #header-starfield {
-            position: absolute;
+        /* === 目標サイト風星空背景 === */
+        #starfield {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 280px;
+            height: 100%;
             pointer-events: none;
-            z-index: 1;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-            overflow: hidden;
+            z-index: -1;
+            background: transparent;
         }
 
-        body.dark-mode #header-starfield {
-            background: linear-gradient(135deg, rgba(26, 26, 46, 0.15) 0%, rgba(22, 33, 62, 0.15) 50%, rgba(15, 52, 96, 0.15) 100%);
-        }
-
-        .header-star {
+        .star {
             position: absolute;
-            background: rgba(64, 158, 255, 0.6);
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 50%;
-            animation: headerTwinkle 4s ease-in-out infinite alternate, headerMove 30s linear infinite;
+            animation: starTwinkle 2s ease-in-out infinite alternate;
         }
 
-        .header-star.small { width: 1px; height: 1px; }
-        .header-star.medium { width: 2px; height: 2px; }
-        .header-star.large { width: 3px; height: 3px; }
-
-        @keyframes headerTwinkle {
-            0% { opacity: 0.2; transform: scale(1); }
-            100% { opacity: 0.8; transform: scale(1.1); }
+        .star.small { 
+            width: 1px; 
+            height: 1px; 
+        }
+        .star.medium { 
+            width: 2px; 
+            height: 2px; 
+        }
+        .star.large { 
+            width: 3px; 
+            height: 3px; 
         }
 
-        @keyframes headerMove {
-            0% { transform: translateX(-50px); }
-            100% { transform: translateX(calc(100vw + 50px)); }
+        @keyframes starTwinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
         }
 
-        .shooting-star {
+        /* === 移動する星 === */
+        .moving-star {
             position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
             width: 2px;
             height: 2px;
-            background: rgba(64, 158, 255, 0.8);
-            border-radius: 50%;
-            box-shadow: 0 0 6px 2px rgba(64, 158, 255, 0.4);
-            animation: shoot 4s linear forwards;
+            animation: moveStar 8s linear infinite;
         }
 
-        @keyframes shoot {
+        @keyframes moveStar {
             0% {
-                transform: translateX(-100px) translateY(-100px);
+                left: -10px;
+                top: 20%;
+                opacity: 0;
+            }
+            10% {
                 opacity: 1;
             }
-            70% {
+            90% {
                 opacity: 1;
             }
             100% {
-                transform: translateX(300px) translateY(300px);
+                left: 100vw;
+                top: 80%;
                 opacity: 0;
             }
         }
 
-        /* === タップエフェクト === */
-        .tap-effect {
+        /* === 泳ぐ魚（目標サイト風） === */
+        .fish {
             position: fixed;
+            font-size: 16px;
+            opacity: 0.6;
+            animation: swimFish 12s linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes swimFish {
+            0% {
+                left: -50px;
+                transform: translateY(0px);
+            }
+            25% {
+                transform: translateY(-30px);
+            }
+            50% {
+                transform: translateY(20px);
+            }
+            75% {
+                transform: translateY(-15px);
+            }
+            100% {
+                left: calc(100vw + 50px);
+                transform: translateY(0px);
+            }
+        }
+
+        /* === 目標サイト風タップエフェクト === */
+        .ripple-effect {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(64, 158, 255, 0.3);
             pointer-events: none;
             z-index: 9999;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(64, 158, 255, 0.3) 0%, rgba(64, 158, 255, 0.1) 30%, transparent 70%);
-            animation: tapExpand 0.6s ease-out forwards;
+            animation: ripple 0.6s linear;
         }
 
-        @keyframes tapExpand {
-            0% {
-                width: 10px;
-                height: 10px;
-                opacity: 1;
-            }
-            100% {
-                width: 150px;
-                height: 150px;
-                opacity: 0;
-            }
-        }
-
-        .tap-ripple {
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            border: 1px solid rgba(64, 158, 255, 0.5);
-            border-radius: 50%;
-            animation: rippleExpand 0.8s ease-out forwards;
-        }
-
-        @keyframes rippleExpand {
+        @keyframes ripple {
             0% {
                 width: 0;
                 height: 0;
@@ -141,87 +153,6 @@
             100% {
                 width: 200px;
                 height: 200px;
-                opacity: 0;
-            }
-        }
-
-        /* === 背景エフェクト（さらに控えめ） === */
-        #background-effects {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.03;
-        }
-
-        body.dark-mode #background-effects {
-            opacity: 0.08;
-        }
-
-        .star {
-            position: absolute;
-            background: #409EFF;
-            border-radius: 50%;
-            animation: twinkle 5s ease-in-out infinite alternate;
-        }
-
-        .star.small { width: 1px; height: 1px; }
-        .star.medium { width: 2px; height: 2px; }
-        .star.large { width: 3px; height: 3px; }
-
-        @keyframes twinkle {
-            0% { opacity: 0.1; }
-            100% { opacity: 0.6; }
-        }
-
-        .fish {
-            position: fixed;
-            font-size: 14px;
-            opacity: 0.08;
-            animation: swim 35s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes swim {
-            0% { 
-                left: -50px; 
-                transform: translateY(0px);
-            }
-            25% {
-                transform: translateY(-15px);
-            }
-            50% {
-                transform: translateY(10px);
-            }
-            75% {
-                transform: translateY(-8px);
-            }
-            100% { 
-                left: 100vw;
-                transform: translateY(0px);
-            }
-        }
-
-        /* === パーティクル効果 === */
-        .floating-particle {
-            position: fixed;
-            pointer-events: none;
-            z-index: 1;
-            font-size: 12px;
-            opacity: 0.4;
-            animation: floatUp 8s linear forwards;
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.4;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
                 opacity: 0;
             }
         }
@@ -273,7 +204,15 @@
             border-bottom: 1px solid #555;
         }
 
-        /* === メインレイアウト（目標サイト準拠） === */
+        body.dark-mode .star {
+            background: rgba(173, 216, 230, 0.8);
+        }
+
+        body.dark-mode .moving-star {
+            background: rgba(173, 216, 230, 0.9);
+        }
+
+        /* === メインレイアウト === */
         #home {
             width: 100%;
             background: #fff;
@@ -358,7 +297,6 @@
             margin: 0 10px;
         }
 
-        /* === ナビゲーション（横ずれエフェクト削除） === */
         #navList a {
             color: #666;
             text-decoration: none;
@@ -412,7 +350,7 @@
             padding: 0;
         }
 
-        /* === 記事項目（横ずれエフェクト削除） === */
+        /* === 記事項目 === */
         .day {
             border-bottom: 1px solid #f0f0f0;
             padding: 22px 25px;
@@ -693,10 +631,6 @@
             #sideBar {
                 width: 100%;
             }
-
-            #header-starfield {
-                height: 200px;
-            }
         }
 
         @media (max-width: 768px) {
@@ -799,11 +733,8 @@
 </head>
 
 <body>
-    <!-- 上部動く星空 -->
-    <div id="header-starfield"></div>
-    
-    <!-- 背景エフェクト -->
-    <div id="background-effects"></div>
+    <!-- 目標サイト風星空 -->
+    <div id="starfield"></div>
 
     <div id="home">
         <!-- ヘッダー -->
@@ -955,144 +886,84 @@
 
     <script>
         $(document).ready(function() {
-            console.log('🎵 Tech Blog - Enhanced System Ready');
+            console.log('🎵 Tech Blog - Target Site Compatible Version Ready');
 
             // === 画像エラー処理 ===
             $('img').on('error', function() {
                 $(this).addClass('broken-image');
             });
 
-            // ===== 上部動く星空背景（控えめ） =====
-            function createHeaderStarfield() {
-                const headerStarfield = $('#header-starfield');
+            // ===== 目標サイト風星空背景 =====
+            function createTargetStarfield() {
+                const starfield = $('#starfield');
                 
-                // ヘッダー用の星（少数）
-                for (let i = 0; i < 40; i++) {
-                    const star = $('<div class="header-star"></div>');
+                // 静止している星（目標サイト風）
+                for (let i = 0; i < 100; i++) {
+                    const star = $('<div class="star"></div>');
                     const size = Math.random();
                     let className = 'small';
-                    if (size > 0.85) className = 'large';
-                    else if (size > 0.7) className = 'medium';
+                    if (size > 0.8) className = 'large';
+                    else if (size > 0.6) className = 'medium';
                     
                     star.addClass(className);
                     star.css({
                         left: Math.random() * 100 + '%',
                         top: Math.random() * 100 + '%',
-                        animationDelay: Math.random() * 4 + 's',
-                        animationDuration: (Math.random() * 15 + 25) + 's'
+                        animationDelay: Math.random() * 2 + 's'
                     });
-                    headerStarfield.append(star);
+                    starfield.append(star);
                 }
 
-                // 流星効果（控えめ）
+                // 移動する星（目標サイト風）
                 setInterval(() => {
-                    const shootingStar = $('<div class="shooting-star"></div>');
-                    shootingStar.css({
-                        left: Math.random() * 100 + '%',
-                        top: Math.random() * 30 + '%'
+                    const movingStar = $('<div class="moving-star"></div>');
+                    movingStar.css({
+                        top: Math.random() * 60 + 20 + '%'
                     });
-                    headerStarfield.append(shootingStar);
+                    starfield.append(movingStar);
                     
-                    setTimeout(() => shootingStar.remove(), 4000);
-                }, 8000);
+                    setTimeout(() => movingStar.remove(), 8000);
+                }, 3000);
             }
-            createHeaderStarfield();
+            createTargetStarfield();
 
-            // ===== タップエフェクト =====
-            function createTapEffect(e) {
+            // ===== 泳ぐ魚エフェクト（目標サイト風） =====
+            function createTargetFish() {
+                const fishEmojis = ['🐟', '🐠', '🐡', '🦈'];
+                const fish = $('<div class="fish"></div>');
+                fish.text(fishEmojis[Math.floor(Math.random() * fishEmojis.length)]);
+                fish.css({
+                    top: Math.random() * (window.innerHeight - 100) + 50 + 'px'
+                });
+                $('body').append(fish);
+                
+                setTimeout(() => fish.remove(), 12000);
+            }
+            
+            setInterval(createTargetFish, 8000);
+            setTimeout(createTargetFish, 2000);
+
+            // ===== 目標サイト風タップエフェクト =====
+            function createTargetRipple(e) {
                 const x = e.clientX || (e.touches && e.touches[0].clientX);
                 const y = e.clientY || (e.touches && e.touches[0].clientY);
 
                 if (!x || !y) return;
 
-                // メインエフェクト
-                const effect = $('<div class="tap-effect"></div>');
-                effect.css({
-                    left: x - 5 + 'px',
-                    top: y - 5 + 'px'
-                });
-                $('body').append(effect);
-
-                // リップルエフェクト
-                const ripple = $('<div class="tap-ripple"></div>');
+                const ripple = $('<div class="ripple-effect"></div>');
                 ripple.css({
-                    left: x + 'px',
-                    top: y + 'px'
+                    left: x - 100 + 'px',
+                    top: y - 100 + 'px'
                 });
                 $('body').append(ripple);
 
-                // エフェクト削除
-                setTimeout(() => {
-                    effect.remove();
-                    ripple.remove();
-                }, 800);
+                setTimeout(() => ripple.remove(), 600);
             }
 
             // タップイベント
             $(document).on('click touchstart', function(e) {
-                createTapEffect(e);
+                createTargetRipple(e);
             });
-
-            // ===== 背景エフェクト（さらに控えめ） =====
-            function createBackgroundEffects() {
-                const container = $('#background-effects');
-                
-                // 背景の星（少数）
-                for (let i = 0; i < 30; i++) {
-                    const star = $('<div class="star"></div>');
-                    const size = Math.random();
-                    let className = 'small';
-                    if (size > 0.9) className = 'large';
-                    else if (size > 0.8) className = 'medium';
-                    
-                    star.addClass(className);
-                    star.css({
-                        left: Math.random() * 100 + '%',
-                        top: Math.random() * 100 + '%',
-                        animationDelay: Math.random() * 5 + 's'
-                    });
-                    container.append(star);
-                }
-
-                // 泳ぐ魚エフェクト（控えめ）
-                function createSwimmingFish() {
-                    const fishEmojis = ['🐟', '🐠', '🐡'];
-                    const fish = $('<div class="fish"></div>');
-                    fish.text(fishEmojis[Math.floor(Math.random() * fishEmojis.length)]);
-                    fish.css({
-                        top: Math.random() * (window.innerHeight - 100) + 50 + 'px',
-                        animationDuration: (Math.random() * 15 + 30) + 's'
-                    });
-                    $('body').append(fish);
-                    
-                    setTimeout(() => fish.remove(), 45000);
-                }
-                
-                setInterval(createSwimmingFish, 20000);
-                setTimeout(createSwimmingFish, 5000);
-            }
-            createBackgroundEffects();
-
-            // ===== フローティングパーティクル（控えめ） =====
-            function createFloatingParticle() {
-                const particles = ['✨', '🎵', '💫', '⭐', '🌟', '💙'];
-                const particle = $('<div class="floating-particle"></div>');
-                
-                particle.text(particles[Math.floor(Math.random() * particles.length)]);
-                particle.css({
-                    left: Math.random() * 100 + 'vw',
-                    top: '100vh',
-                    fontSize: (Math.random() * 6 + 10) + 'px',
-                    color: `hsl(${Math.random() * 60 + 200}, 60%, 60%)`
-                });
-                
-                $('body').append(particle);
-                
-                setTimeout(() => particle.remove(), 8000);
-            }
-
-            // パーティクル生成（控えめ）
-            setInterval(createFloatingParticle, 4000);
 
             // ===== APlayer 音楽プレイヤー =====
             const ap = new APlayer({
@@ -1212,13 +1083,6 @@
                 ap.toggle();
             });
 
-            // ===== スクロール効果（控えめ） =====
-            $(window).scroll(function() {
-                const scrolled = $(window).scrollTop();
-                const rate = scrolled * -0.2;
-                $('#header-starfield').css('transform', 'translateY(' + rate + 'px)');
-            });
-
             // ===== ホバー効果（シンプル） =====
             $('.day').hover(
                 function() {
@@ -1229,7 +1093,7 @@
                 }
             );
 
-            console.log('✅ Tech Blog systems operational! 🚀');
+            console.log('✅ Target site compatible version operational! 🚀');
         });
     </script>
 </body>
