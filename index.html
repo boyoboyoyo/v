@@ -19,7 +19,7 @@
             box-sizing: border-box;
         }
 
-        /* === 基本設定（目標サイトと同じ） === */
+        /* === 基本設定 === */
         body {
             font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Segoe UI", Helvetica, Arial, sans-serif;
             font-size: 12px;
@@ -27,9 +27,117 @@
             color: #333;
             background: #f4f4f4;
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* === 背景エフェクト（控えめ） === */
+        /* === 上部動く星空背景 === */
+        #header-starfield {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            pointer-events: none;
+            z-index: 1;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            overflow: hidden;
+        }
+
+        body.dark-mode #header-starfield {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.3) 0%, rgba(22, 33, 62, 0.3) 50%, rgba(15, 52, 96, 0.3) 100%);
+        }
+
+        .header-star {
+            position: absolute;
+            background: rgba(64, 158, 255, 0.8);
+            border-radius: 50%;
+            animation: headerTwinkle 3s ease-in-out infinite alternate, headerMove 20s linear infinite;
+        }
+
+        .header-star.small { width: 2px; height: 2px; }
+        .header-star.medium { width: 3px; height: 3px; }
+        .header-star.large { width: 4px; height: 4px; }
+
+        @keyframes headerTwinkle {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes headerMove {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(calc(100vw + 100px)); }
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #409EFF;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 3px rgba(64, 158, 255, 0.6);
+            animation: shoot 3s linear forwards;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(-150px) translateY(-150px);
+                opacity: 1;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(400px) translateY(400px);
+                opacity: 0;
+            }
+        }
+
+        /* === タップエフェクト === */
+        .tap-effect {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(64, 158, 255, 0.4) 0%, rgba(64, 158, 255, 0.2) 30%, transparent 70%);
+            animation: tapExpand 0.6s ease-out forwards;
+        }
+
+        @keyframes tapExpand {
+            0% {
+                width: 10px;
+                height: 10px;
+                opacity: 1;
+            }
+            100% {
+                width: 200px;
+                height: 200px;
+                opacity: 0;
+            }
+        }
+
+        .tap-ripple {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            border: 2px solid rgba(64, 158, 255, 0.6);
+            border-radius: 50%;
+            animation: rippleExpand 0.8s ease-out forwards;
+        }
+
+        @keyframes rippleExpand {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
+        }
+
+        /* === 背景エフェクト === */
         #background-effects {
             position: fixed;
             top: 0;
@@ -38,11 +146,11 @@
             height: 100%;
             pointer-events: none;
             z-index: -1;
-            opacity: 0.1;
+            opacity: 0.08;
         }
 
         body.dark-mode #background-effects {
-            opacity: 0.3;
+            opacity: 0.15;
         }
 
         .star {
@@ -64,14 +172,50 @@
         .fish {
             position: fixed;
             font-size: 16px;
-            opacity: 0.15;
-            animation: swim 20s linear infinite;
+            opacity: 0.1;
+            animation: swim 25s linear infinite;
             z-index: -1;
         }
 
         @keyframes swim {
-            0% { left: -50px; }
-            100% { left: 100vw; }
+            0% { 
+                left: -50px; 
+                transform: translateY(0px);
+            }
+            25% {
+                transform: translateY(-20px);
+            }
+            50% {
+                transform: translateY(15px);
+            }
+            75% {
+                transform: translateY(-10px);
+            }
+            100% { 
+                left: 100vw;
+                transform: translateY(0px);
+            }
+        }
+
+        /* === パーティクル効果 === */
+        .floating-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            font-size: 14px;
+            opacity: 0.6;
+            animation: floatUp 6s linear forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         /* === ダークモード === */
@@ -91,12 +235,16 @@
 
         body.dark-mode #main {
             background: #2d2d2d;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
         body.dark-mode .day {
             background: #333;
             border-bottom: 1px solid #555;
+        }
+
+        body.dark-mode .day:hover {
+            background: #3a3a3a;
         }
 
         body.dark-mode .postTitle2 {
@@ -112,22 +260,33 @@
             border: 1px solid #555;
         }
 
-        /* === メインレイアウト（目標サイトと同じ構造） === */
+        body.dark-mode .catListTitle {
+            background: #3a3a3a;
+            border-bottom: 1px solid #555;
+        }
+
+        /* === メインレイアウト === */
         #home {
             width: 100%;
             background: #fff;
             min-height: 100vh;
+            position: relative;
         }
 
         #header {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid #e4e6ea;
             padding: 20px 0;
+            position: relative;
+            z-index: 10;
         }
 
         #blogTitle {
             text-align: center;
             margin-bottom: 20px;
+            position: relative;
+            z-index: 11;
         }
 
         #blogLogo {
@@ -136,6 +295,12 @@
             border-radius: 50%;
             margin-bottom: 10px;
             border: 2px solid #409EFF;
+            transition: all 0.3s;
+        }
+
+        #blogLogo:hover {
+            transform: scale(1.1) rotate(360deg);
+            box-shadow: 0 0 20px rgba(64, 158, 255, 0.5);
         }
 
         .headermaintitle {
@@ -145,6 +310,12 @@
             text-decoration: none;
             display: block;
             margin-bottom: 5px;
+            transition: all 0.3s;
+        }
+
+        .headermaintitle:hover {
+            color: #409EFF;
+            transform: scale(1.05);
         }
 
         #header h2 {
@@ -157,6 +328,8 @@
         #navigator {
             text-align: center;
             margin-top: 20px;
+            position: relative;
+            z-index: 11;
         }
 
         #navList {
@@ -173,59 +346,100 @@
         #navList a {
             color: #666;
             text-decoration: none;
-            padding: 5px 10px;
+            padding: 8px 15px;
             font-size: 13px;
-            border-radius: 3px;
+            border-radius: 20px;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #navList a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(64, 158, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        #navList a:hover::before {
+            left: 100%;
         }
 
         #navList a:hover {
             color: #409EFF;
-            background: #f0f9ff;
+            background: rgba(64, 158, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(64, 158, 255, 0.2);
         }
 
         .blogStats {
             text-align: center;
             font-size: 12px;
             color: #999;
-            padding: 10px;
-            background: rgba(240, 249, 255, 0.5);
-            border-radius: 4px;
+            padding: 10px 20px;
+            background: rgba(240, 249, 255, 0.8);
+            border-radius: 20px;
             margin: 0 auto;
             display: inline-block;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(64, 158, 255, 0.1);
         }
 
         /* === メインコンテンツ === */
         #main {
             width: 950px;
             margin: 30px auto;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.98);
             display: flex;
             gap: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border-radius: 4px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border-radius: 8px;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
         #mainContent {
             flex: 1;
-            background: #fff;
+            background: transparent;
         }
 
         .forFlow {
             padding: 0;
         }
 
-        /* === 記事項目（目標サイトと同じスタイル） === */
+        /* === 記事項目 === */
         .day {
             border-bottom: 1px solid #f0f0f0;
             padding: 25px;
-            background: #fff;
-            transition: background 0.3s;
+            background: transparent;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .day::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(64, 158, 255, 0.05), transparent);
+            transition: left 0.6s;
+        }
+
+        .day:hover::before {
+            left: 100%;
         }
 
         .day:hover {
-            background: #fafbfc;
+            background: rgba(248, 251, 255, 0.8);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(64, 158, 255, 0.1);
         }
 
         .day:last-child {
@@ -248,7 +462,23 @@
             font-weight: 500;
             text-decoration: none;
             line-height: 1.4;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .postTitle2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #409EFF, #2c5aa0);
+            transition: width 0.3s ease;
+        }
+
+        .postTitle2:hover::after {
+            width: 100%;
         }
 
         .postTitle2:hover {
@@ -274,19 +504,27 @@
         /* === サイドバー === */
         #sideBar {
             width: 250px;
-            background: #fff;
+            background: transparent;
         }
 
         .newsItem {
-            background: #fff;
-            border: 1px solid #e4e6ea;
-            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(228, 230, 234, 0.8);
+            border-radius: 8px;
             margin-bottom: 15px;
             overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .newsItem:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(64, 158, 255, 0.15);
+            border-color: rgba(64, 158, 255, 0.3);
         }
 
         .catListTitle {
-            background: #f7f7f7;
+            background: rgba(247, 247, 247, 0.9);
             border-bottom: 1px solid #e4e6ea;
             padding: 10px 15px;
             font-size: 13px;
@@ -317,15 +555,35 @@
 
         .music-player {
             background: linear-gradient(135deg, #409EFF, #2c5aa0);
-            border-radius: 8px;
-            padding: 15px;
+            border-radius: 12px;
+            padding: 18px;
             color: white;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(64, 158, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(64, 158, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .music-player::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: musicShine 3s linear infinite;
+        }
+
+        @keyframes musicShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .music-info {
             margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
         }
 
         .music-title {
@@ -343,14 +601,16 @@
             display: flex;
             justify-content: center;
             gap: 8px;
+            position: relative;
+            z-index: 2;
         }
 
         .music-btn {
             background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
             font-size: 12px;
@@ -362,12 +622,13 @@
 
         .music-btn:hover {
             background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
+            transform: scale(1.15);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
         }
 
         .music-btn.play {
-            width: 36px;
-            height: 36px;
+            width: 42px;
+            height: 42px;
             background: rgba(255, 255, 255, 0.25);
         }
 
@@ -381,34 +642,54 @@
 
         .float-btn {
             display: block;
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             background: rgba(64, 158, 255, 0.9);
             color: white;
             border: none;
             border-radius: 50%;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             cursor: pointer;
-            font-size: 16px;
-            box-shadow: 0 4px 12px rgba(64, 158, 255, 0.3);
+            font-size: 18px;
+            box-shadow: 0 6px 20px rgba(64, 158, 255, 0.4);
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .float-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transition: all 0.3s;
+            transform: translate(-50%, -50%);
+        }
+
+        .float-btn:hover::before {
+            width: 100%;
+            height: 100%;
         }
 
         .float-btn:hover {
             background: #409EFF;
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(64, 158, 255, 0.4);
+            transform: scale(1.15);
+            box-shadow: 0 8px 30px rgba(64, 158, 255, 0.5);
         }
 
         /* === APlayer カスタマイズ === */
         .aplayer.aplayer-fixed {
             bottom: 20px !important;
             right: 20px !important;
-            width: 320px !important;
+            width: 330px !important;
             background: rgba(255, 255, 255, 0.98) !important;
-            backdrop-filter: blur(10px) !important;
-            border-radius: 10px !important;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+            backdrop-filter: blur(15px) !important;
+            border-radius: 12px !important;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
             border: 1px solid rgba(64, 158, 255, 0.2) !important;
         }
 
@@ -427,11 +708,15 @@
             #sideBar {
                 width: 100%;
             }
+
+            #header-starfield {
+                height: 200px;
+            }
         }
 
         @media (max-width: 768px) {
             .floating-controls {
-                bottom: 100px;
+                bottom: 120px;
                 top: auto;
             }
             
@@ -441,7 +726,7 @@
             
             #navList a {
                 font-size: 12px;
-                padding: 4px 8px;
+                padding: 6px 12px;
             }
             
             .aplayer.aplayer-fixed {
@@ -457,11 +742,17 @@
             .postTitle2 {
                 font-size: 15px;
             }
+
+            .float-btn {
+                width: 44px;
+                height: 44px;
+                font-size: 16px;
+            }
         }
 
         /* === アニメーション === */
         .day {
-            animation: fadeInUp 0.5s ease forwards;
+            animation: fadeInUp 0.6s ease forwards;
             opacity: 0;
         }
 
@@ -472,11 +763,32 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        .newsItem {
+            animation: slideInRight 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .newsItem:nth-child(1) { animation-delay: 0.3s; }
+        .newsItem:nth-child(2) { animation-delay: 0.4s; }
+        .newsItem:nth-child(3) { animation-delay: 0.5s; }
+        .newsItem:nth-child(4) { animation-delay: 0.6s; }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
 
@@ -491,7 +803,10 @@
 </head>
 
 <body>
-    <!-- 控えめな背景エフェクト -->
+    <!-- 上部動く星空 -->
+    <div id="header-starfield"></div>
+    
+    <!-- 背景エフェクト -->
     <div id="background-effects"></div>
 
     <div id="home">
@@ -535,7 +850,7 @@
                         </div>
                         <div class="postCon">
                             <div class="c_b_p_desc">
-                                概要：WebGLとThree.jsを使用して、リアルタイム音楽ビジュアライゼーションを実装する方法について解説します。FFT解析による周波数データの取得から、3Dグラフィックスでの可視化まで、段階的に説明します。Web Audio APIとの連携により、音楽に同期した美しいビジュアルエフェクトを作成できます。
+                                概要：WebGLとThree.jsを使用して、リアルタイム音楽ビジュアライゼーションを実装する方法について解説します。FFT解析による周波数データの取得から、3Dグラフィックスでの可視化まで、段階的に説明します。Web Audio APIとの連携により、音楽に同期した美しいビジュアルエフェクトを作成できます。パフォーマンス最適化とブラウザ互換性についても詳しく解説します。
                             </div>
                         </div>
                         <div class="clear"></div>
@@ -552,7 +867,7 @@
                         </div>
                         <div class="postCon">
                             <div class="c_b_p_desc">
-                                Canvas APIを活用して、音楽に同期する美しい音波アニメーションを作成する方法を紹介します。Web Audio API との連携により、リアルタイムでビジュアルが変化するインタラクティブなコンテンツを開発できます。パフォーマンス最適化のテクニックも含めて詳しく解説します。
+                                Canvas APIを活用して、音楽に同期する美しい音波アニメーションを作成する方法を紹介します。Web Audio API との連携により、リアルタイムでビジュアルが変化するインタラクティブなコンテンツを開発できます。パフォーマンス最適化のテクニックも含めて詳しく解説します。requestAnimationFrameの活用とメモリ管理についても説明します。
                             </div>
                         </div>
                         <div class="clear"></div>
@@ -569,7 +884,7 @@
                         </div>
                         <div class="postCon">
                             <div class="c_b_p_desc">
-                                React、Node.js、MongoDB を組み合わせたフルスタック音楽配信プラットフォームの設計と実装について解説します。認証システム、ファイルアップロード、ストリーミング配信などの核心技術を詳しく説明します。スケーラブルなアーキテクチャとセキュリティ対策も含めています。
+                                React、Node.js、MongoDB を組み合わせたフルスタック音楽配信プラットフォームの設計と実装について解説します。認証システム、ファイルアップロード、ストリーミング配信などの核心技術を詳しく説明します。スケーラブルなアーキテクチャとセキュリティ対策も含めています。CDNの活用とリアルタイム通信の実装方法についても解説します。
                             </div>
                         </div>
                         <div class="clear"></div>
@@ -644,14 +959,83 @@
 
     <script>
         $(document).ready(function() {
-            console.log('🎵 polusiti Blog - System Ready');
+            console.log('🎵 polusiti Blog - Enhanced System Ready');
 
-            // ===== 控えめな背景エフェクト =====
-            function createSubtleEffects() {
+            // ===== 上部動く星空背景 =====
+            function createHeaderStarfield() {
+                const headerStarfield = $('#header-starfield');
+                
+                // ヘッダー用の星
+                for (let i = 0; i < 80; i++) {
+                    const star = $('<div class="header-star"></div>');
+                    const size = Math.random();
+                    let className = 'small';
+                    if (size > 0.8) className = 'large';
+                    else if (size > 0.6) className = 'medium';
+                    
+                    star.addClass(className);
+                    star.css({
+                        left: Math.random() * 100 + '%',
+                        top: Math.random() * 100 + '%',
+                        animationDelay: Math.random() * 3 + 's',
+                        animationDuration: (Math.random() * 10 + 15) + 's'
+                    });
+                    headerStarfield.append(star);
+                }
+
+                // 流星効果
+                setInterval(() => {
+                    const shootingStar = $('<div class="shooting-star"></div>');
+                    shootingStar.css({
+                        left: Math.random() * 100 + '%',
+                        top: Math.random() * 30 + '%'
+                    });
+                    headerStarfield.append(shootingStar);
+                    
+                    setTimeout(() => shootingStar.remove(), 3000);
+                }, 5000);
+            }
+            createHeaderStarfield();
+
+            // ===== タップエフェクト =====
+            function createTapEffect(e) {
+                const x = e.clientX || e.touches[0].clientX;
+                const y = e.clientY || e.touches[0].clientY;
+
+                // メインエフェクト
+                const effect = $('<div class="tap-effect"></div>');
+                effect.css({
+                    left: x - 5 + 'px',
+                    top: y - 5 + 'px'
+                });
+                $('body').append(effect);
+
+                // リップルエフェクト
+                const ripple = $('<div class="tap-ripple"></div>');
+                ripple.css({
+                    left: x + 'px',
+                    top: y + 'px'
+                });
+                $('body').append(ripple);
+
+                // エフェクト削除
+                setTimeout(() => {
+                    effect.remove();
+                    ripple.remove();
+                }, 800);
+            }
+
+            // タップイベント
+            $(document).on('click touchstart', function(e) {
+                createTapEffect(e);
+            });
+
+            // ===== 背景エフェクト =====
+            function createBackgroundEffects() {
                 const container = $('#background-effects');
                 
-                // 少数の控えめな星
-                for (let i = 0; i < 50; i++) {
+                // 背景の星
+                for (let i = 0; i < 60; i++) {
                     const star = $('<div class="star"></div>');
                     const size = Math.random();
                     let className = 'small';
@@ -667,24 +1051,45 @@
                     container.append(star);
                 }
 
-                // 控えめな魚エフェクト
-                function createSubtleFish() {
-                    const fishEmojis = ['🐟', '🐠', '🐡'];
+                // 泳ぐ魚エフェクト
+                function createSwimmingFish() {
+                    const fishEmojis = ['🐟', '🐠', '🐡', '🦈', '🐙'];
                     const fish = $('<div class="fish"></div>');
                     fish.text(fishEmojis[Math.floor(Math.random() * fishEmojis.length)]);
                     fish.css({
                         top: Math.random() * (window.innerHeight - 100) + 50 + 'px',
-                        animationDuration: (Math.random() * 10 + 15) + 's'
+                        animationDuration: (Math.random() * 10 + 20) + 's'
                     });
                     $('body').append(fish);
                     
-                    setTimeout(() => fish.remove(), 25000);
+                    setTimeout(() => fish.remove(), 30000);
                 }
                 
-                setInterval(createSubtleFish, 15000);
-                setTimeout(createSubtleFish, 3000);
+                setInterval(createSwimmingFish, 12000);
+                setTimeout(createSwimmingFish, 2000);
             }
-            createSubtleEffects();
+            createBackgroundEffects();
+
+            // ===== フローティングパーティクル =====
+            function createFloatingParticle() {
+                const particles = ['✨', '🎵', '💫', '⭐', '🌟', '💙', '🎼', '♪', '♫', '🎶'];
+                const particle = $('<div class="floating-particle"></div>');
+                
+                particle.text(particles[Math.floor(Math.random() * particles.length)]);
+                particle.css({
+                    left: Math.random() * 100 + 'vw',
+                    top: '100vh',
+                    fontSize: (Math.random() * 8 + 12) + 'px',
+                    color: `hsl(${Math.random() * 60 + 200}, 70%, 60%)`
+                });
+                
+                $('body').append(particle);
+                
+                setTimeout(() => particle.remove(), 6000);
+            }
+
+            // パーティクル生成
+            setInterval(createFloatingParticle, 2500);
 
             // ===== APlayer 音楽プレイヤー =====
             const ap = new APlayer({
@@ -797,24 +1202,31 @@
 
             // ===== その他のコントロール =====
             $('#back-to-top').click(function() {
-                $('html, body').animate({ scrollTop: 0 }, 600);
+                $('html, body').animate({ scrollTop: 0 }, 800);
             });
 
             $('#music-toggle').click(function() {
                 ap.toggle();
             });
 
-            // ===== ホバー効果 =====
+            // ===== スクロール効果 =====
+            $(window).scroll(function() {
+                const scrolled = $(window).scrollTop();
+                const rate = scrolled * -0.3;
+                $('#header-starfield').css('transform', 'translateY(' + rate + 'px)');
+            });
+
+            // ===== ホバー効果強化 =====
             $('.day').hover(
                 function() {
-                    $(this).css('transform', 'translateY(-3px)');
+                    $(this).css('transform', 'translateY(-5px) scale(1.02)');
                 },
                 function() {
-                    $(this).css('transform', 'translateY(0)');
+                    $(this).css('transform', 'translateY(0) scale(1)');
                 }
             );
 
-            console.log('✅ All systems operational!');
+            console.log('✅ Enhanced systems operational! 🚀');
         });
     </script>
 </body>
