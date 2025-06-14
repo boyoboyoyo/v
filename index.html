@@ -8,7 +8,7 @@
     <title>polusiti - 博客园</title>
     <link rel="icon" href="https://via.placeholder.com/32x32/409EFF/ffffff?text=P" type="image/x-icon" />
     
-    <!-- 必要なCSS -->
+    <!-- APlayer CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
     
     <style>
@@ -19,13 +19,59 @@
             box-sizing: border-box;
         }
 
-        /* === 基本設定 === */
+        /* === 基本設定（目標サイトと同じ） === */
         body {
             font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Segoe UI", Helvetica, Arial, sans-serif;
             font-size: 12px;
             line-height: 1.5;
             color: #333;
             background: #f4f4f4;
+            position: relative;
+        }
+
+        /* === 背景エフェクト（控えめ） === */
+        #background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        body.dark-mode #background-effects {
+            opacity: 0.3;
+        }
+
+        .star {
+            position: absolute;
+            background: #409EFF;
+            border-radius: 50%;
+            animation: twinkle 4s ease-in-out infinite alternate;
+        }
+
+        .star.small { width: 1px; height: 1px; }
+        .star.medium { width: 2px; height: 2px; }
+        .star.large { width: 3px; height: 3px; }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 0.8; }
+        }
+
+        .fish {
+            position: fixed;
+            font-size: 16px;
+            opacity: 0.15;
+            animation: swim 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes swim {
+            0% { left: -50px; }
+            100% { left: 100vw; }
         }
 
         /* === ダークモード === */
@@ -45,6 +91,7 @@
 
         body.dark-mode #main {
             background: #2d2d2d;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
         }
 
         body.dark-mode .day {
@@ -65,95 +112,7 @@
             border: 1px solid #555;
         }
 
-        /* === 星空背景 === */
-        #starfield {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -10;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        body.dark-mode #starfield {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-        }
-
-        .star {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            animation: twinkle 3s ease-in-out infinite alternate, moveRight 25s linear infinite;
-        }
-
-        .star.small { width: 1px; height: 1px; }
-        .star.medium { width: 2px; height: 2px; }
-        .star.large { width: 3px; height: 3px; }
-
-        @keyframes twinkle {
-            0% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
-
-        @keyframes moveRight {
-            0% { transform: translateX(-50px); }
-            100% { transform: translateX(calc(100vw + 50px)); }
-        }
-
-        .shooting-star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.8);
-            animation: shoot 2s linear forwards;
-        }
-
-        @keyframes shoot {
-            0% {
-                transform: translateX(-100px) translateY(-100px);
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(300px) translateY(300px);
-                opacity: 0;
-            }
-        }
-
-        /* === 泳ぐ魚 === */
-        .fish {
-            position: fixed;
-            font-size: 20px;
-            pointer-events: none;
-            z-index: 1;
-            animation: swim 15s linear infinite;
-            opacity: 0.6;
-        }
-
-        @keyframes swim {
-            0% {
-                left: -50px;
-                transform: translateY(0px);
-            }
-            25% {
-                transform: translateY(-20px);
-            }
-            50% {
-                transform: translateY(20px);
-            }
-            75% {
-                transform: translateY(-10px);
-            }
-            100% {
-                left: 100vw;
-                transform: translateY(0px);
-            }
-        }
-
-        /* === メインレイアウト === */
+        /* === メインレイアウト（目標サイトと同じ構造） === */
         #home {
             width: 100%;
             background: #fff;
@@ -163,77 +122,89 @@
         #header {
             background: #fff;
             border-bottom: 1px solid #e4e6ea;
-            padding: 15px 0;
+            padding: 20px 0;
         }
 
         #blogTitle {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         #blogLogo {
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            border: 2px solid #409EFF;
         }
 
         .headermaintitle {
             color: #333;
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 700;
             text-decoration: none;
+            display: block;
+            margin-bottom: 5px;
         }
 
         #header h2 {
             color: #666;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: normal;
-            margin-top: 5px;
+            margin: 0;
         }
 
         #navigator {
             text-align: center;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         #navList {
             list-style: none;
             display: inline-block;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         #navList li {
             display: inline-block;
-            margin: 0 8px;
+            margin: 0 10px;
         }
 
         #navList a {
             color: #666;
             text-decoration: none;
-            padding: 3px 8px;
-            font-size: 12px;
+            padding: 5px 10px;
+            font-size: 13px;
+            border-radius: 3px;
+            transition: all 0.3s;
         }
 
         #navList a:hover {
             color: #409EFF;
             background: #f0f9ff;
-            border-radius: 3px;
         }
 
         .blogStats {
             text-align: center;
-            font-size: 11px;
+            font-size: 12px;
             color: #999;
+            padding: 10px;
+            background: rgba(240, 249, 255, 0.5);
+            border-radius: 4px;
+            margin: 0 auto;
+            display: inline-block;
         }
 
         /* === メインコンテンツ === */
         #main {
             width: 950px;
-            margin: 20px auto;
+            margin: 30px auto;
             background: #fff;
             display: flex;
             gap: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            overflow: hidden;
         }
 
         #mainContent {
@@ -245,33 +216,39 @@
             padding: 0;
         }
 
-        /* === 記事項目 === */
+        /* === 記事項目（目標サイトと同じスタイル） === */
         .day {
             border-bottom: 1px solid #f0f0f0;
-            padding: 20px;
+            padding: 25px;
             background: #fff;
+            transition: background 0.3s;
         }
 
         .day:hover {
-            background: #fafafa;
+            background: #fafbfc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
         }
 
         .dayTitle {
-            font-size: 11px;
+            font-size: 12px;
             color: #999;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .postTitle {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .postTitle2 {
             color: #333;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 500;
             text-decoration: none;
             line-height: 1.4;
+            transition: color 0.3s;
         }
 
         .postTitle2:hover {
@@ -279,18 +256,18 @@
         }
 
         .postCon {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .c_b_p_desc {
             color: #666;
-            font-size: 12px;
+            font-size: 13px;
             line-height: 1.6;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .postDesc {
-            font-size: 11px;
+            font-size: 12px;
             color: #999;
         }
 
@@ -311,67 +288,72 @@
         .catListTitle {
             background: #f7f7f7;
             border-bottom: 1px solid #e4e6ea;
-            padding: 8px 12px;
-            font-size: 12px;
+            padding: 10px 15px;
+            font-size: 13px;
             font-weight: 600;
             color: #333;
             margin: 0;
         }
 
         #blog-news {
-            padding: 12px;
-            font-size: 11px;
+            padding: 15px;
+            font-size: 12px;
             line-height: 1.6;
             color: #666;
         }
 
         #blog-news p {
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+        }
+
+        #blog-news p:last-child {
+            margin-bottom: 0;
         }
 
         /* === 音楽プレイヤー === */
         .music-widget {
-            padding: 12px;
+            padding: 15px;
         }
 
         .music-player {
-            background: linear-gradient(45deg, #409EFF, #3376c4);
-            border-radius: 6px;
-            padding: 12px;
+            background: linear-gradient(135deg, #409EFF, #2c5aa0);
+            border-radius: 8px;
+            padding: 15px;
             color: white;
             text-align: center;
+            box-shadow: 0 4px 12px rgba(64, 158, 255, 0.3);
         }
 
         .music-info {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .music-title {
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 600;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
         .music-artist {
-            font-size: 10px;
-            opacity: 0.8;
+            font-size: 11px;
+            opacity: 0.9;
         }
 
         .music-controls {
             display: flex;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
         }
 
         .music-btn {
             background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 10px;
+            font-size: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -380,12 +362,13 @@
 
         .music-btn:hover {
             background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
         }
 
         .music-btn.play {
-            width: 32px;
-            height: 32px;
-            background: rgba(255, 255, 255, 0.3);
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.25);
         }
 
         /* === フローティングコントロール === */
@@ -398,33 +381,40 @@
 
         .float-btn {
             display: block;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             background: rgba(64, 158, 255, 0.9);
             color: white;
             border: none;
             border-radius: 50%;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             cursor: pointer;
-            font-size: 14px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(64, 158, 255, 0.3);
             transition: all 0.3s;
         }
 
         .float-btn:hover {
             background: #409EFF;
             transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(64, 158, 255, 0.4);
         }
 
         /* === APlayer カスタマイズ === */
         .aplayer.aplayer-fixed {
             bottom: 20px !important;
             right: 20px !important;
-            width: 280px !important;
-            background: rgba(255, 255, 255, 0.95) !important;
+            width: 320px !important;
+            background: rgba(255, 255, 255, 0.98) !important;
             backdrop-filter: blur(10px) !important;
-            border-radius: 8px !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+            border-radius: 10px !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+            border: 1px solid rgba(64, 158, 255, 0.2) !important;
+        }
+
+        body.dark-mode .aplayer.aplayer-fixed {
+            background: rgba(45, 45, 45, 0.98) !important;
+            border: 1px solid rgba(64, 158, 255, 0.3) !important;
         }
 
         /* === レスポンシブ === */
@@ -441,29 +431,43 @@
 
         @media (max-width: 768px) {
             .floating-controls {
-                bottom: 80px;
+                bottom: 100px;
                 top: auto;
             }
             
             #navList li {
-                margin: 0 4px;
+                margin: 0 6px;
+            }
+            
+            #navList a {
+                font-size: 12px;
+                padding: 4px 8px;
             }
             
             .aplayer.aplayer-fixed {
-                width: 260px !important;
+                width: 300px !important;
                 bottom: 10px !important;
                 right: 10px !important;
+            }
+
+            .day {
+                padding: 20px;
+            }
+
+            .postTitle2 {
+                font-size: 15px;
             }
         }
 
         /* === アニメーション === */
         .day {
-            animation: fadeInUp 0.6s ease forwards;
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
         }
 
-        .day:nth-child(2) { animation-delay: 0.1s; }
-        .day:nth-child(3) { animation-delay: 0.2s; }
-        .day:nth-child(4) { animation-delay: 0.3s; }
+        .day:nth-child(1) { animation-delay: 0.1s; }
+        .day:nth-child(2) { animation-delay: 0.2s; }
+        .day:nth-child(3) { animation-delay: 0.3s; }
 
         @keyframes fadeInUp {
             from {
@@ -475,6 +479,11 @@
                 transform: translateY(0);
             }
         }
+
+        /* === クリア要素 === */
+        .clear {
+            clear: both;
+        }
     </style>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -482,8 +491,8 @@
 </head>
 
 <body>
-    <!-- 星空背景 -->
-    <div id="starfield"></div>
+    <!-- 控えめな背景エフェクト -->
+    <div id="background-effects"></div>
 
     <div id="home">
         <!-- ヘッダー -->
@@ -506,7 +515,7 @@
                         <span>記事 - 3</span> 
                         <span>随筆 - 0</span> 
                         <span>コメント - 7</span> 
-                        <span>閲覧数 - 27080</span>
+                        <span>閲覧数 - 27,080</span>
                         <span id="current-time"></span>
                     </div>
                 </div>
@@ -526,11 +535,11 @@
                         </div>
                         <div class="postCon">
                             <div class="c_b_p_desc">
-                                概要：WebGLとThree.jsを使用して、リアルタイム音楽ビジュアライゼーションを実装する方法について解説します。FFT解析による周波数データの取得から、3Dグラフィックスでの可視化まで、段階的に説明します。
+                                概要：WebGLとThree.jsを使用して、リアルタイム音楽ビジュアライゼーションを実装する方法について解説します。FFT解析による周波数データの取得から、3Dグラフィックスでの可視化まで、段階的に説明します。Web Audio APIとの連携により、音楽に同期した美しいビジュアルエフェクトを作成できます。
                             </div>
                         </div>
                         <div class="clear"></div>
-                        <div class="postDesc">投稿日時: 2025-06-14 23:49 by polusiti<span>閲覧(1,234)</span> <span>コメント(3)</span> <span>推薦(1)</span></div>
+                        <div class="postDesc">投稿日時: 2025-06-14 23:49 by polusiti　<span>閲覧(1,234)</span> <span>コメント(3)</span> <span>推薦(1)</span></div>
                         <div class="clear"></div>
                     </div>
 
@@ -543,11 +552,11 @@
                         </div>
                         <div class="postCon">
                             <div class="c_b_p_desc">
-                                Canvas APIを活用して、音楽に同期する美しい音波アニメーションを作成する方法を紹介します。Web Audio API との連携により、リアルタイムでビジュアルが変化するインタラクティブなコンテンツを開発できます。
+                                Canvas APIを活用して、音楽に同期する美しい音波アニメーションを作成する方法を紹介します。Web Audio API との連携により、リアルタイムでビジュアルが変化するインタラクティブなコンテンツを開発できます。パフォーマンス最適化のテクニックも含めて詳しく解説します。
                             </div>
                         </div>
                         <div class="clear"></div>
-                        <div class="postDesc">投稿日時: 2025-06-10 14:30 by polusiti<span>閲覧(892)</span> <span>コメント(2)</span> <span>推薦(0)</span></div>
+                        <div class="postDesc">投稿日時: 2025-06-10 14:30 by polusiti　<span>閲覧(892)</span> <span>コメント(2)</span> <span>推薦(0)</span></div>
                         <div class="clear"></div>
                     </div>
 
@@ -560,11 +569,11 @@
                         </div>
                         <div class="postCon">
                             <div class="c_b_p_desc">
-                                React、Node.js、MongoDB を組み合わせたフルスタック音楽配信プラットフォームの設計と実装について解説します。認証システム、ファイルアップロード、ストリーミング配信などの核心技術を詳しく説明します。
+                                React、Node.js、MongoDB を組み合わせたフルスタック音楽配信プラットフォームの設計と実装について解説します。認証システム、ファイルアップロード、ストリーミング配信などの核心技術を詳しく説明します。スケーラブルなアーキテクチャとセキュリティ対策も含めています。
                             </div>
                         </div>
                         <div class="clear"></div>
-                        <div class="postDesc">投稿日時: 2025-06-05 19:15 by polusiti<span>閲覧(2,156)</span> <span>コメント(5)</span> <span>推薦(2)</span></div>
+                        <div class="postDesc">投稿日時: 2025-06-05 19:15 by polusiti　<span>閲覧(2,156)</span> <span>コメント(5)</span> <span>推薦(2)</span></div>
                         <div class="clear"></div>
                     </div>
                 </div>
@@ -637,57 +646,45 @@
         $(document).ready(function() {
             console.log('🎵 polusiti Blog - System Ready');
 
-            // ===== 動く星空背景 =====
-            function createStarfield() {
-                const starfield = $('#starfield');
+            // ===== 控えめな背景エフェクト =====
+            function createSubtleEffects() {
+                const container = $('#background-effects');
                 
-                // 通常の星
-                for (let i = 0; i < 150; i++) {
+                // 少数の控えめな星
+                for (let i = 0; i < 50; i++) {
                     const star = $('<div class="star"></div>');
                     const size = Math.random();
                     let className = 'small';
-                    if (size > 0.8) className = 'large';
-                    else if (size > 0.5) className = 'medium';
+                    if (size > 0.9) className = 'large';
+                    else if (size > 0.7) className = 'medium';
                     
                     star.addClass(className);
                     star.css({
                         left: Math.random() * 100 + '%',
                         top: Math.random() * 100 + '%',
-                        animationDelay: Math.random() * 3 + 's',
-                        animationDuration: (Math.random() * 15 + 20) + 's'
+                        animationDelay: Math.random() * 4 + 's'
                     });
-                    starfield.append(star);
+                    container.append(star);
                 }
 
-                // 流星効果
-                setInterval(() => {
-                    const shootingStar = $('<div class="shooting-star"></div>');
-                    shootingStar.css({
-                        left: Math.random() * 100 + '%',
-                        top: Math.random() * 50 + '%'
+                // 控えめな魚エフェクト
+                function createSubtleFish() {
+                    const fishEmojis = ['🐟', '🐠', '🐡'];
+                    const fish = $('<div class="fish"></div>');
+                    fish.text(fishEmojis[Math.floor(Math.random() * fishEmojis.length)]);
+                    fish.css({
+                        top: Math.random() * (window.innerHeight - 100) + 50 + 'px',
+                        animationDuration: (Math.random() * 10 + 15) + 's'
                     });
-                    starfield.append(shootingStar);
+                    $('body').append(fish);
                     
-                    setTimeout(() => shootingStar.remove(), 2000);
-                }, 6000);
-            }
-            createStarfield();
-
-            // ===== 泳ぐ魚効果 =====
-            function createFish() {
-                const fishEmojis = ['🐟', '🐠', '🐡', '🦈', '🐙'];
-                const fish = $('<div class="fish"></div>');
-                fish.text(fishEmojis[Math.floor(Math.random() * fishEmojis.length)]);
-                fish.css({
-                    top: Math.random() * (window.innerHeight - 100) + 50 + 'px'
-                });
-                $('body').append(fish);
+                    setTimeout(() => fish.remove(), 25000);
+                }
                 
-                setTimeout(() => fish.remove(), 15000);
+                setInterval(createSubtleFish, 15000);
+                setTimeout(createSubtleFish, 3000);
             }
-            
-            setInterval(createFish, 8000);
-            setTimeout(createFish, 2000);
+            createSubtleEffects();
 
             // ===== APlayer 音楽プレイヤー =====
             const ap = new APlayer({
@@ -698,10 +695,10 @@
                 loop: 'all',
                 order: 'random',
                 preload: 'auto',
-                volume: 0.7,
+                volume: 0.6,
                 mutex: true,
                 listFolded: true,
-                listMaxHeight: 90,
+                listMaxHeight: 120,
                 audio: [
                     {
                         name: 'Lo-fi Hip Hop',
@@ -800,7 +797,7 @@
 
             // ===== その他のコントロール =====
             $('#back-to-top').click(function() {
-                $('html, body').animate({ scrollTop: 0 }, 500);
+                $('html, body').animate({ scrollTop: 0 }, 600);
             });
 
             $('#music-toggle').click(function() {
@@ -810,7 +807,7 @@
             // ===== ホバー効果 =====
             $('.day').hover(
                 function() {
-                    $(this).css('transform', 'translateY(-2px)');
+                    $(this).css('transform', 'translateY(-3px)');
                 },
                 function() {
                     $(this).css('transform', 'translateY(0)');
