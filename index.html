@@ -3,297 +3,749 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="referrer" content="origin-when-cross-origin" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="iMikufans Club Blogs - VOCALOID関連のリソースや技術情報を共有するブログサイト" />
+    <meta name="keywords" content="VOCALOID, Hatsune Miku, 初音ミク, 音楽制作, DTM, ブログ" />
     <title>iMikufans Club Blogs - 未来へ響く最初の音</title>
-    <link rel="icon" id="favicon" href="https://blog.imikufans.com/wp-content/uploads/2023/08/btn_miku1.jpg" type="image/x-icon" />
-    <link rel="canonical" href="https://boyoboyoyo.github.io/v/" />
+    <link rel="icon" href="https://blog.imikufans.com/wp-content/uploads/2023/08/btn_miku1.jpg" type="image/x-icon" />
     
-    <!-- ★ 基本CSS（順番重要）★ -->
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
-    
-    <!-- ★ 外部ライブラリCSS ★ -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dreamer-Paul/Pio@2.4/static/pio.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- CSS -->
+    <style type="text/css">
+        /* ★ 基本設定 ★ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- ★ JavaScript（jQuery最優先）★ -->
+        :root {
+            --primary-color: #2D8CF0;
+            --secondary-color: #19be6b;
+            --accent-color: #ff9900;
+            --text-color: #2c3e50;
+            --text-light: #7f8c8d;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-gradient);
+            min-height: 100vh;
+        }
+
+        /* ★ ダークモード ★ */
+        body.dark-mode {
+            --text-color: #ecf0f1;
+            --text-light: #bdc3c7;
+            --card-bg: rgba(22, 33, 62, 0.9);
+            --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --glass-bg: rgba(0, 0, 0, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ★ 背景アニメーション ★ */
+        #bg-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* ★ ガラス効果 ★ */
+        .glass-effect {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .glass-effect:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        /* ★ コンテナ ★ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ★ ヘッダー ★ */
+        .main-header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+
+        .site-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: block;
+            border: 3px solid var(--primary-color);
+            box-shadow: var(--shadow);
+        }
+
+        .site-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .site-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        /* ★ ナビゲーション ★ */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 12px 24px;
+            border-radius: 25px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ★ 統計バー ★ */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            color: var(--primary-color);
+            border: 1px solid var(--glass-border);
+        }
+
+        /* ★ コンテンツグリッド ★ */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* ★ 記事セクション ★ */
+        .posts-section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .post-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .post-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .post-title {
+            margin: 15px 0;
+        }
+
+        .post-title a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+
+        .post-title a:hover {
+            color: var(--primary-color);
+        }
+
+        .post-excerpt {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* ★ サイドバー ★ */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .widget {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .widget-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .widget-content {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ★ 今日の詩 ★ */
+        .poem-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 40px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .poem-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #poem-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin: 15px 0;
+            color: var(--text-color);
+        }
+
+        #poem-author {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* ★ フッター ★ */
+        .main-footer {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            margin-top: 40px;
+        }
+
+        /* ★ フローティングボタン ★ */
+        .floating-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .float-btn {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .float-btn:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* ★ レスポンシブ ★ */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .site-title {
+                font-size: 2rem;
+            }
+            
+            .main-nav {
+                gap: 15px;
+            }
+            
+            .nav-link {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .stats-bar {
+                gap: 15px;
+            }
+            
+            .post-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .floating-controls {
+                bottom: 20px;
+                top: auto;
+            }
+        }
+
+        /* ★ アニメーション ★ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .post-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .post-card:nth-child(2) { animation-delay: 0.1s; }
+        .post-card:nth-child(3) { animation-delay: 0.2s; }
+        .post-card:nth-child(4) { animation-delay: 0.3s; }
+
+        /* ★ パーティクル ★ */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .floating-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            animation: float 4s ease-in-out infinite;
+            opacity: 0.6;
+        }
+    </style>
+
+    <!-- jQuery -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 </head>
 
-<body class="modern-layout">
-    <!-- ★ 背景エフェクト ★ -->
-    <div id="bg-animation">
-        <canvas id="star-canvas"></canvas>
-        <div id="floating-particles"></div>
+<body>
+    <!-- ★ 背景星空 ★ -->
+    <div id="bg-stars"></div>
+
+    <div class="container">
+        <!-- ★ ヘッダー ★ -->
+        <header class="main-header">
+            <img src="https://blog.imikufans.com/wp-content/uploads/2023/08/btn_miku1.jpg" alt="Logo" class="site-logo">
+            <h1 class="site-title">iMikufans Club Blogs</h1>
+            <p class="site-subtitle">未来へ響く、最初の音</p>
+            
+            <nav class="main-nav">
+                <a href="#" class="nav-link active">🏠 ホーム</a>
+                <a href="#" class="nav-link">🎤 VOCALOID</a>
+                <a href="#" class="nav-link">📥 ダウンロード</a>
+                <a href="#" class="nav-link">🔗 リンク</a>
+                <a href="#" class="nav-link">📧 コンタクト</a>
+            </nav>
+        </header>
+
+        <!-- ★ 統計バー ★ -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                📄 記事 3
+            </div>
+            <div class="stat-item">
+                💬 コメント 7
+            </div>
+            <div class="stat-item">
+                👁️ 閲覧数 27,080
+            </div>
+            <div class="stat-item">
+                🕐 <span id="current-time">--:--:--</span>
+            </div>
+        </div>
+
+        <!-- ★ 今日の詩 ★ -->
+        <div class="poem-section">
+            <div class="poem-content">
+                💫
+                <div id="poem-text">桜散り 新緑の季節に 音響く</div>
+                <div id="poem-author">— 初音ミク</div>
+            </div>
+        </div>
+
+        <!-- ★ メインコンテンツ ★ -->
+        <div class="content-grid">
+            <!-- ★ 記事一覧 ★ -->
+            <section class="posts-section">
+                <h2 class="section-title">📰 最新記事</h2>
+                
+                <article class="post-card">
+                    <div class="post-header">
+                        <time class="post-date">2023年12月30日</time>
+                        <div class="post-meta">
+                            <span>👁️ 19,684</span>
+                            <span>💬 6</span>
+                        </div>
+                    </div>
+                    <h3 class="post-title">
+                        <a href="#">VOCALOID総合ライブラリダウンロードサイト (V2, V3, V4, V5, V6対応)</a>
+                    </h3>
+                    <div class="post-excerpt">
+                        このサイトでは、VOCALOIDの各バージョンの音声ライブラリを簡単にダウンロードできます。V2からV6まで幅広く対応しており、初心者から上級者まで利用できる便利なリソースサイトです。
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag">VOCALOID</span>
+                        <span class="tag">ダウンロード</span>
+                        <span class="tag">音声ライブラリ</span>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-header">
+                        <time class="post-date">2023年8月27日</time>
+                        <div class="post-meta">
+                            <span>👁️ 1,501</span>
+                            <span>💬 0</span>
+                        </div>
+                    </div>
+                    <h3 class="post-title">
+                        <a href="#">【V4配布】VOCALOID 4.5.2 V4 Plus Alphaエディタ (V5ライブラリ対応)</a>
+                    </h3>
+                    <div class="post-excerpt">
+                        V5ライブラリをサポートするVocaloid 4エディタの改良版です。新機能や互換性の向上により、より快適な音楽制作環境を提供します。
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag">VOCALOID4</span>
+                        <span class="tag">エディタ</span>
+                        <span class="tag">配布</span>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-header">
+                        <time class="post-date">2023年8月23日</time>
+                        <div class="post-meta">
+                            <span>👁️ 7,895</span>
+                            <span>💬 1</span>
+                        </div>
+                    </div>
+                    <h3 class="post-title">
+                        <a href="#">新サイト「VOCAKEY」完成！Live2D、ダークモード対応</a>
+                    </h3>
+                    <div class="post-excerpt">
+                        VOCAKEY新サイトが完成しました。編集機能、ダークモード、管理画面、Live2Dなどに対応した次世代のVOCALOIDコミュニティサイトです。
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag">サイト更新</span>
+                        <span class="tag">Live2D</span>
+                        <span class="tag">VOCAKEY</span>
+                    </div>
+                </article>
+            </section>
+
+            <!-- ★ サイドバー ★ -->
+            <aside class="sidebar">
+                <div class="widget">
+                    <h3 class="widget-title">📢 お知らせ</h3>
+                    <div class="widget-content">
+                        <p>🎵 iMikufans Club Blogsへようこそ！</p>
+                        <p>📚 VOCALOID関連のリソースや技術情報を共有</p>
+                        <p>✨ 未来へ響く、最初の音</p>
+                    </div>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">🎵 音楽プレイヤー</h3>
+                    <div class="widget-content">
+                        <div style="text-align: center;">
+                            <button id="play-btn" style="background: var(--primary-color); color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer;">
+                                ▶️ Senbonzakura
+                            </button>
+                            <p style="margin-top: 10px; font-size: 0.9rem;">Hatsune Miku</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">☀️ 今日の天気</h3>
+                    <div class="widget-content">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: var(--primary-color); font-weight: bold;">22°C</div>
+                            <div style="margin-top: 5px;">☀️ 晴れ</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">🏷️ 人気タグ</h3>
+                    <div class="widget-content">
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <a href="#" style="background: var(--glass-bg); color: var(--text-color); padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.85rem;">VOCALOID</a>
+                            <a href="#" style="background: var(--glass-bg); color: var(--text-color); padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.85rem;">Hatsune Miku</a>
+                            <a href="#" style="background: var(--glass-bg); color: var(--text-color); padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.85rem;">音楽制作</a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- ★ フッター ★ -->
+        <footer class="main-footer">
+            <p>&copy; 2025 polusiti - iMikufans Club Blogs</p>
+            <p style="margin-top: 5px; font-size: 0.9rem; color: var(--text-light);">
+                🐙 <a href="https://github.com/boyoboyoyo" style="color: var(--primary-color);">GitHub</a> | 
+                🐦 <a href="#" style="color: var(--primary-color);">Twitter</a> | 
+                📧 <a href="#" style="color: var(--primary-color);">Contact</a>
+            </p>
+        </footer>
     </div>
-
-    <!-- ★ ヘッダー部分 ★ -->
-    <header id="main-header" class="glass-effect">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo-section">
-                    <img src="https://blog.imikufans.com/wp-content/uploads/2023/08/btn_miku1.jpg" alt="Logo" class="site-logo">
-                    <div class="site-info">
-                        <h1 class="site-title">iMikufans Club Blogs</h1>
-                        <p class="site-subtitle">未来へ響く、最初の音</p>
-                    </div>
-                </div>
-                
-                <nav class="main-nav">
-                    <ul class="nav-list">
-                        <li><a href="#" class="nav-link active"><i class="fas fa-home"></i> ホーム</a></li>
-                        <li><a href="#" class="nav-link"><i class="fas fa-microphone"></i> VOCALOID</a></li>
-                        <li><a href="#" class="nav-link"><i class="fas fa-download"></i> ダウンロード</a></li>
-                        <li><a href="#" class="nav-link"><i class="fas fa-link"></i> リンク</a></li>
-                        <li><a href="#" class="nav-link"><i class="fas fa-envelope"></i> コンタクト</a></li>
-                    </ul>
-                </nav>
-                
-                <div class="header-controls">
-                    <button id="theme-toggle" class="control-btn" title="ダークモード切り替え">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    <button id="search-toggle" class="control-btn" title="検索">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- ★ メインコンテンツ ★ -->
-    <main class="main-content">
-        <div class="container">
-            <!-- ★ 統計情報バー ★ -->
-            <div class="stats-bar glass-effect">
-                <div class="stat-item">
-                    <i class="fas fa-file-alt"></i>
-                    <span>記事 3</span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-comments"></i>
-                    <span>コメント 7</span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-eye"></i>
-                    <span>閲覧数 27,080</span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-clock"></i>
-                    <span id="current-time">--:--:--</span>
-                </div>
-            </div>
-
-            <!-- ★ 今日の詩（コンパクト版）★ -->
-            <div class="poem-section glass-effect">
-                <div class="poem-content">
-                    <i class="fas fa-quote-left"></i>
-                    <div id="poem-text">読み込み中...</div>
-                    <div id="poem-author">-- 作者不明</div>
-                </div>
-            </div>
-
-            <div class="content-grid">
-                <!-- ★ 記事一覧（メイン）★ -->
-                <section class="posts-section">
-                    <h2 class="section-title">
-                        <i class="fas fa-newspaper"></i>
-                        最新記事
-                    </h2>
-                    
-                    <article class="post-card glass-effect">
-                        <div class="post-header">
-                            <time class="post-date">2023年12月30日</time>
-                            <div class="post-meta">
-                                <span class="view-count"><i class="fas fa-eye"></i> 19,684</span>
-                                <span class="comment-count"><i class="fas fa-comments"></i> 6</span>
-                            </div>
-                        </div>
-                        <h3 class="post-title">
-                            <a href="#">VOCALOID総合ライブラリダウンロードサイト (V2, V3, V4, V5, V6対応)</a>
-                        </h3>
-                        <div class="post-excerpt">
-                            このサイトでは、VOCALOIDの各バージョンの音声ライブラリを簡単にダウンロードできます。V2からV6まで幅広く対応しており、初心者から上級者まで利用できる便利なリソースサイトです。
-                        </div>
-                        <div class="post-tags">
-                            <span class="tag">VOCALOID</span>
-                            <span class="tag">ダウンロード</span>
-                            <span class="tag">音声ライブラリ</span>
-                        </div>
-                    </article>
-
-                    <article class="post-card glass-effect">
-                        <div class="post-header">
-                            <time class="post-date">2023年8月27日</time>
-                            <div class="post-meta">
-                                <span class="view-count"><i class="fas fa-eye"></i> 1,501</span>
-                                <span class="comment-count"><i class="fas fa-comments"></i> 0</span>
-                            </div>
-                        </div>
-                        <h3 class="post-title">
-                            <a href="#">【V4配布】VOCALOID 4.5.2 V4 Plus Alphaエディタ (V5ライブラリ対応)</a>
-                        </h3>
-                        <div class="post-excerpt">
-                            V5ライブラリをサポートするVocaloid 4エディタの改良版です。新機能や互換性の向上により、より快適な音楽制作環境を提供します。
-                        </div>
-                        <div class="post-tags">
-                            <span class="tag">VOCALOID4</span>
-                            <span class="tag">エディタ</span>
-                            <span class="tag">配布</span>
-                        </div>
-                    </article>
-
-                    <article class="post-card glass-effect">
-                        <div class="post-header">
-                            <time class="post-date">2023年8月23日</time>
-                            <div class="post-meta">
-                                <span class="view-count"><i class="fas fa-eye"></i> 7,895</span>
-                                <span class="comment-count"><i class="fas fa-comments"></i> 1</span>
-                            </div>
-                        </div>
-                        <h3 class="post-title">
-                            <a href="#">新サイト「VOCAKEY」完成！Live2D、ダークモード対応</a>
-                        </h3>
-                        <div class="post-excerpt">
-                            VOCAKEY新サイトが完成しました。編集機能、ダークモード、管理画面、Live2Dなどに対応した次世代のVOCALOIDコミュニティサイトです。
-                        </div>
-                        <div class="post-tags">
-                            <span class="tag">サイト更新</span>
-                            <span class="tag">Live2D</span>
-                            <span class="tag">VOCAKEY</span>
-                        </div>
-                    </article>
-                </section>
-
-                <!-- ★ サイドバー ★ -->
-                <aside class="sidebar">
-                    <div class="widget glass-effect">
-                        <h3 class="widget-title">
-                            <i class="fas fa-bullhorn"></i>
-                            お知らせ
-                        </h3>
-                        <div class="widget-content">
-                            <p>🎵 iMikufans Club Blogsへようこそ！</p>
-                            <p>📚 VOCALOID関連のリソースや技術情報を共有</p>
-                            <p>✨ 未来へ響く、最初の音</p>
-                        </div>
-                    </div>
-
-                    <div class="widget glass-effect">
-                        <h3 class="widget-title">
-                            <i class="fas fa-music"></i>
-                            音楽プレイヤー
-                        </h3>
-                        <div class="widget-content">
-                            <div class="music-player-mini">
-                                <button id="play-btn" class="music-btn">
-                                    <i class="fas fa-play"></i>
-                                </button>
-                                <div class="track-info">
-                                    <div class="track-title">Senbonzakura</div>
-                                    <div class="track-artist">Hatsune Miku</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="widget glass-effect">
-                        <h3 class="widget-title">
-                            <i class="fas fa-cloud-sun"></i>
-                            今日の天気
-                        </h3>
-                        <div class="widget-content">
-                            <div class="weather-display">
-                                <div class="weather-temp">22°C</div>
-                                <div class="weather-desc">
-                                    <i class="fas fa-sun"></i>
-                                    晴れ
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="widget glass-effect">
-                        <h3 class="widget-title">
-                            <i class="fas fa-tags"></i>
-                            人気タグ
-                        </h3>
-                        <div class="widget-content">
-                            <div class="tag-cloud">
-                                <a href="#" class="tag-link">VOCALOID</a>
-                                <a href="#" class="tag-link">Hatsune Miku</a>
-                                <a href="#" class="tag-link">音楽制作</a>
-                                <a href="#" class="tag-link">ダウンロード</a>
-                                <a href="#" class="tag-link">チュートリアル</a>
-                            </div>
-                        </div>
-                    </div>
-                </aside>
-            </div>
-        </div>
-    </main>
-
-    <!-- ★ フッター ★ -->
-    <footer class="main-footer glass-effect">
-        <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2025 polusiti - iMikufans Club Blogs</p>
-                <div class="footer-links">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fas fa-rss"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <!-- ★ フローティングボタン ★ -->
     <div class="floating-controls">
-        <button id="back-to-top" class="float-btn" title="トップへ戻る">
-            <i class="fas fa-arrow-up"></i>
+        <button id="theme-toggle" class="float-btn" title="ダークモード切り替え">
+            🌙
         </button>
-        <button id="toggle-music" class="float-btn" title="音楽の再生/停止">
-            <i class="fas fa-music"></i>
+        <button id="music-toggle" class="float-btn" title="音楽再生">
+            🎵
         </button>
     </div>
 
-    <!-- ★ 音楽プレイヤー（隠し）★ -->
-    <div id="player"></div>
-
     <!-- ★ JavaScript ★ -->
-    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-    <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            console.log('🎵 iMikufans Club Blogs - System Ready');
 
-    <!-- ★ Live2D キャラクター ★ -->
-    <script async src="https://cdn.jsdelivr.net/combine/gh/Dreamer-Paul/Pio@2.4/static/l2d.min.js,gh/Dreamer-Paul/Pio@2.4/static/pio.min.js"
-        onload='
-            let pio_container = document.createElement("div");
-            pio_container.classList.add("pio-container", "right");
-            pio_container.style.bottom = "80px";
-            pio_container.style.right = "20px";
-            pio_container.style.zIndex = "999";
-            document.body.appendChild(pio_container);
-            
-            let pio_canvas = document.createElement("canvas");
-            pio_canvas.id = "pio";
-            pio_canvas.style.width = "12rem";
-            pio_canvas.width = "500";
-            pio_canvas.height = "600";
-            pio_container.appendChild(pio_canvas);
-            
-            let pio = new Paul_Pio({
-                "mode": "fixed",
-                "hidden": false,
-                "content": { "link": ["https://boyoboyoyo.github.io/v/"] },
-                "model": [
-                    "https://cdn.jsdelivr.net/gh/imuncle/live2d/model/mashiro/seifuku.model.json"
-                ]
+            // ★ 星空背景 ★
+            function createStars() {
+                const starsContainer = $('#bg-stars');
+                for (let i = 0; i < 150; i++) {
+                    const star = $('<div class="star"></div>');
+                    star.css({
+                        left: Math.random() * 100 + '%',
+                        top: Math.random() * 100 + '%',
+                        animationDelay: Math.random() * 3 + 's'
+                    });
+                    starsContainer.append(star);
+                }
+            }
+            createStars();
+
+            // ★ 時刻表示 ★
+            function updateTime() {
+                const now = new Date();
+                const timeStr = now.toLocaleTimeString('ja-JP');
+                $('#current-time').text(timeStr);
+            }
+            updateTime();
+            setInterval(updateTime, 1000);
+
+            // ★ ダークモード切り替え ★
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            if (isDark) {
+                $('body').addClass('dark-mode');
+                $('#theme-toggle').text('☀️');
+            }
+
+            $('#theme-toggle').click(function() {
+                $('body').toggleClass('dark-mode');
+                const isNowDark = $('body').hasClass('dark-mode');
+                $(this).text(isNowDark ? '☀️' : '🌙');
+                localStorage.setItem('darkMode', isNowDark);
+                
+                // アニメーション効果
+                $(this).css('transform', 'rotate(360deg)');
+                setTimeout(() => {
+                    $(this).css('transform', 'rotate(0deg)');
+                }, 300);
             });
-        '></script>
+
+            // ★ 音楽プレイヤー ★
+            let isPlaying = false;
+            $('#play-btn, #music-toggle').click(function() {
+                if (isPlaying) {
+                    $('#play-btn').text('▶️ Senbonzakura');
+                    isPlaying = false;
+                } else {
+                    $('#play-btn').text('⏸️ Senbonzakura');
+                    isPlaying = true;
+                }
+            });
+
+            // ★ フローティングパーティクル ★
+            function createParticle() {
+                const particles = ['✨', '🎵', '💫', '⭐', '🌟', '💙'];
+                const particle = $('<div class="floating-particle"></div>');
+                
+                particle.text(particles[Math.floor(Math.random() * particles.length)]);
+                particle.css({
+                    left: Math.random() * 100 + 'vw',
+                    top: '100vh',
+                    fontSize: (Math.random() * 20 + 15) + 'px',
+                    animationDuration: (Math.random() * 3 + 4) + 's'
+                });
+                
+                $('body').append(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 7000);
+            }
+
+            // パーティクルを定期的に生成
+            setInterval(createParticle, 2000);
+
+            // ★ スムーススクロール ★
+            $('a[href^="#"]').click(function(e) {
+                e.preventDefault();
+                const target = $($(this).attr('href'));
+                if (target.length) {
+                    $('html, body').animate({
+                        scrollTop: target.offset().top - 20
+                    }, 600);
+                }
+            });
+
+            // ★ 記事カードホバー効果 ★
+            $('.post-card').hover(
+                function() {
+                    $(this).css('transform', 'translateY(-8px)');
+                },
+                function() {
+                    $(this).css('transform', 'translateY(0)');
+                }
+            );
+
+            console.log('✅ All systems operational!');
+        });
+    </script>
 </body>
 </html>
