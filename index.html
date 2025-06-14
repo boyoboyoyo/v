@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="referrer" content="origin-when-cross-origin" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>polusiti - 博客园</title>
-    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM0MDlFRkYiLz4KPHR0ZXh0IHg9IjE2IiB5PSIyMSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlA8L3RleHQ+Cjwvc3ZnPgo=" type="image/svg+xml" />
+    <title>Tech Blog - 技術ブログ</title>
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM0MDlFRkYiLz4KPHR0ZXh0IHg9IjE2IiB5PSIyMSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlQ8L3RleHQ+Cjwvc3ZnPgo=" type="image/svg+xml" />
     
     <!-- APlayer CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
@@ -358,6 +358,7 @@
             margin: 0 10px;
         }
 
+        /* === ナビゲーション（横ずれエフェクト削除） === */
         #navList a {
             color: #666;
             text-decoration: none;
@@ -366,22 +367,7 @@
             border-radius: 20px;
             transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
-        }
-
-        #navList a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(64, 158, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        #navList a:hover::before {
-            left: 100%;
+            display: block;
         }
 
         #navList a:hover {
@@ -426,29 +412,13 @@
             padding: 0;
         }
 
-        /* === 記事項目（目標サイト準拠） === */
+        /* === 記事項目（横ずれエフェクト削除） === */
         .day {
             border-bottom: 1px solid #f0f0f0;
             padding: 22px 25px;
             background: transparent;
             transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
-        }
-
-        .day::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(64, 158, 255, 0.03), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .day:hover::before {
-            left: 100%;
         }
 
         .day:hover {
@@ -839,22 +809,22 @@
         <!-- ヘッダー -->
         <div id="header">
             <div id="blogTitle">
-                <div id="blogLogo">P</div>
-                <h1><a id="Header1_HeaderTitle" class="headermaintitle" href="#">polusiti</a></h1>
+                <div id="blogLogo">T</div>
+                <h1><a id="Header1_HeaderTitle" class="headermaintitle" href="#">Tech Blog</a></h1>
                 <h2>技術と音楽の調和</h2>
             </div>
             <div id="navigator">
                 <ul id="navList">
                     <li><a class="menu" href="#">ホーム</a></li>
-                    <li><a class="menu" href="#">新随筆</a></li>
+                    <li><a class="menu" href="#">新記事</a></li>
+                    <li><a class="menu" href="#">カテゴリ</a></li>
+                    <li><a class="menu" href="#">アーカイブ</a></li>
                     <li><a class="menu" href="#">コンタクト</a></li>
-                    <li><a class="menu" href="#">購読</a></li>
-                    <li><a class="menu" href="#">管理</a></li>
                 </ul>
                 <div class="blogStats">
                     <div id="blog_stats">
                         <span>記事 - 3</span> 
-                        <span>随筆 - 0</span> 
+                        <span>カテゴリ - 5</span> 
                         <span>コメント - 7</span> 
                         <span>閲覧数 - 27,080</span>
                         <span id="current-time"></span>
@@ -880,7 +850,7 @@
                             </div>
                         </div>
                         <div class="clear"></div>
-                        <div class="postDesc">投稿日時: 2025-06-14 15:13 by polusiti　<span>閲覧(1,234)</span> <span>コメント(3)</span> <span>推薦(1)</span></div>
+                        <div class="postDesc">投稿日時: 2025-06-14 15:13 by 管理者　<span>閲覧(1,234)</span> <span>コメント(3)</span> <span>推薦(1)</span></div>
                         <div class="clear"></div>
                     </div>
 
@@ -897,7 +867,7 @@
                             </div>
                         </div>
                         <div class="clear"></div>
-                        <div class="postDesc">投稿日時: 2025-06-10 14:30 by polusiti　<span>閲覧(892)</span> <span>コメント(2)</span> <span>推薦(0)</span></div>
+                        <div class="postDesc">投稿日時: 2025-06-10 14:30 by 管理者　<span>閲覧(892)</span> <span>コメント(2)</span> <span>推薦(0)</span></div>
                         <div class="clear"></div>
                     </div>
 
@@ -914,7 +884,7 @@
                             </div>
                         </div>
                         <div class="clear"></div>
-                        <div class="postDesc">投稿日時: 2025-06-05 19:15 by polusiti　<span>閲覧(2,156)</span> <span>コメント(5)</span> <span>推薦(2)</span></div>
+                        <div class="postDesc">投稿日時: 2025-06-05 19:15 by 管理者　<span>閲覧(2,156)</span> <span>コメント(5)</span> <span>推薦(2)</span></div>
                         <div class="clear"></div>
                     </div>
                 </div>
@@ -985,7 +955,7 @@
 
     <script>
         $(document).ready(function() {
-            console.log('🎵 polusiti Blog - Enhanced System Ready');
+            console.log('🎵 Tech Blog - Enhanced System Ready');
 
             // === 画像エラー処理 ===
             $('img').on('error', function() {
@@ -1249,7 +1219,7 @@
                 $('#header-starfield').css('transform', 'translateY(' + rate + 'px)');
             });
 
-            // ===== ホバー効果 =====
+            // ===== ホバー効果（シンプル） =====
             $('.day').hover(
                 function() {
                     $(this).css('transform', 'translateY(-2px)');
@@ -1259,7 +1229,7 @@
                 }
             );
 
-            console.log('✅ Enhanced systems operational! 🚀');
+            console.log('✅ Tech Blog systems operational! 🚀');
         });
     </script>
 </body>
