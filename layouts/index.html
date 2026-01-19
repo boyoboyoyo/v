@@ -1,7 +1,8 @@
 {{ define "main" }}
 <div id="mainContent">
     <div class="forFlow">
-        {{ range .Pages }}
+        {{ $posts := where .Site.RegularPages "Section" "posts" }}
+        {{ range $posts }}
         <div class="day">
             <div class="dayTitle">
                 <a>{{ .Date.Format "2006-01-02" }}</a>
@@ -13,17 +14,22 @@
             </div>
             <div class="postCon">
                 <div class="c_b_p_desc">
-                    {{ .Summary }}
+                    {{ if .Summary }}
+                        {{ .Summary }}
+                    {{ else }}
+                        {{ .Plain | truncate 200 }}
+                    {{ end }}
                 </div>
             </div>
             <div class="clear"></div>
             <div class="postDesc">
                 投稿日時: {{ .Date.Format "2006-01-02 15:04" }} by {{ site.Params.author }}
                 <span>閲覧({{ .WordCount }})</span>
-                <span>{{ if .Params.tags }}タグ: {{ range first 3 .Params.tags }}<a href="{{ "/tags/" | relURL }}{{ . | urlize }}">{{ . }}</a> {{ end }}{{ end }}</span>
+                {{ if .Params.tags }}<span>タグ: {{ range first 3 .Params.tags }}<a href="{{ "/tags/" | relURL }}{{ . | urlize }}">{{ . }}</a> {{ end }}</span>{{ end }}
             </div>
             <div class="clear"></div>
         </div>
+        {{ end }}
         {{ end }}
     </div>
 </div>
@@ -51,8 +57,10 @@
         <div class="sidebar-block newsItem">
             <h3 class="catListTitle">最新記事</h3>
             <div id="blog-news">
-                {{ range first 5 .Pages }}
+                {{ $posts := first 5 (where .Site.RegularPages "Section" "posts") }}
+                {{ range $posts }}
                 <p><a href="{{ .Permalink }}">{{ .Title }}</a></p>
+                {{ end }}
                 {{ end }}
             </div>
         </div>
