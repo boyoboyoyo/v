@@ -1,0 +1,80 @@
+{{ define "main" }}
+<div id="mainContent">
+    <div class="forFlow">
+        {{ range .Pages }}
+        <div class="day">
+            <div class="dayTitle">
+                <a>{{ .Date.Format "2006-01-02" }}</a>
+            </div>
+            <div class="postTitle">
+                <a class="postTitle2 vertical-middle" href="{{ .Permalink }}">
+                    {{ .Title }}
+                </a>
+            </div>
+            <div class="postCon">
+                <div class="c_b_p_desc">
+                    {{ .Summary }}
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="postDesc">
+                投稿日時: {{ .Date.Format "2006-01-02 15:04" }} by {{ site.Params.author }}
+                <span>閲覧({{ .WordCount }})</span>
+                <span>{{ if .Params.tags }}タグ: {{ range first 3 .Params.tags }}<a href="{{ "/tags/" | relURL }}{{ . | urlize }}">{{ . }}</a> {{ end }}{{ end }}</span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        {{ end }}
+    </div>
+</div>
+
+<!-- サイドバー -->
+<div id="sideBar">
+    <div id="sideBarMain">
+        <div class="sidebar-block newsItem">
+            <h3 class="catListTitle">音楽プレイヤー</h3>
+            <div class="music-widget">
+                <div class="music-player">
+                    <div class="music-info">
+                        <div class="music-title" id="current-song">The Princess of Fake Moon Loop A</div>
+                        <div class="music-artist" id="current-artist">Unknown</div>
+                    </div>
+                    <div class="music-controls">
+                        <button class="music-btn" id="prev-btn">Prev</button>
+                        <button class="music-btn play" id="play-pause-btn">Play</button>
+                        <button class="music-btn" id="next-btn">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-block newsItem">
+            <h3 class="catListTitle">最新記事</h3>
+            <div id="blog-news">
+                {{ range first 5 .Pages }}
+                <p><a href="{{ .Permalink }}">{{ .Title }}</a></p>
+                {{ end }}
+            </div>
+        </div>
+
+        <div class="sidebar-block newsItem">
+            <h3 class="catListTitle">タグ</h3>
+            <div id="blog-news">
+                {{ range $name, $taxonomy := site.Taxonomies.tags }}
+                <p><a href="{{ "/tags/" | relURL }}{{ $name | urlize }}">{{ $name }}({{ len $taxonomy }})</a></p>
+                {{ end }}
+            </div>
+        </div>
+
+        <div class="sidebar-block newsItem">
+            <h3 class="catListTitle">カテゴリ</h3>
+            <div id="blog-news">
+                {{ range $name, $taxonomy := site.Taxonomies.categories }}
+                <p><a href="{{ "/categories/" | relURL }}{{ $name | urlize }}">{{ $name }}({{ len $taxonomy }})</a></p>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+{{ end }}
