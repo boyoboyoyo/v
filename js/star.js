@@ -1,86 +1,104 @@
-// 星空アニメーション
-function initStarBackground() {
-    let scene, camera, renderer, stars = [];
-    
-    function init() {
-        scene = new THREE.Scene();
-        camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-        camera.position.z = 1;
-        camera.rotation.x = Math.PI / 6;
-        
-        renderer = new THREE.WebGLRenderer({ alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.domElement.style.position = 'fixed';
-        renderer.domElement.style.top = '0';
-        renderer.domElement.style.left = '0';
-        renderer.domElement.style.zIndex = '-1';
-        renderer.domElement.style.pointerEvents = 'none';
-        document.body.appendChild(renderer.domElement);
-        
-        // 星を作成
-        for (let i = 0; i < 1000; i++) {
-            let star = new THREE.Vector3(
-                Math.random() * 600 - 300,
-                Math.random() * 600 - 300,
-                Math.random() * 600 - 300
-            );
-            star.velocity = 0;
-            star.acceleration = 0.02;
-            stars.push(star);
-        }
-        
-        let geometry = new THREE.BufferGeometry();
-        let positions = new Float32Array(stars.length * 3);
-        
-        for (let i = 0; i < stars.length; i++) {
-            positions[i * 3] = stars[i].x;
-            positions[i * 3 + 1] = stars[i].y;
-            positions[i * 3 + 2] = stars[i].z;
-        }
-        
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        
-        let material = new THREE.PointsMaterial({ color: 0xffffff, size: 2 });
-        let starField = new THREE.Points(geometry, material);
-        scene.add(starField);
-        
-        animate();
-    }
-    
-    function animate() {
-        requestAnimationFrame(animate);
-        
-        // 星を動かす
-        for (let i = 0; i < stars.length; i++) {
-            stars[i].velocity += stars[i].acceleration;
-            stars[i].z += stars[i].velocity;
-            
-            if (stars[i].z >= 200) {
-                stars[i].z = -200;
-                stars[i].velocity = 0;
-            }
-        }
-        
-        let positions = renderer.domElement.querySelector('canvas').geometry?.attributes.position.array;
-        if (positions) {
-            for (let i = 0; i < stars.length; i++) {
-                positions[i * 3] = stars[i].x;
-                positions[i * 3 + 1] = stars[i].y;
-                positions[i * 3 + 2] = stars[i].z;
-            }
-        }
-        
-        renderer.render(scene, camera);
-    }
-    
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-    
-    init();
+var scene,
+    camera,
+    renderer,
+    container,
+    aspect,
+    fov,
+    plane,
+    far,
+    mouseX,
+    mouseY,
+    windowHalfX,
+    windowHalfY,
+    geometry,
+    starStuff,
+    materialOptions,
+    stars;
+
+init();
+animate();
+$("#showstar").find("canvas").attr("style","width:100%;height:40vh;position:absolute;top:0;left:0;z-index:1")
+function init() {
+  container = document.createElement(`div`);
+  container.setAttribute("id","showstar");
+  document.body.appendChild(container);
+  mouseX = 0;
+  mouseY = 0;
+
+  aspect = window.innerWidth / window.innerHeight;
+  fov = 40;
+  plane = 1;
+  far = 800;
+
+  windowHalfX = window.innerWidth / 2;
+  windowHalfY = window.innerHeight / 2;
+
+  camera = new THREE.PerspectiveCamera(
+    fov,
+    aspect,
+    plane,
+    far
+  );
+
+  camera.position.z = far / 2;
+
+  scene = new THREE.Scene({ antialias: true });
+  scene.fog = new THREE.FogExp2(0x1b1b1b, 0.0001);
+
+  starForge();
+
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio((window.devicePixelRatio) ? window.devicePixelRatio : 1);
+  renderer.setSize(window.innerWidth, parseFloat($("#blogTitle").css("height")));
+  renderer.autoClear = false;
+  renderer.setClearColor(0x000000, 0.0);
+  container.appendChild(renderer.domElement);
+
+
+
+  document.addEventListener('mousemove', onMouseMove, false);
 }
 
-// ページ読み込み後に実行
-document.addEventListener('DOMContentLoaded', initStarBackground);
+function animate() {
+  requestAnimationFrame(animate);
+  render();
+}
+
+function render() {
+  camera.position.x += (mouseX - camera.position.x) * 0.005;
+  camera.position.y += (-mouseY - camera.position.y) * 0.005;
+  camera.lookAt(scene.position);
+  renderer.render(scene, camera);
+}
+
+function starForge() {
+  var amount = 45000;
+  geometry = new THREE.SphereGeometry(1000, 100, 50);
+
+  materialOptions = {
+    color: new THREE.Color(0xffffff),
+    size: 1.1,
+    transparency: true,
+    opacity: 0.8
+  };
+
+  starStuff = new THREE.PointsMaterial(materialOptions);
+
+
+  for (var i = 0; i < amount; i++) {
+    var item = new THREE.Vector3();
+    item.x = Math.random() * 2000 - 1000;
+    item.y = Math.random() * 2000 - 1000;
+    item.z = Math.random() * 2000 - 1000;
+
+    geometry.vertices.push(item);
+  }
+
+  stars = new THREE.PointCloud(geometry, starStuff);
+  scene.add(stars);
+}
+
+function onMouseMove(e) {
+  mouseX = e.clientX - windowHalfX;
+  mouseY = e.clientY - windowHalfY;
+}

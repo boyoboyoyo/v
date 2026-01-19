@@ -6,13 +6,13 @@
     <meta name="referrer" content="origin-when-cross-origin" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Tech Blog - 技術ブログ</title>
-    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM0MDlFRkYiLz4KPHR0ZXh0IHg9IjE2IiB5PSIyMSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlQ8L3RleHQ+Cjwvc3ZnPgo=" type="image/svg+xml" />
-    
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM3Mzk2YTciLz4KPHR0ZXh0IHg9IjE2IiB5PSIyMSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlQ8L3RleHQ+Cjwvc3ZnPgo=" type="image/svg+xml" />
+
     <!-- APlayer CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
-    
+
     <style>
-        /* === 基本リセット === */
+        /* === cute-cnblogs2 風スタイル === */
         * {
             margin: 0;
             padding: 0;
@@ -21,286 +21,255 @@
 
         /* === 基本設定 === */
         body {
-            font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Segoe UI", Helvetica, Arial, sans-serif;
+            font-family: "Noto Sans SC", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Segoe UI", sans-serif;
             font-size: 12px;
             line-height: 1.5;
-            color: #333;
-            background: #f4f4f4;
+            color: #7f8c93;
+            background: #fff;
             position: relative;
             overflow-x: hidden;
+            cursor: url('https://files-cdn.cnblogs.com/files/miluluyo/cursora.ico'), auto;
         }
 
-        /* === 画像表示の修正 === */
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            border: 0;
-        }
-
-        /* === ダークモード === */
-        body.dark-mode {
-            background: #1e1e1e;
-            color: #e0e0e0;
-        }
-
-        body.dark-mode #home {
-            background: #2d2d2d;
-        }
-
-        body.dark-mode #header {
-            background: rgba(51, 51, 51, 0.95);
-            border-bottom: 1px solid #555;
-        }
-
-        body.dark-mode #main {
-            background: rgba(45, 45, 45, 0.98);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        }
-
-        body.dark-mode .day {
-            background: rgba(51, 51, 51, 0.8);
-            border-bottom: 1px solid #555;
-        }
-
-        body.dark-mode .day:hover {
-            background: rgba(58, 58, 58, 0.9);
-        }
-
-        body.dark-mode .postTitle2 {
-            color: #409EFF !important;
-        }
-
-        body.dark-mode #sideBar {
-            background: transparent;
-        }
-
-        body.dark-mode .newsItem {
-            background: rgba(68, 68, 68, 0.9);
-            border: 1px solid #555;
-        }
-
-        body.dark-mode .catListTitle {
-            background: rgba(58, 58, 58, 0.9);
-            border-bottom: 1px solid #555;
-        }
-
-        /* === メインレイアウト === */
-        #home {
-            width: 100%;
-            background: #fff;
-            min-height: 100vh;
-            position: relative;
-        }
-
-        #header {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #e4e6ea;
-            padding: 20px 0;
-            position: relative;
-            z-index: 10;
-        }
-
-        #blogTitle {
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 11;
-        }
-
-        #blogLogo {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            margin: 0 auto 10px;
-            border: 2px solid #409EFF;
-            transition: all 0.3s ease;
-            background: #409EFF;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        #blogLogo:hover {
-            transform: scale(1.05) rotate(360deg);
-            box-shadow: 0 0 15px rgba(64, 158, 255, 0.4);
-        }
-
-        .headermaintitle {
-            color: #333;
-            font-size: 24px;
-            font-weight: 700;
+        a, a:visited, a:link {
+            color: #7396a7;
             text-decoration: none;
-            display: block;
-            margin-bottom: 5px;
-            transition: all 0.3s ease;
         }
 
-        .headermaintitle:hover {
-            color: #409EFF;
-            transform: scale(1.02);
+        a:hover {
+            color: #f60;
+            cursor: pointer !important;
         }
 
-        #header h2 {
-            color: #666;
-            font-size: 14px;
-            font-weight: normal;
-            margin: 0;
+        /* === スクロールバー === */
+        *::-webkit-scrollbar-thumb {
+            height: 40px;
+            background-color: #ccc;
+            border-radius: 16px;
         }
 
-        #navigator {
+        *::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+        }
+
+        /* === 背景画像（薄く表示） === */
+        body::after {
+            content: "";
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.06;
+            filter: grayscale(100%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('https://api.imacroc.cn/acg/');
+        }
+
+        /* === ヘッダー（cute-cnblogs2風） === */
+        #header {
+            background: url('https://images.cnblogs.com/cnblogs_com/miluluyo/1764887/o_20051406473719.jpg') center center / cover no-repeat #222;
+            overflow: hidden;
+            width: 100%;
+            height: 40vh;
+            max-height: 40vh;
+            box-shadow: 0 1px 2px rgba(150,150,150,.7);
             text-align: center;
-            margin-top: 20px;
+        }
+
+        .vertical {
+            display: table-cell;
+            vertical-align: middle;
+            width: 100%;
             position: relative;
-            z-index: 11;
+            z-index: 2;
+            height: 40vh;
+        }
+
+        #Header1_HeaderTitle {
+            font-family: 'Playball', cursive;
+            color: #fff;
+            font-size: 3rem;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            margin: 10px 0 10px 0;
+            letter-spacing: -1px;
+            font-weight: 700;
+            animation: fade-in-down 1s both;
+            animation-delay: .5s;
+        }
+
+        .vertical h2 {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.5em;
+            font-weight: 400;
+            letter-spacing: .01rem;
+            color: rgba(255,255,255,0.8);
+            animation: fade-in-down .9s both;
+            animation-delay: .3s;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.5);
+            font-family: 'Playball', cursive;
+        }
+
+        @keyframes fade-in-down {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* === ナビゲーション === */
+        #navigator {
+            width: 100%;
+            box-shadow: 0 1px 3px rgba(26,26,26,.1);
+            background: hsla(0,0%,100%,.6);
+            z-index: 1;
         }
 
         #navList {
+            text-align: center;
             list-style: none;
             display: inline-block;
             margin-bottom: 15px;
         }
 
         #navList li {
+            font-family: 'Josefin Sans Light', -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "'Hiragino Sans GB", STHeiti, "Microsoft Yahei", "Source Han Sans SC", "Noto Sans CJK SC", "WenQuanYi Micro Hei", Arial, Verdana, sans-serif;
+            color: #95a5a6;
             display: inline-block;
-            margin: 0 10px;
+            padding: 1rem;
+            font-size: 1rem;
+            text-align: center;
         }
 
-        #navList a {
-            color: #666;
-            text-decoration: none;
-            padding: 8px 16px;
-            font-size: 13px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            position: relative;
-            display: block;
+        #navList li a {
+            text-shadow: 0 3px 6px rgba(0,0,0,0.3);
         }
 
-        #navList a:hover {
-            color: #409EFF;
-            background: rgba(64, 158, 255, 0.08);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(64, 158, 255, 0.15);
+        #navList li a:hover {
+            color: #f60;
+            font-weight: 500;
         }
 
         .blogStats {
-            text-align: center;
-            font-size: 12px;
-            color: #999;
-            padding: 8px 16px;
-            background: rgba(240, 249, 255, 0.8);
-            border-radius: 16px;
-            margin: 0 auto;
-            display: inline-block;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(64, 158, 255, 0.1);
+            display: none;
         }
 
-        /* === メインコンテンツ === */
+        /* === メインレイアウト === */
         #main {
-            width: 950px;
+            max-width: 1200px;
             margin: 30px auto;
-            background: rgba(255, 255, 255, 0.98);
             display: flex;
-            gap: 20px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-            border-radius: 6px;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
+            justify-content: center;
         }
 
         #mainContent {
-            flex: 1;
-            background: transparent;
+            width: calc(100% - 250px);
+            float: left;
+            transition: all .5s ease-in-out 0s;
         }
 
         .forFlow {
-            padding: 0;
+            max-width: 830px;
+            margin: 3.5rem auto;
         }
 
         /* === 記事項目 === */
         .day {
-            border-bottom: 1px solid #f0f0f0;
-            padding: 22px 25px;
-            background: transparent;
-            transition: all 0.3s ease;
+            min-height: 10px;
             position: relative;
+            max-width: 830px;
+            margin: 3.5rem auto;
+            padding-bottom: 3.5rem;
+            border-bottom: #ebf2f6 1px solid;
         }
 
-        .day:hover {
-            background: rgba(248, 251, 255, 0.6);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(64, 158, 255, 0.08);
+        .day .dayTitle {
+            display: none;
         }
 
-        .day:last-child {
-            border-bottom: none;
-        }
-
-        .dayTitle {
-            font-size: 12px;
-            color: #999;
-            margin-bottom: 8px;
-        }
-
-        .postTitle {
-            margin-bottom: 10px;
-        }
-
-        .postTitle2 {
-            color: #333;
-            font-size: 16px;
-            font-weight: 500;
-            text-decoration: none;
-            line-height: 1.4;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .postTitle2::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: linear-gradient(90deg, #409EFF, #2c5aa0);
-            transition: width 0.3s ease;
-        }
-
-        .postTitle2:hover::after {
+        .day .postTitle {
+            font-size: 20px;
             width: 100%;
+            border-bottom: 1px dashed #95a5a6;
+            margin-top: 2.5rem;
         }
 
-        .postTitle2:hover {
-            color: #409EFF;
+        .day .postTitle a:link {
+            background-color: rgba(0,0,0,0);
+            color: #7396a7;
+            font-family: "Open Sans", "Microsoft Jhenghei", "Microsoft Yahei", sans-serif;
+            font-size: 1.6rem;
+            line-height: 3rem;
+            font-weight: bold;
+            letter-spacing: -1px;
+            transition: all .5s ease;
         }
 
-        .postCon {
-            margin-bottom: 10px;
+        .day .postTitle a:hover {
+            color: #f60 !important;
+            transition: color .3s ease;
+        }
+
+        .day .postCon {
+            width: 100%;
+            color: #3a4145;
+            font-family: Merriweather, "Open Sans", "Microsoft Jhenghei", "Microsoft Yahei", sans-serif;
+            font-size: 16px;
+            line-height: 1.7em;
+            margin: 0;
         }
 
         .c_b_p_desc {
-            color: #666;
-            font-size: 13px;
-            line-height: 1.6;
-            margin-bottom: 8px;
+            word-wrap: break-word;
+            word-break: break-all;
+            overflow: hidden;
+            line-height: 1.5;
+            color: #7f8c93;
         }
 
         .postDesc {
-            font-size: 12px;
-            color: #999;
+            float: left;
+            width: 100%;
+            text-align: left;
+            font-family: "Open Sans", sans-serif;
+            font-size: .8rem;
+            line-height: 1rem;
+            color: #9eabb3;
+            margin-bottom: 3.5rem;
+        }
+
+        .postDesc a {
+            display: none;
         }
 
         /* === サイドバー === */
         #sideBar {
             width: 250px;
-            background: transparent;
+            float: right;
+            font-size: .8rem;
+        }
+
+        #sideBarMain {
+            margin-top: 3.5rem;
+            padding: 10px;
+        }
+
+        #sideBar h3 {
+            border-left: 3px solid #7396a7;
+            padding-left: 5px;
+        }
+
+        .sidebar-block {
+            margin-top: 20px;
         }
 
         .newsItem {
@@ -315,8 +284,7 @@
 
         .newsItem:hover {
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(64, 158, 255, 0.12);
-            border-color: rgba(64, 158, 255, 0.2);
+            box-shadow: 0 6px 20px rgba(115, 150, 167, 0.12);
         }
 
         .catListTitle {
@@ -340,22 +308,18 @@
             margin-bottom: 8px;
         }
 
-        #blog-news p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* === 音楽プレイヤー === */
+        /* === 音楽プレイヤー（cute-cnblogs風） === */
         .music-widget {
             padding: 15px;
         }
 
         .music-player {
-            background: linear-gradient(135deg, #409EFF, #2c5aa0);
+            background: linear-gradient(135deg, #7396a7, #2daebf);
             border-radius: 10px;
             padding: 16px;
             color: white;
             text-align: center;
-            box-shadow: 0 6px 20px rgba(64, 158, 255, 0.25);
+            box-shadow: 0 6px 20px rgba(115, 150, 167, 0.25);
             position: relative;
             overflow: hidden;
         }
@@ -440,41 +404,60 @@
             display: block;
             width: 44px;
             height: 44px;
-            background: rgba(64, 158, 255, 0.9);
+            background: rgba(115, 150, 167, 0.9);
             color: white;
             border: none;
             border-radius: 50%;
             margin-bottom: 10px;
             cursor: pointer;
             font-size: 16px;
-            box-shadow: 0 4px 16px rgba(64, 158, 255, 0.3);
+            box-shadow: 0 4px 16px rgba(115, 150, 167, 0.3);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .float-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            transform: translate(-50%, -50%);
-        }
-
-        .float-btn:hover::before {
-            width: 100%;
-            height: 100%;
-        }
-
         .float-btn:hover {
-            background: #409EFF;
+            background: #7396a7;
             transform: scale(1.08);
-            box-shadow: 0 6px 20px rgba(64, 158, 255, 0.4);
+            box-shadow: 0 6px 20px rgba(115, 150, 167, 0.4);
+        }
+
+        /* === スキン切り替え === */
+        body.skin-furvous {
+            background: #2d2d2d;
+            color: #e0e0e0;
+        }
+
+        body.skin-furvous #header {
+            background: url('https://images.cnblogs.com/cnblogs_com/miluluyo/1764887/o_20051406473719.jpg') center center / cover no-repeat #1a1a1a;
+        }
+
+        body.skin-furvous #navigator {
+            background: rgba(45, 45, 45, 0.9);
+        }
+
+        body.skin-furvous .newsItem {
+            background: rgba(68, 68, 68, 0.9);
+            border-color: #555;
+        }
+
+        body.skin-furvous .catListTitle {
+            background: rgba(58, 58, 58, 0.9);
+            color: #e0e0e0;
+        }
+
+        body.skin-reading {
+            background: #f4f1ea;
+            color: #5a5a5a;
+        }
+
+        body.skin-reading #navigator {
+            background: rgba(244, 241, 234, 0.9);
+        }
+
+        body.skin-reading .newsItem {
+            background: rgba(255, 255, 255, 0.9);
         }
 
         /* === APlayer カスタマイズ === */
@@ -486,12 +469,22 @@
             backdrop-filter: blur(15px) !important;
             border-radius: 10px !important;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
-            border: 1px solid rgba(64, 158, 255, 0.15) !important;
+            border: 1px solid rgba(115, 150, 167, 0.15) !important;
         }
 
-        body.dark-mode .aplayer.aplayer-fixed {
+        body.skin-furvous .aplayer.aplayer-fixed {
             background: rgba(45, 45, 45, 0.98) !important;
-            border: 1px solid rgba(64, 158, 255, 0.25) !important;
+            border: 1px solid rgba(115, 150, 167, 0.25) !important;
+        }
+
+        /* === 魚アニメーションコンテナ === */
+        .container {
+            width: 100%;
+            height: 200px;
+            position: fixed;
+            z-index: -1;
+            bottom: 0;
+            left: 0;
         }
 
         /* === レスポンシブ === */
@@ -500,7 +493,11 @@
                 width: 95%;
                 flex-direction: column;
             }
-            
+
+            #mainContent {
+                width: 90%;
+            }
+
             #sideBar {
                 width: 100%;
             }
@@ -511,16 +508,16 @@
                 bottom: 100px;
                 top: auto;
             }
-            
+
             #navList li {
                 margin: 0 6px;
             }
-            
+
             #navList a {
                 font-size: 12px;
                 padding: 6px 12px;
             }
-            
+
             .aplayer.aplayer-fixed {
                 width: 290px !important;
                 bottom: 10px !important;
@@ -531,62 +528,18 @@
                 padding: 18px 20px;
             }
 
-            .postTitle2 {
-                font-size: 15px;
+            .postTitle a {
+                font-size: 1.4rem;
+            }
+
+            #Header1_HeaderTitle {
+                font-size: 2rem;
             }
 
             .float-btn {
                 width: 40px;
                 height: 40px;
                 font-size: 14px;
-            }
-
-            #blogLogo {
-                width: 44px;
-                height: 44px;
-                font-size: 16px;
-            }
-        }
-
-        /* === アニメーション === */
-        .day {
-            animation: fadeInUp 0.5s ease forwards;
-            opacity: 0;
-        }
-
-        .day:nth-child(1) { animation-delay: 0.1s; }
-        .day:nth-child(2) { animation-delay: 0.2s; }
-        .day:nth-child(3) { animation-delay: 0.3s; }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .newsItem {
-            animation: slideInRight 0.5s ease forwards;
-            opacity: 0;
-        }
-
-        .newsItem:nth-child(1) { animation-delay: 0.3s; }
-        .newsItem:nth-child(2) { animation-delay: 0.4s; }
-        .newsItem:nth-child(3) { animation-delay: 0.5s; }
-        .newsItem:nth-child(4) { animation-delay: 0.6s; }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
             }
         }
 
@@ -609,25 +562,21 @@
     <div id="home">
         <!-- ヘッダー -->
         <div id="header">
-            <div id="blogTitle">
-                <div id="blogLogo">T</div>
-                <h1><a id="Header1_HeaderTitle" class="headermaintitle" href="#">Tech Blog</a></h1>
+            <div class="vertical">
+                <h1><a id="Header1_HeaderTitle" href="#">Tech Blog</a></h1>
                 <h2>技術と音楽の調和</h2>
             </div>
-            <div id="navigator">
-                <ul id="navList">
-                    <li><a class="menu" href="#">ホーム</a></li>
-                    <li><a class="menu" href="#">新記事</a></li>
-                    <li><a class="menu" href="#">カテゴリ</a></li>
-                    <li><a class="menu" href="#">アーカイブ</a></li>
-                    <li><a class="menu" href="#">コンタクト</a></li>
-                </ul>
-                <div class="blogStats">
-                    <div id="blog_stats">
-                        <span id="current-time"></span>
-                    </div>
-                </div>
-            </div>
+        </div>
+
+        <!-- ナビゲーション -->
+        <div id="navigator">
+            <ul id="navList">
+                <li><a href="#">ホーム</a></li>
+                <li><a href="#">新記事</a></li>
+                <li><a href="#">カテゴリ</a></li>
+                <li><a href="#">アーカイブ</a></li>
+                <li><a href="#">コンタクト</a></li>
+            </ul>
         </div>
 
         <!-- メインコンテンツ -->
@@ -640,23 +589,24 @@
 
             <!-- サイドバー -->
             <div id="sideBar">
-                <div class="newsItem">
-                    <h3 class="catListTitle">音楽プレイヤー</h3>
-                    <div class="music-widget">
-                        <div class="music-player">
-                            <div class="music-info">
-                                <div class="music-title" id="current-song">The Princess of Fake Moon Loop A</div>
-                                <div class="music-artist" id="current-artist">Unknown</div>
-                            </div>
-                            <div class="music-controls">
-                                <button class="music-btn" id="prev-btn">⏮</button>
-                                <button class="music-btn play" id="play-pause-btn">▶</button>
-                                <button class="music-btn" id="next-btn">⏭</button>
+                <div id="sideBarMain">
+                    <div class="sidebar-block newsItem">
+                        <h3 class="catListTitle">音楽プレイヤー</h3>
+                        <div class="music-widget">
+                            <div class="music-player">
+                                <div class="music-info">
+                                    <div class="music-title" id="current-song">The Princess of Fake Moon Loop A</div>
+                                    <div class="music-artist" id="current-artist">Unknown</div>
+                                </div>
+                                <div class="music-controls">
+                                    <button class="music-btn" id="prev-btn">Prev</button>
+                                    <button class="music-btn play" id="play-pause-btn">Play</button>
+                                    <button class="music-btn" id="next-btn">Next</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="clear"></div>
         </div>
@@ -665,37 +615,35 @@
 
     <!-- フローティングコントロール -->
     <div class="floating-controls">
-        <button id="theme-toggle" class="float-btn" title="ダークモード切り替え">🌙</button>
-        <button id="music-toggle" class="float-btn" title="音楽プレイヤー">🎵</button>
-        <button id="back-to-top" class="float-btn" title="トップへ戻る">↑</button>
+        <button id="skin-toggle" class="float-btn" title="スキン切り替え">Skin</button>
+        <button id="music-toggle" class="float-btn" title="音楽プレイヤー">Music</button>
+        <button id="back-to-top" class="float-btn" title="トップへ戻る">Top</button>
     </div>
 
     <!-- 音楽プレイヤー -->
     <div id="aplayer"></div>
 
-    <!-- 目標サイトと同じ星空エフェクト -->
+    <!-- 魚アニメーションコンテナ -->
+    <div id="jsi-flying-fish-container" class="container"></div>
+
+    <!-- 星空エフェクト -->
     <script src="https://blog-static.cnblogs.com/files/miluluyo/three.min.js"></script>
     <script src="https://blog-static.cnblogs.com/files/miluluyo/star.js"></script>
 
-    <!-- 目標サイトと同じタップエフェクト -->
+    <!-- タップエフェクト -->
     <canvas width="1777" height="841" style="position: fixed; left: 0px; top: 0px; z-index: 2147483647; pointer-events: none;"></canvas>
     <script src="https://blog-static.cnblogs.com/files/miluluyo/mouse-click.js"></script>
 
     <script>
         $(document).ready(function() {
-            console.log('🎵 Tech Blog - Target Site Exact Match Version Ready');
-
-            // === 画像エラー処理 ===
-            $('img').on('error', function() {
-                $(this).addClass('broken-image');
-            });
+            console.log('Tech Blog - cute-cnblogs2 Style');
 
             // ===== APlayer 音楽プレイヤー =====
             const ap = new APlayer({
                 container: document.getElementById('aplayer'),
                 fixed: true,
                 autoplay: false,
-                theme: '#409EFF',
+                theme: '#7396a7',
                 loop: 'all',
                 order: 'random',
                 preload: 'auto',
@@ -708,81 +656,84 @@
                         name: 'The Princess of Fake Moon Loop A',
                         artist: 'Unknown',
                         url: 'siryou/The_Princess_of_Fake_Moon_Loop_A.mp3',
-                        cover: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiBmaWxsPSIjNDA5RUZGIi8+Cjx0ZXh0IHg9IjYwIiB5PSI3MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPuKZqjwvdGV4dD4KPC9zdmc+Cg=='
+                        cover: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiBmaWxsPSIjNzM5NmE3Ii8+Cjx0ZXh0IHg9IjYwIiB5PSI3MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPm11c2ljPC90ZXh0Pgo8L3N2Zz4K'
                     }
                 ]
             });
 
             // ===== 音楽コントロール =====
             let isPlaying = false;
-            let currentTrack = 0;
             const tracks = [
                 { name: 'The Princess of Fake Moon Loop A', artist: 'Unknown' }
             ];
 
             function updateTrackInfo() {
-                $('#current-song').text(tracks[currentTrack].name);
-                $('#current-artist').text(tracks[currentTrack].artist);
+                $('#current-song').text(tracks[0].name);
+                $('#current-artist').text(tracks[0].artist);
             }
 
             $('#play-pause-btn').click(function() {
                 if (isPlaying) {
-                    $(this).text('▶');
+                    $(this).text('Play');
                     ap.pause();
                 } else {
-                    $(this).text('⏸');
+                    $(this).text('Pause');
                     ap.play();
                 }
-            });
-
-            $('#next-btn').click(function() {
-                currentTrack = (currentTrack + 1) % tracks.length;
-                updateTrackInfo();
-                ap.skipForward();
-            });
-
-            $('#prev-btn').click(function() {
-                currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
-                updateTrackInfo();
-                ap.skipBack();
+                isPlaying = !isPlaying;
             });
 
             ap.on('play', function() {
-                $('#play-pause-btn').text('⏸');
+                $('#play-pause-btn').text('Pause');
                 isPlaying = true;
             });
 
             ap.on('pause', function() {
-                $('#play-pause-btn').text('▶');
+                $('#play-pause-btn').text('Play');
                 isPlaying = false;
             });
 
-            // ===== 現在時刻 =====
-            function updateTime() {
-                const now = new Date();
-                const timeStr = now.toLocaleString('ja-JP', {
-                    month: '2-digit',
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-                $('#current-time').text(' - ' + timeStr);
-            }
-            updateTime();
-            setInterval(updateTime, 60000);
+            // ===== スキン切り替え =====
+            const skins = ['light_white', 'furvous', 'reading'];
+            let currentSkin = parseInt(localStorage.getItem('skin')) || 0;
 
-            // ===== ダークモード =====
-            const isDark = localStorage.getItem('darkMode') === 'true';
-            if (isDark) {
-                $('body').addClass('dark-mode');
-                $('#theme-toggle').text('☀️');
+            function applySkin(skinIndex) {
+                $('body').removeClass('skin-furvous skin-reading');
+                if (skinIndex === 1) {
+                    $('body').addClass('skin-furvous');
+                } else if (skinIndex === 2) {
+                    $('body').addClass('skin-reading');
+                }
+
+                // 魚アニメーションの切り替え
+                $('#fish_script').remove();
+                if (!isMobile()) {
+                    const fishUrls = [
+                        'https://blog-static.cnblogs.com/files/miluluyo/fish.js',
+                        'https://blog-static.cnblogs.com/files/miluluyo/fish2.js',
+                        'https://blog-static.cnblogs.com/files/miluluyo/fish3.js'
+                    ];
+                    const script = document.createElement('script');
+                    script.type = 'text/javascript';
+                    script.id = 'fish_script';
+                    script.src = fishUrls[skinIndex];
+                    document.body.appendChild(script);
+                }
             }
 
-            $('#theme-toggle').click(function() {
-                $('body').toggleClass('dark-mode');
-                const isNowDark = $('body').hasClass('dark-mode');
-                $(this).text(isNowDark ? '☀️' : '🌙');
-                localStorage.setItem('darkMode', isNowDark);
+            function isMobile() {
+                const userAgent = navigator.userAgent;
+                const mobileAgents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+                return mobileAgents.some(agent => userAgent.indexOf(agent) > 0);
+            }
+
+            // 初期スキン適用
+            applySkin(currentSkin);
+
+            $('#skin-toggle').click(function() {
+                currentSkin = (currentSkin + 1) % skins.length;
+                localStorage.setItem('skin', currentSkin);
+                applySkin(currentSkin);
             });
 
             // ===== その他のコントロール =====
@@ -794,17 +745,7 @@
                 ap.toggle();
             });
 
-            // ===== ホバー効果（シンプル） =====
-            $('.day').hover(
-                function() {
-                    $(this).css('transform', 'translateY(-2px)');
-                },
-                function() {
-                    $(this).css('transform', 'translateY(0)');
-                }
-            );
-
-            console.log('✅ Target site exact match version operational! 🚀');
+            console.log('cute-cnblogs2 style operational');
         });
     </script>
 </body>
