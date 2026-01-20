@@ -519,6 +519,25 @@
 
     <!-- Disable forced scroll animations -->
     <script>
+        // CRITICAL FIX: Disable the scroll event handler that causes forced downward scroll
+        $(window).off('scroll');  // Remove ALL scroll event handlers
+
+        // Prevent scroll events from cute-cnblogs scripts
+        $.event.special.scroll = {
+            setup: function() {
+                // Block scroll event binding
+                return false;
+            },
+            teardown: function() {
+                // Block scroll event unbinding
+                return false;
+            },
+            add: function() {
+                // Block adding scroll handlers
+                return false;
+            }
+        };
+
         // BLOCK ALL SCROLL ANIMATIONS - Override jQuery animate
         (function() {
             var originalAnimate = $.fn.animate;
@@ -552,9 +571,31 @@
         // Disable any existing scroll animations
         $("body, html").stop(true, true);
 
-        // Prevent all scroll-jacking
-        $.event.special.scrollstart = { enabled: false };
-        $.event.special.scrollstop = { enabled: false };
+        // Keep navigator always static (never fixed)
+        $("#navigator").css({"position": "static"});
+        $("#blogTitle").css({"margin-bottom": "0"});
+
+        // Watch for and prevent any style changes that cause scroll issues
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    var target = $(mutation.target);
+                    if (target.is('#navigator') || target.is('#blogTitle')) {
+                        // Keep navigator static at all times
+                        if (target.is('#navigator')) {
+                            target.css({"position": "static"});
+                        }
+                        if (target.is('#blogTitle')) {
+                            target.css({"margin-bottom": "0"});
+                        }
+                    }
+                }
+            });
+        });
+
+        // Observe navigator and blogTitle for style changes
+        observer.observe(document.querySelector('#navigator'), { attributes: true });
+        observer.observe(document.querySelector('#blogTitle'), { attributes: true });
 
         // Sidebar close button functionality
         $(document).on('click', '#sideBar::before, #catalogue::before', function() {
