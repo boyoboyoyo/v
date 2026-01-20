@@ -1,6 +1,6 @@
-// 音楽プレイヤーの初期化
+// Music player initialization
 function initMusicPlayer() {
-    // APlayerの設定
+    // APlayer configuration
     if (typeof APlayer !== 'undefined') {
         const ap = new APlayer({
             container: document.getElementById('player'),
@@ -18,36 +18,36 @@ function initMusicPlayer() {
                 {
                     name: 'Senbonzakura',
                     artist: 'Hatsune Miku',
-                    url: 'https://example.com/senbonzakura.mp3', // 実際の音楽ファイルURLに変更
+                    url: 'https://example.com/senbonzakura.mp3', // Change to actual music file URL
                     cover: 'https://blog.imikufans.com/wp-content/uploads/2023/08/btn_miku1.jpg'
                 },
                 {
                     name: 'World is Mine',
                     artist: 'Hatsune Miku',
-                    url: 'https://example.com/worldismine.mp3', // 実際の音楽ファイルURLに変更
+                    url: 'https://example.com/worldismine.mp3', // Change to actual music file URL
                     cover: 'https://blog.imikufans.com/wp-content/uploads/2023/08/btn_miku1.jpg'
                 }
             ]
         });
-        
-        // プレイヤーイベント
+
+        // Player events
         ap.on('play', function () {
-            console.log('音楽再生開始');
+            console.log('Music playback started');
         });
-        
+
         ap.on('pause', function () {
-            console.log('音楽一時停止');
+            console.log('Music paused');
         });
     }
 }
 
-// ページ読み込み後に実行
+// Execute after page load
 document.addEventListener('DOMContentLoaded', function() {
-    // APlayerが読み込まれるまで待機
+    // Wait for APlayer to load
     if (typeof APlayer !== 'undefined') {
         initMusicPlayer();
     } else {
-        // APlayerの読み込みを待つ
+        // Wait for APlayer to load
         const checkAPlayer = setInterval(() => {
             if (typeof APlayer !== 'undefined') {
                 clearInterval(checkAPlayer);

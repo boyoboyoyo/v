@@ -1,11 +1,11 @@
-        /* === cute-cnblogs2 風スタイル === */
+        /* === cute-cnblogs2 style === */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* === 基本設定 === */
+        /* === Basic settings === */
         body {
             font-family: "Noto Sans SC", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Segoe UI", sans-serif;
             font-size: 12px;
@@ -27,7 +27,7 @@
             cursor: pointer !important;
         }
 
-        /* === スクロールバー === */
+        /* === Scrollbar === */
         *::-webkit-scrollbar-thumb {
             height: 40px;
             background-color: #ccc;
@@ -40,7 +40,7 @@
             border-radius: 2px;
         }
 
-        /* === 背景画像（薄く表示） === */
+        /* === Background image (faded) === */
         body::after {
             content: "";
             background-repeat: no-repeat;
@@ -56,7 +56,7 @@
             background-image: url('https://api.imacroc.cn/acg/');
         }
 
-        /* === ヘッダー（cute-cnblogs2風） === */
+        /* === Header (cute-cnblogs2 style) === */
         #header {
             background: url('https://images.cnblogs.com/cnblogs_com/miluluyo/1764887/o_20051406473719.jpg') center center / cover no-repeat #222;
             overflow: hidden;
@@ -168,7 +168,7 @@
             margin: 3.5rem auto;
         }
 
-        /* === 記事項目 === */
+        /* === Post items === */
         .day {
             min-height: 10px;
             position: relative;
@@ -294,7 +294,7 @@
             margin-bottom: 8px;
         }
 
-        /* === 音楽プレイヤー（cute-cnblogs風） === */
+        /* === Music player (cute-cnblogs style) === */
         .music-widget {
             padding: 15px;
         }
@@ -409,7 +409,7 @@
             box-shadow: 0 6px 20px rgba(115, 150, 167, 0.4);
         }
 
-        /* === スキン切り替え === */
+        /* === Skin switching === */
         body.skin-furvous {
             background: #2d2d2d;
             color: #e0e0e0;
@@ -463,7 +463,7 @@
             border: 1px solid rgba(115, 150, 167, 0.25) !important;
         }
 
-        /* === 魚アニメーションコンテナ === */
+        /* === Fish animation container === */
         .container {
             width: 100%;
             height: 200px;
@@ -529,12 +529,12 @@
             }
         }
 
-        /* === クリア要素 === */
+        /* === Clear elements === */
         .clear {
             clear: both;
         }
 
-        /* === 画像フィックス === */
+        /* === Image fixes === */
         .broken-image {
             display: none !important;
         }

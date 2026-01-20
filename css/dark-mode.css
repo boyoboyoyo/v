@@ -1,4 +1,4 @@
-/* ダークモードのスタイル */
+/* Dark mode styles */
 body.dark-mode {
     background-color: #1a1a1a;
     color: #e0e0e0;
@@ -32,7 +32,7 @@ body.dark-mode .newsItem {
     border: 1px solid #444;
 }
 
-/* ダークモード切り替えボタン */
+/* Dark mode toggle button */
 .dark-mode-toggle {
     position: fixed;
     top: 20px;
