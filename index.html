@@ -282,7 +282,9 @@
 
             <!-- Sidebar -->
             <div id="sideBar">
-                <div class="newsItem">
+                <!-- milusidebar expects this structure -->
+                <div id="sidebar_news">
+                    <div class="newsItem">
                     <h3 class="catListTitle">Music Player</h3>
                     <div class="music-widget">
                         <div class="music-player">
@@ -318,6 +320,14 @@
                         <div>Comments: <span id="comment_count">0</span></div>
                         <div>Views: <span id="view_count">0</span></div>
                     </div>
+                </div>
+                </div>
+                <!-- End sidebar_news -->
+
+                <!-- Blog News (milusidebar expects this) -->
+                <div id="blog-news">
+                    <div id="p_b_follow" style="display:none;"></div>
+                    <div id="blog-calendar"></div>
                 </div>
             </div>
             <div class="clear"></div>
