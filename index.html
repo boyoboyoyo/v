@@ -519,43 +519,25 @@
 
     <!-- Disable forced scroll animations -->
     <script>
-        // CRITICAL FIX: Disable the scroll event handler that causes forced downward scroll
-        $(window).off('scroll');  // Remove ALL scroll event handlers
+        // CRITICAL FIX: Block only the problematic navigator fixed positioning
+        // NOT all scroll handlers (sidebar needs scroll for fixed positioning)
 
-        // Prevent scroll events from cute-cnblogs scripts
-        $.event.special.scroll = {
-            setup: function() {
-                // Block scroll event binding
-                return false;
-            },
-            teardown: function() {
-                // Block scroll event unbinding
-                return false;
-            },
-            add: function() {
-                // Block adding scroll handlers
-                return false;
-            }
-        };
-
-        // BLOCK ALL SCROLL ANIMATIONS - Override jQuery animate
+        // Block jQuery animate scrollTop
         (function() {
             var originalAnimate = $.fn.animate;
             $.fn.animate = function(prop, duration, easing, callback) {
-                // Check if trying to animate scrollTop
                 if (prop && prop.hasOwnProperty('scrollTop')) {
                     console.log('Blocked scrollTop animation');
-                    return this; // Don't animate
+                    return this;
                 }
                 return originalAnimate.call(this, prop, duration, easing, callback);
             };
         })();
 
-        // Block scrollTo
+        // Block scrollTo to top
         (function() {
             var originalScrollTo = window.scrollTo;
             window.scrollTo = function(x, y) {
-                // Only block if trying to scroll to top programmatically
                 if (y === 0 && arguments.length === 2) {
                     console.log('Blocked window.scrollTo(0, 0)');
                     return;
@@ -564,28 +546,26 @@
             };
         })();
 
-        // Disable fly_top button completely
+        // Disable fly_top button
         $(document).off("click", ".fly_top");
-        $(".fly_top").remove(); // Remove from DOM
+        $(".fly_top").remove();
 
-        // Disable any existing scroll animations
-        $("body, html").stop(true, true);
-
-        // Keep navigator always static (never fixed)
-        $("#navigator").css({"position": "static"});
-        $("#blogTitle").css({"margin-bottom": "0"});
-
-        // Watch for and prevent any style changes that cause scroll issues
-        var observer = new MutationObserver(function(mutations) {
+        // MutationObserver: Block ONLY navigator/blogTitle style changes that cause scroll issues
+        var navigatorObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutation) {
                 if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
                     var target = $(mutation.target);
-                    if (target.is('#navigator') || target.is('#blogTitle')) {
-                        // Keep navigator static at all times
-                        if (target.is('#navigator')) {
+                    if (target.is('#navigator')) {
+                        // Keep navigator ALWAYS static - never fixed
+                        var position = target.css('position');
+                        if (position === 'fixed') {
                             target.css({"position": "static"});
                         }
-                        if (target.is('#blogTitle')) {
+                    }
+                    if (target.is('#blogTitle')) {
+                        // Keep margin-bottom at 0
+                        var marginBottom = target.css('margin-bottom');
+                        if (marginBottom && marginBottom !== '0px' && marginBottom !== '0px') {
                             target.css({"margin-bottom": "0"});
                         }
                     }
@@ -593,9 +573,14 @@
             });
         });
 
-        // Observe navigator and blogTitle for style changes
-        observer.observe(document.querySelector('#navigator'), { attributes: true });
-        observer.observe(document.querySelector('#blogTitle'), { attributes: true });
+        // Only observe navigator and blogTitle (not sidebar/catalogue)
+        var navEl = document.querySelector('#navigator');
+        var titleEl = document.querySelector('#blogTitle');
+        if (navEl) navigatorObserver.observe(navEl, { attributes: true });
+        if (titleEl) navigatorObserver.observe(titleEl, { attributes: true });
+
+        // IMPORTANT: Don't block all scroll events - sidebar needs them for fixed positioning
+        // Just prevent the problematic navigator fixed behavior
 
         // Sidebar close button functionality
         $(document).on('click', '#sideBar::before, #catalogue::before', function() {
