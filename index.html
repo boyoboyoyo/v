@@ -185,15 +185,6 @@
     <!-- APlayer -->
     <div id="aplayer"></div>
 
-    <!-- Ancient Poetry Module -->
-    <div class="poem-wrap">
-        <div class="poem-border poem-left"></div>
-        <div class="poem-border poem-right"></div>
-        <h1>Poetry of the Day</h1>
-        <div id="poem_sentence"></div>
-        <div id="poem_info"></div>
-    </div>
-
     <!-- APlayer -->
     <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
 
@@ -367,19 +358,6 @@
                 $('#play-pause-btn').text('Play');
                 isPlaying = false;
             });
-        });
-    </script>
-
-    <!-- Ancient Poem Script (Jinrishici) -->
-    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-    <script>
-        jinrishici.load(function(result) {
-            var sentence = document.querySelector("#poem_sentence");
-            var info = document.querySelector("#poem_info");
-            if (sentence && info) {
-                sentence.innerHTML = result.data.content;
-                info.innerHTML = '[' + result.data.origin.dynasty + '] ' + result.data.origin.author + ' - ' + result.data.origin.title + '';
-            }
         });
     </script>
 
