@@ -513,106 +513,13 @@
 
     <!-- cute-cnblogs Phase 2 Scripts -->
     <script src="js/milusidebar.js"></script>
-    <script src="js/cute-cnblogs2.js"></script>
-    <script src="js/cute-cnblogs3.js"></script>
+
+    <!-- FIXED VERSION - Replaces cute-cnblogs2.js and cute-cnblogs3.js -->
+    <!-- This version has all features WITHOUT the forced scroll issue -->
+    <script src="js/cute-cnblogs-fixed.js"></script>
+
     <script src="js/monitoring2.js"></script>
 
-    <!-- Disable forced scroll animations -->
-    <script>
-        // CRITICAL FIX: Block only the problematic navigator fixed positioning
-        // NOT all scroll handlers (sidebar needs scroll for fixed positioning)
-
-        // Block jQuery animate scrollTop
-        (function() {
-            var originalAnimate = $.fn.animate;
-            $.fn.animate = function(prop, duration, easing, callback) {
-                if (prop && prop.hasOwnProperty('scrollTop')) {
-                    console.log('Blocked scrollTop animation');
-                    return this;
-                }
-                return originalAnimate.call(this, prop, duration, easing, callback);
-            };
-        })();
-
-        // Block scrollTo to top
-        (function() {
-            var originalScrollTo = window.scrollTo;
-            window.scrollTo = function(x, y) {
-                if (y === 0 && arguments.length === 2) {
-                    console.log('Blocked window.scrollTo(0, 0)');
-                    return;
-                }
-                return originalScrollTo.call(window, x, y);
-            };
-        })();
-
-        // Disable fly_top button
-        $(document).off("click", ".fly_top");
-        $(".fly_top").remove();
-
-        // MutationObserver: Block ONLY navigator/blogTitle style changes that cause scroll issues
-        var navigatorObserver = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-                    var target = $(mutation.target);
-                    if (target.is('#navigator')) {
-                        // Keep navigator ALWAYS static - never fixed
-                        var position = target.css('position');
-                        if (position === 'fixed') {
-                            target.css({"position": "static"});
-                        }
-                    }
-                    if (target.is('#blogTitle')) {
-                        // Keep margin-bottom at 0
-                        var marginBottom = target.css('margin-bottom');
-                        if (marginBottom && marginBottom !== '0px' && marginBottom !== '0px') {
-                            target.css({"margin-bottom": "0"});
-                        }
-                    }
-                }
-            });
-        });
-
-        // Only observe navigator and blogTitle (not sidebar/catalogue)
-        var navEl = document.querySelector('#navigator');
-        var titleEl = document.querySelector('#blogTitle');
-        if (navEl) navigatorObserver.observe(navEl, { attributes: true });
-        if (titleEl) navigatorObserver.observe(titleEl, { attributes: true });
-
-        // IMPORTANT: Don't block all scroll events - sidebar needs them for fixed positioning
-        // Just prevent the problematic navigator fixed behavior
-
-        // Sidebar close button functionality
-        $(document).on('click', '#sideBar::before, #catalogue::before', function() {
-            $('#sideBar').removeClass('show');
-            $('#catalogue').removeClass('show');
-        });
-
-        // Close sidebar when clicking outside
-        $(document).on('click', function(e) {
-            if ($(window).width() <= 1300) {
-                if (!$(e.target).closest('#sideBar, #catalogue, .catalogue_btn, .set_btn').length) {
-                    $('#sideBar').removeClass('show');
-                    $('#catalogue').removeClass('show');
-                }
-            }
-        });
-
-        // Better sidebar toggle for mobile
-        $(document).on('click', '.catalogue_btn', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            if ($(window).width() <= 1300) {
-                $('#sideBar').toggleClass('show');
-                $('#catalogue').toggleClass('show');
-            }
-        });
-
-        // Ensure proper sidebar toggle from existing scripts
-        var originalCatalogueClick = $.fn.catalogueClick;
-        $(document).off('click', '.catalogue');
-    </script>
 
     <script>
         // ===== miluframe Configuration (Phase 2) =====
@@ -693,6 +600,12 @@
             'popper_weixin': '<div class="popper_box"><p><b>Nice to meet you! (づ｡◕ᴗᴗ◕｡)づ</b></p></div>', /* WeChat popup */
             'portrait': 'https://pic.cnblogs.com/avatar/default.jpg' /* Avatar */
         });
+
+        // ===== Generate Table of Contents =====
+        // Call GenerateContentList function from cute-cnblogs-fixed.js
+        if (typeof GenerateContentList === 'function') {
+            GenerateContentList();
+        }
 
         // ===== APlayer Music Player =====
         const ap = new APlayer({
