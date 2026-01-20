@@ -162,6 +162,21 @@
         .music-btn:hover {
             background: #66b1ff;
         }
+
+        /* Mobile scroll fixes - prevent forced scroll behavior */
+        html, body {
+            overscroll-behavior: none !important;
+            overscroll-behavior-x: none !important;
+            overscroll-behavior-y: none !important;
+            touch-action: pan-y pan-x !important;
+            -webkit-overflow-scrolling: auto !important;
+        }
+
+        /* Disable fly_top button completely */
+        .fly_top {
+            display: none !important;
+            pointer-events: none !important;
+        }
     </style>
 </head>
 <body>
@@ -365,6 +380,14 @@
     <script src="js/cute-cnblogs2.js"></script>
     <script src="js/cute-cnblogs3.js"></script>
     <script src="js/monitoring2.js"></script>
+
+    <!-- Disable forced scroll animations -->
+    <script>
+        // Disable fly_top scroll animation that causes forced scroll on mobile
+        $(document).off("click", ".fly_top");
+        // Disable any scroll animations on body/html
+        $("body, html").stop(true, true);
+    </script>
 
     <script>
         // ===== miluframe Configuration (Phase 2) =====
