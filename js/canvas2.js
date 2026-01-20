@@ -14,7 +14,7 @@ class ThumbsUpAni {
     height = 0;
     scanning = false;
     renderList=[];
-    scaleTime = 0.1;// 百分比
+    scaleTime = 0.1;// percentage
     constructor() {
         this.loadImages();
         const canvas = document.getElementById('thumsCanvas');
@@ -46,7 +46,7 @@ class ThumbsUpAni {
                 return false;
             });
             if (this.imgsList.length == 0) {
-                dLog('error', 'imgsList load all error');
+                console.log('error', 'imgsList load all error');
                 return;
             }
         })
@@ -63,14 +63,14 @@ class ThumbsUpAni {
             }
         };
         const context = this.context;
-        // 随机读取一个图片来渲染
+        // Randomly select an image to render
         const image = this.imgsList[getRandom(0, this.imgsList.length - 1)]
         const offset = 20;
         const basicX = this.width / 2 + getRandom(-offset, offset);
         const angle = getRandom(2, 10);
         let ratio = getRandom(10,30)*((getRandom(0, 1) ? 1 : -1));
         const getTranslateX = (diffTime) => {
-            if (diffTime < this.scaleTime) {// 放大期间，不进行摇摆位移
+            if (diffTime < this.scaleTime) {// No swing during scaling
                 return basicX;
             } else {
                 return basicX + ratio*Math.sin(angle*(diffTime - this.scaleTime));
@@ -92,7 +92,7 @@ class ThumbsUpAni {
         };
 
         return (diffTime) => {
-            // 差值满了，即结束了 0 ---》 1
+            // Diff reaches 1 means animation ends (0 -> 1)
             if(diffTime>=1) return true;
             context.save();
             const scale = getScale(diffTime);
@@ -128,7 +128,7 @@ class ThumbsUpAni {
         while (index < length) {
             const child = this.renderList[index];
             if (!child || !child.render || child.render.call(null, (Date.now() - child.timestamp) / child.duration)) {
-                // 结束了，删除该动画
+                // Animation ended, remove it
                 this.renderList.splice(index, 1);
                 length--;
             } else {
