@@ -88,6 +88,29 @@
             z-index: 1;
         }
 
+        /* Footnote Styles */
+        .footnote-ref {
+            font-size: 0.8em;
+            vertical-align: super;
+            color: #409EFF;
+            cursor: help;
+            font-weight: bold;
+        }
+        .footnotes {
+            font-size: 0.9em;
+            color: #666;
+            padding-left: 20px;
+            margin-top: 30px;
+        }
+        .footnotes li {
+            margin-bottom: 10px;
+        }
+        .footnotes li[id]::before {
+            content: attr(id) ". ";
+            font-weight: bold;
+            color: #409EFF;
+        }
+
         /* Music player customization */
         #aplayer {
             position: fixed;
@@ -205,7 +228,7 @@
                                 <p>Quantum mechanics is a fundamental theory in physics that provides a description of the physical properties of nature at the scale of atoms and subatomic particles.</p>
 
                                 <h2>The Schrödinger Equation</h2>
-                                <p>The time-dependent Schrödinger equation is given by:</p>
+                                <p>The time-dependent Schrödinger equation is given by <span class="footnote-ref">[1]</span>:</p>
 
                                 <p>$$ i\hbar\frac{\partial}{\partial t}\Psi(x,t) = \hat{H}\Psi(x,t) $$</p>
 
@@ -218,7 +241,7 @@
                                 </ul>
 
                                 <h2>Wave Function Properties</h2>
-                                <p>The wave function $\Psi(x,t)$ contains all information about the system. The probability density is given by:</p>
+                                <p>The wave function $\Psi(x,t)$ contains all information about the system. The probability density is given by <span class="footnote-ref">[2]</span>:</p>
 
                                 <p>$$ \rho(x,t) = |\Psi(x,t)|^2 $$</p>
 
@@ -236,6 +259,21 @@
 
                                 <h2>Conclusion</h2>
                                 <p>Quantum mechanics revolutionized our understanding of the microscopic world and continues to be fundamental to modern physics.</p>
+
+                                <hr>
+
+                                <h2>References</h2>
+                                <ol class="footnotes">
+                                    <li id="fn1">
+                                        Schrödinger, E. (1926). "An Undulatory Theory of the Mechanics of Atoms and Molecules". Physical Review. 28 (6): 1049–1070.
+                                    </li>
+                                    <li id="fn2">
+                                        Heisenberg, W. (1927). "Über den anschaulichen Inhalt der quantentheoretischen Kinematik und Mechanik". Zeitschrift für Physik. 43 (3-4): 172–198.
+                                    </li>
+                                    <li id="fn3">
+                                        Dirac, P. A. M. (1958). "The Principles of Quantum Mechanics" (4th ed.). Oxford University Press.
+                                    </li>
+                                </ol>
                             </div>
                         </div>
                     </div>
@@ -513,6 +551,57 @@
             });
         });
     </script>
+
+    <!-- Click Effect (Cute Text on Click) - DISABLED for performance
+    <!-- <script>
+        var a_idx = 0;
+        jQuery(document).ready(function($) {
+            $("body").click(function(e) {
+                var a = new Array(
+                    "Live out yourself.",
+                    "A good plan today is better than a perfect plan tomorrow.",
+                    "Don't give up easily.",
+                    "Every moment is a fresh beginning.",
+                    "Change the game, don't let the game change you.",
+                    "Your actions define you.",
+                    "Take risks for your beliefs.",
+                    "Some birds cannot be caged.",
+                    "Our choices define who we become.",
+                    "Keep swimming forward.",
+                    "Some roads must be walked alone.",
+                    "May you have stars in your eyes.",
+                    "Ride dreams, cherish youth.",
+                    "Achievements come from spare time.",
+                    "Be happy.",
+                    "Be young, be emotional.",
+                    "I was born ordinary, born proud.",
+                    "I walk slowly, but never retreat.",
+                    "Stay innocent, stay happy.",
+                    "You look like good weather.",
+                    "Self-help is the best help."
+                );
+                var le = Math.ceil(Math.random() * a.length);
+                var $i = $("<span></span>").text(a[le]);
+                var x = e.pageX;
+                var y = e.pageY;
+                $i.css({
+                    "z-index": 999999999,
+                    "top": y - 20,
+                    "left": x,
+                    "position": "absolute",
+                    "font-weight": "bold",
+                    "color": "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+                });
+                $("body").append($i);
+                $i.animate({
+                    "top": y - 180,
+                    "opacity": 0
+                }, 2000, function() {
+                    $i.remove();
+                });
+            });
+        });
+    </script> -->
 
     <!-- Mobile Responsive Style -->
     <style id="ceshicss">
