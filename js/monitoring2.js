@@ -56,14 +56,14 @@
         window.logInfo.allloadTime = +new Date() - window.logInfo.openTime;
         window.logInfo.nowTime = new Date().getTime();
         var timname = {
-            whiteScreenTime: '白屏时间',
-            readyTime: '用户可操作时间',
-            allloadTime: '总下载时间',
-            mobile: '使用设备',
-            nowTime: '时间',
+            whiteScreenTime: 'White Screen Time',
+            readyTime: 'Ready Time',
+            allloadTime: 'Total Load Time',
+            mobile: 'Device',
+            nowTime: 'Time',
         };
         var logStr = '';
-        console.info("前端可视化监控如下：")
+        console.info("Frontend Monitoring:")
         for (var i in timname) {
             console.info(timname[i] + ':' + window.logInfo[i] + 'ms');
             if (i === 'mobile') {
@@ -71,7 +71,7 @@
             } else {
                 logStr += '&' + i + '=' + window.logInfo[i];
             }
-            
+
         }
        /* (new Image()).src = '/action?' + logStr;*/
     };
