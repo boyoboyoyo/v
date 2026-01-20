@@ -3,6 +3,197 @@
  * All features working WITHOUT forced scroll issues
  */
 
+// ===== CONFIGURATION =====
+var c = {
+    Youself: "https://boyoboyoyo.github.io/v/",
+    custom: [{
+        name: 'Home',
+        link: 'https://boyoboyoyo.github.io/v/',
+        istarget: false
+    }],
+    resume: {
+        "name": "barker",
+        "link": "https://boyoboyoyo.github.io/v/",
+        "headurl": "https://pic.cnblogs.com/avatar/default.jpg",
+        "introduction": "Blood Creation Platform"
+    },
+    unionbox: [],
+    details: [{
+        field: 'name',
+        literal: 'Name',
+    }, {
+        field: 'introduction',
+        literal: 'Description',
+    }, {
+        field: 'url',
+        literal: 'URL',
+    }],
+    logoimg: 'https://pic.cnblogs.com/avatar/default.jpg',
+    cuteicon: ['icon-caomei', 'icon-boluo', 'icon-huolongguo', 'icon-chengzi', 'icon-hamigua', 'icon-lizhi', 'icon-mangguo', 'icon-liulian', 'icon-lizi', 'icon-lanmei', 'icon-longyan', 'icon-shanzhu', 'icon-pingguo', 'icon-mihoutao', 'icon-niyouguo', 'icon-xigua', 'icon-putao', 'icon-xiangjiao', 'icon-ningmeng', 'icon-yingtao', 'icon-taozi', 'icon-shiliu', 'icon-ximei', 'icon-shizi'],
+    isGratuity: false,
+    gratuity: ''
+};
+
+// ===== miluframe FUNCTION =====
+function miluframe(setting) {
+    $.extend(c, setting);
+    allpage(c);
+}
+
+// ===== allpage FUNCTION =====
+function allpage(c) {
+    // Custom navigation
+    var custom = "";
+    for (var i = 0; i < c.custom.length; i++) {
+        if (c.custom[i].istarget == true) {
+            custom = custom + '<li><a href="' + c.custom[i].link + '" target="_blank">' + c.custom[i].name + "</a></li>";
+        } else {
+            custom = custom + '<li><a href="' + c.custom[i].link + '">' + c.custom[i].name + "</a></li>";
+        }
+    }
+    $("#navList").html(custom);
+
+    // Fish container
+    if (!mobile_flag) {
+        $("#footer").before('<div id="jsi-flying-fish-container" class="container"></div>');
+    }
+
+    // Article title icons
+    var le = $(".postTitle2").length;
+    for (var i = 0; i < le; i++) {
+        var num = Math.floor(Math.random() * c.cuteicon.length);
+        $(".postTitle2").eq(i).before('<svg class="icon" aria-hidden="true"><use xlink:href="#' + c.cuteicon[num] + '"></use></svg>');
+    }
+
+    // Skin selection UI
+    var skin = '<div class="select_skin"><ul><li class="light_white">Light</li><li class="furvous">Dark</li><li class="reading">Reading Mode</li></ul></div>';
+    tippy(".skin_btn", {
+        content: skin,
+        theme: "tomato",
+        allowHTML: true,
+        animation: "scale",
+        duration: 500,
+        arrow: true,
+        hideOnClick: "false",
+        interactive: true
+    });
+
+    // Logo
+    var le = $("link").length;
+    for (var i = 0; i < le; i++) {
+        var rel = $("link").eq(i).attr("rel");
+        if (rel == "shortcut icon") {
+            $("link").eq(i).attr("href", c.logoimg);
+        }
+    }
+
+    // Friend links (unionbox)
+    var newarray = shuffle(c.unionbox);
+    var listfriends = "";
+    for (var i = 0; i < newarray.length; i++) {
+        listfriends = listfriends + '<div class="unionbox"><div class="info"><div class="headimg"><img src="' + newarray[i].headurl + '" alt=""></div><div class="content"><h3 class="title">' + newarray[i].name + '</h3><p class="desc">' + newarray[i].introduction + '</p><a class="btn" target="_blank" href="' + newarray[i].url + '">Jump to</a></div></div></div>';
+    }
+    $(".unionbox-box").html(listfriends);
+
+    // Friend table
+    var detailsfriends = "";
+    for (var i = 0; i < c.details.length; i++) {
+        detailsfriends = detailsfriends + "<tr><td>" + c.details[i].field + "</td><td>" + c.details[i].literal + "</td></tr>";
+    }
+    $(".friendstable").append(detailsfriends);
+
+    // Gratuity button
+    if (c.isGratuity != false) {
+        tippy(".gratuity", {
+            content: c.gratuity,
+            theme: "tomato",
+            allowHTML: true,
+            animation: "scale",
+            duration: 500,
+            arrow: true,
+            hideOnClick: "false",
+            interactive: true
+        });
+    } else {
+        $(".gratuity").hide();
+    }
+
+    // Comment avatars
+    var le = $(".feedbackItem").length;
+    for (var i = 0; i < le; i++) {
+        var src = $(".feedbackItem").eq(i).find(".feedbackCon").find("span").text();
+        $(".feedbackCon").eq(i).prepend('<img class="comment-avatar" src="' + $.trim(src) + '">');
+    }
+
+    // Comment placeholder
+    $("#tbCommentBody").attr("placeholder", "Please fill in properly！ ...");
+
+    // OwO emoji picker
+    $("#tbCommentBody").after('<div class="OwO" onclick="load_face(this)"><div class="OwO-logo"><span>OωO<space><space>Emoji</span></div></div>');
+    window.load_face = function(a) {
+        var OwO_demo = new OwO({
+            logo: "OωOEmoji",
+            container: document.getElementsByClassName("OwO")[0],
+            target: document.getElementById("tbCommentBody"),
+            api: "https://miluluyo.github.io/OwO.json",
+            position: "down",
+            width: "70%",
+            maxHeight: "250px"
+        });
+        a.classList.add("OwO-open");
+        a.onclick = null;
+    };
+
+    $("#commentbox_opt").nextAll().remove();
+    $("#btn_comment_submit").val("Submit Comment (Ctrl + Enter)");
+
+    $(document).on("click", "#btn_edit_comment", function() {
+        $(".OwO").show();
+    });
+
+    $(document).on("click", "#btn_preview_comment", function() {
+        $(".OwO").hide();
+    });
+
+    // Window resize handler
+    $(window).resize(function() {
+        var w = document.body.clientWidth;
+        if (w > 1300) {
+            // Do nothing
+        } else {
+            if (960 < w) {
+                if ($("#mainContent").css("width") != "90%") {
+                    $("#mainContent").css("width", "90%");
+                }
+            } else {
+                if (0 < w) {
+                    if ($("#mainContent").css("width") != "90%") {
+                        $("#mainContent").css("width", "90%");
+                    }
+                }
+            }
+        }
+    });
+
+    // NO navigator scroll direction detection - this was causing the forced scroll issue!
+    // REMOVED: The code that detects scroll direction and sets navigator to position:fixed
+    // This was the root cause of the forced downward scroll when scrolling up
+}
+
+// Shuffle function for randomizing array
+function shuffle(unionbox) {
+    var array = unionbox;
+    var m = array.length,
+        t, i;
+    while (m) {
+        i = Math.floor(Math.random() * m--);
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+    }
+    return array;
+}
+
 // Mobile detection
 function isMobile() {
     var userAgentInfo = navigator.userAgent;
