@@ -648,9 +648,9 @@
                                 <div class="music-artist" id="current-artist">Unknown</div>
                             </div>
                             <div class="music-controls">
-                                <button class="music-btn" id="prev-btn">⏮</button>
-                                <button class="music-btn play" id="play-pause-btn">▶</button>
-                                <button class="music-btn" id="next-btn">⏭</button>
+                                <button class="music-btn" id="prev-btn">Prev</button>
+                                <button class="music-btn play" id="play-pause-btn">Play</button>
+                                <button class="music-btn" id="next-btn">Next</button>
                             </div>
                         </div>
                     </div>
@@ -664,9 +664,9 @@
 
     <!-- フローティングコントロール -->
     <div class="floating-controls">
-        <button id="theme-toggle" class="float-btn" title="ダークモード切り替え">🌙</button>
-        <button id="music-toggle" class="float-btn" title="音楽プレイヤー">🎵</button>
-        <button id="back-to-top" class="float-btn" title="トップへ戻る">↑</button>
+        <button id="theme-toggle" class="float-btn" title="ダークモード切り替え">Dark</button>
+        <button id="music-toggle" class="float-btn" title="音楽プレイヤー">Music</button>
+        <button id="back-to-top" class="float-btn" title="トップへ戻る">Top</button>
     </div>
 
     <!-- 音楽プレイヤー -->
@@ -682,7 +682,7 @@
 
     <script>
         $(document).ready(function() {
-            console.log('🎵 Tech Blog - Target Site Exact Match Version Ready');
+            console.log('Tech Blog - Target Site Exact Match Version Ready');
 
             // === 画像エラー処理 ===
             $('img').on('error', function() {
@@ -726,10 +726,10 @@
 
             $('#play-pause-btn').click(function() {
                 if (isPlaying) {
-                    $(this).text('▶');
+                    $(this).text('Play');
                     ap.pause();
                 } else {
-                    $(this).text('⏸');
+                    $(this).text('Pause');
                     ap.play();
                 }
             });
@@ -747,12 +747,12 @@
             });
 
             ap.on('play', function() {
-                $('#play-pause-btn').text('⏸');
+                $('#play-pause-btn').text('Pause');
                 isPlaying = true;
             });
 
             ap.on('pause', function() {
-                $('#play-pause-btn').text('▶');
+                $('#play-pause-btn').text('Play');
                 isPlaying = false;
             });
 
@@ -774,13 +774,13 @@
             const isDark = localStorage.getItem('darkMode') === 'true';
             if (isDark) {
                 $('body').addClass('dark-mode');
-                $('#theme-toggle').text('☀️');
+                $('#theme-toggle').text('Light');
             }
 
             $('#theme-toggle').click(function() {
                 $('body').toggleClass('dark-mode');
                 const isNowDark = $('body').hasClass('dark-mode');
-                $(this).text(isNowDark ? '☀️' : '🌙');
+                $(this).text(isNowDark ? 'Light' : 'Dark');
                 localStorage.setItem('darkMode', isNowDark);
             });
 
