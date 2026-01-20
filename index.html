@@ -40,8 +40,13 @@
 
     <style>
         /* Custom styles for barker */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
         }
 
         /* Title centering - Override cute-cnblogs2.css */
@@ -176,6 +181,137 @@
         .fly_top {
             display: none !important;
             pointer-events: none !important;
+        }
+
+        /* Mobile improvements */
+        @media (max-width: 1300px) {
+            #set_btn_box {
+                bottom: 120px;
+                right: 16px;
+            }
+
+            .set_btn {
+                width: 48px !important;
+                height: 48px !important;
+                line-height: 48px !important;
+                margin-bottom: 12px;
+                border-radius: 50% !important;
+            }
+
+            .set_btn svg {
+                width: 24px !important;
+                height: 24px !important;
+                margin: 12px auto !important;
+            }
+
+            /* Better sidebar transition */
+            #sideBar.show, #catalogue.show {
+                clip-path: circle(150% at 100% 100%) !important;
+                -webkit-clip-path: circle(150% at 100% 100%) !important;
+            }
+
+            /* Add close button for sidebar */
+            #sideBar::before, #catalogue::before {
+                content: '×';
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                font-size: 40px;
+                font-weight: bold;
+                color: #333;
+                z-index: 9999;
+                cursor: pointer;
+                display: block;
+            }
+        }
+
+        @media (max-width: 767px) {
+            #set_btn_box {
+                bottom: 80px;
+                right: 12px;
+            }
+
+            .set_btn {
+                width: 52px !important;
+                height: 52px !important;
+                line-height: 52px !important;
+            }
+
+            /* Improve navigation links for touch */
+            #navList li {
+                padding: 0.5rem;
+            }
+
+            #navList li a {
+                display: block;
+                padding: 12px 20px;
+                font-size: 1.1rem;
+            }
+
+            /* Better header on mobile */
+            #Header1_HeaderTitle {
+                font-size: 2rem !important;
+            }
+
+            .vertical h2 {
+                font-size: 0.9rem !important;
+            }
+        }
+
+        /* Typography improvements */
+        #cnblogs_post_body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        #cnblogs_post_body p {
+            margin-bottom: 1.2em;
+        }
+
+        #cnblogs_post_body h2 {
+            font-size: 1.8rem;
+            margin-top: 2em;
+            margin-bottom: 1em;
+            line-height: 1.4;
+        }
+
+        #cnblogs_post_body h3 {
+            font-size: 1.4rem;
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+        }
+
+        /* Better content readability */
+        .day .postCon {
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .postTitle2 {
+            font-size: 1.8rem !important;
+        }
+
+        /* Improve button visibility and usability */
+        .set_btn {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+            transition: transform 0.2s, box-shadow 0.2s !important;
+        }
+
+        .set_btn:hover, .set_btn:active {
+            transform: scale(1.1) !important;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        /* Make catalogue and sidebar more accessible */
+        #sideBar, #catalogue {
+            transition: clip-path 0.4s ease-in-out, visibility 0.4s;
+        }
+
+        #sideBar:hover, #catalogue:hover,
+        #sideBar:focus-within, #catalogue:focus-within {
+            /* Better visibility on desktop */
         }
     </style>
 </head>
@@ -387,6 +523,37 @@
         $(document).off("click", ".fly_top");
         // Disable any scroll animations on body/html
         $("body, html").stop(true, true);
+
+        // Sidebar close button functionality
+        $(document).on('click', '#sideBar::before, #catalogue::before', function() {
+            $('#sideBar').removeClass('show');
+            $('#catalogue').removeClass('show');
+        });
+
+        // Close sidebar when clicking outside
+        $(document).on('click', function(e) {
+            if ($(window).width() <= 1300) {
+                if (!$(e.target).closest('#sideBar, #catalogue, .catalogue_btn, .set_btn').length) {
+                    $('#sideBar').removeClass('show');
+                    $('#catalogue').removeClass('show');
+                }
+            }
+        });
+
+        // Better sidebar toggle for mobile
+        $(document).on('click', '.catalogue_btn', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if ($(window).width() <= 1300) {
+                $('#sideBar').toggleClass('show');
+                $('#catalogue').toggleClass('show');
+            }
+        });
+
+        // Ensure proper sidebar toggle from existing scripts
+        var originalCatalogueClick = $.fn.catalogueClick;
+        $(document).off('click', '.catalogue');
     </script>
 
     <script>

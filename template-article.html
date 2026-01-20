@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Title - barker</title>
+
+    <!-- Copy the same HEAD section from index.html -->
+    <!-- Including all CSS, MathJax, etc. -->
+
+    <style>
+        /* Add any article-specific styles here */
+    </style>
+</head>
+<body>
+
+    <!-- ===== ARTICLE START ===== -->
+    <!-- Copy this structure to add a new article -->
+    <div class="day">
+        <div class="dayTitle">
+        </div>
+
+        <div class="postTitle">
+            <a class="postTitle2" href="#">Your Article Title Here</a>
+        </div>
+
+        <div class="postCon">
+            <div class="c_b_p_desc">
+                <!-- Brief description/excerpt -->
+            </div>
+        </div>
+
+        <div class="postDesc">
+            Posted on <span id="post-date">YYYY-MM-DD</span> | Tags: <a href="#">tag1</a>, <a href="#">tag2</a>
+        </div>
+
+        <div class="postText">
+            <div id="cnblogs_post_body">
+                <!-- ===== ARTICLE CONTENT START ===== -->
+
+                <h2>Introduction</h2>
+                <p>Your introduction paragraph here. Use <code>$$</code> for display math and <code>$</code> for inline math.</p>
+
+                <h2>Main Section</h2>
+                <p>Example equation:</p>
+
+                <p>$$ E = mc^2 $$</p>
+
+                <p>Example with inline math: The energy $E$ is related to mass $m$ by the speed of light $c$.</p>
+
+                <h2>Subsection</h2>
+                <ul>
+                    <li>Point 1</li>
+                    <li>Point 2</li>
+                    <li>Point 3</li>
+                </ul>
+
+                <h2>Code Example</h2>
+                <pre><code>def hello():
+    print("Hello, World!")
+    return True</code></pre>
+
+                <h2>References</h2>
+                <p>Citations with footnotes <span class="footnote-ref">[1]</span>.</p>
+
+                <!-- ===== FOOTNOTES (optional) ===== -->
+                <div class="footnotes-section">
+                    <h3>References</h3>
+                    <ol class="footnotes">
+                        <li id="fn1">Author, A. (Year). "Title". Journal, Volume(Issue), pages.</li>
+                        <li id="fn2">Author, B. (Year). Book Title. Publisher.</li>
+                    </ol>
+                </div>
+
+                <!-- ===== ARTICLE CONTENT END ===== -->
+            </div>
+        </div>
+
+        <!-- Article action buttons -->
+        <div id="green_channel">
+            <a id="green_channel_weibo" href="javascript:void(0)">Weibo</a>
+            <a id="green_channel_wechat" href="javascript:void(0)">WeChat</a>
+        </div>
+    </div>
+    <!-- ===== ARTICLE END ===== -->
+
+    <!-- To add this article to index.html:
+         1. Copy the entire <div class="day">...</div> block
+         2. Paste it in the <div id="topics"> section
+         3. Update the content, title, date
+         4. Adjust the postDesc with correct date
+    -->
+
+</body>
+</html>
