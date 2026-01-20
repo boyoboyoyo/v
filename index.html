@@ -23,6 +23,21 @@
     <!-- jQuery (must load before other scripts) -->
     <script src="js/jquery2.min.js"></script>
 
+    <!-- MathJax for LaTeX -->
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            tags: 'ams'
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
         /* Custom styles for barker */
         body {
@@ -141,9 +156,6 @@
         <div class="set_btn skin_btn">
             <svg class="icon" aria-hidden="true" style="color:#97A1A7"><use xlink:href="#icon-pifu"></use></svg>
         </div>
-        <div class="set_btn gratuity">
-            <svg class="icon" aria-hidden="true" style="color:#97A1A7"><use xlink:href="#icon-dashang"></use></svg>
-        </div>
         <div class="set_btn article_icon_btn artice_recommend">
             <svg class="icon" aria-hidden="true" style="color:#97A1A7"><use xlink:href="#icon-tuijian2"></use></svg>
         </div>
@@ -177,7 +189,56 @@
         <div id="main">
             <div id="mainContent">
                 <div class="forFlow">
-                    <!-- Articles will be added here -->
+                    <!-- Sample Post with LaTeX -->
+                    <div class="day">
+                        <div class="dayTitle">
+                            <a id="post-sample">Sample Post - Introduction to Quantum Mechanics</a>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div class="postTitle">
+                            <a id="cb_post_title_url" class="postTitle2" href="https://boyoboyoyo.github.io/v/#post-sample">Introduction to Quantum Mechanics</a>
+                        </div>
+                        <div class="postCon">
+                            <div id="cnblogs_post_body" class="blogpost-body">
+                                <h2>Introduction</h2>
+                                <p>Quantum mechanics is a fundamental theory in physics that provides a description of the physical properties of nature at the scale of atoms and subatomic particles.</p>
+
+                                <h2>The Schrödinger Equation</h2>
+                                <p>The time-dependent Schrödinger equation is given by:</p>
+
+                                <p>$$ i\hbar\frac{\partial}{\partial t}\Psi(x,t) = \hat{H}\Psi(x,t) $$</p>
+
+                                <p>Where:</p>
+                                <ul>
+                                    <li>$i$ is the imaginary unit</li>
+                                    <li>$\hbar$ is the reduced Planck constant</li>
+                                    <li>$\Psi(x,t)$ is the wave function</li>
+                                    <li>$\hat{H}$ is the Hamiltonian operator</li>
+                                </ul>
+
+                                <h2>Wave Function Properties</h2>
+                                <p>The wave function $\Psi(x,t)$ contains all information about the system. The probability density is given by:</p>
+
+                                <p>$$ \rho(x,t) = |\Psi(x,t)|^2 $$</p>
+
+                                <h2>Heisenberg Uncertainty Principle</h2>
+                                <p>The uncertainty principle states that the more precisely the position of some particle is determined, the less precisely its momentum can be known, and vice versa:</p>
+
+                                <p>$$ \sigma_x \sigma_p \geq \frac{\hbar}{2} $$</p>
+
+                                <h2>Quantum Superposition</h2>
+                                <p>A quantum system can exist in a superposition of states:</p>
+
+                                <p>$$ |\Psi\rangle = \alpha|0\rangle + \beta|1\rangle $$</p>
+
+                                <p>Where $|\alpha|^2 + |\beta|^2 = 1$.</p>
+
+                                <h2>Conclusion</h2>
+                                <p>Quantum mechanics revolutionized our understanding of the microscopic world and continues to be fundamental to modern physics.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -314,10 +375,10 @@
             cuteicon: ['icon-caomei', 'icon-boluo', 'icon-huolongguo', 'icon-chengzi', 'icon-hamigua', 'icon-lizhi', 'icon-mangguo', 'icon-liulian', 'icon-lizi', 'icon-lanmei', 'icon-longyan', 'icon-shanzhu', 'icon-pingguo', 'icon-mihoutao', 'icon-niuyouguo', 'icon-xigua', 'icon-putao', 'icon-xiangjiao', 'icon-ningmeng', 'icon-yingtao', 'icon-taozi', 'icon-shiliu', 'icon-ximei', 'icon-shizi'],
 
             /* Show gratuity button */
-            isGratuity: true,
+            isGratuity: false,
 
             /* Gratuity content */
-            gratuity: '<div class="popper_box"><p><b>Support barker (づ｡◕ᴗᴗ◕｡)づ</b></p><div class="popper_box_con"><p>Thank you for your support!</p></div></div>'
+            gratuity: ''
         });
 
         // ===== Sidebar Configuration (Phase 2) =====

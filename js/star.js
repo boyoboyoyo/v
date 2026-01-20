@@ -49,7 +49,7 @@ function init() {
 
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio((window.devicePixelRatio) ? window.devicePixelRatio : 1);
-  renderer.setSize(window.innerWidth, parseFloat($("#blogTitle").css("height")));
+  renderer.setSize(window.innerWidth, window.innerHeight * 0.4);  // 40% of window height
   renderer.autoClear = false;
   renderer.setClearColor(0x000000, 0.0);
   container.appendChild(renderer.domElement);
@@ -78,7 +78,6 @@ function starForge() {
   materialOptions = {
     color: new THREE.Color(0xffffff),
     size: 1.1,
-    transparency: true,
     opacity: 0.8
   };
 
@@ -94,7 +93,7 @@ function starForge() {
     geometry.vertices.push(item);
   }
 
-  stars = new THREE.PointCloud(geometry, starStuff);
+  stars = new THREE.Points(geometry, starStuff);
   scene.add(stars);
 }
 
