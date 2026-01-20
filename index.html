@@ -185,6 +185,15 @@
     <!-- APlayer -->
     <div id="aplayer"></div>
 
+    <!-- Ancient Poetry Module -->
+    <div class="poem-wrap">
+        <div class="poem-border poem-left"></div>
+        <div class="poem-border poem-right"></div>
+        <h1>Poetry of the Day</h1>
+        <div id="poem_sentence"></div>
+        <div id="poem_info"></div>
+    </div>
+
     <!-- APlayer -->
     <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
 
@@ -196,6 +205,9 @@
     <!-- Three.js Star Effect -->
     <script src="js/three.min.js"></script>
     <script src="js/star.js"></script>
+
+    <!-- Swimming Fish Animation -->
+    <script src="js/swimming-fish.js"></script>
 
     <!-- Canvas Effect -->
     <script src="js/canvas2.js"></script>
@@ -354,6 +366,70 @@
             ap.on('pause', function() {
                 $('#play-pause-btn').text('Play');
                 isPlaying = false;
+            });
+        });
+    </script>
+
+    <!-- Ancient Poem Script (Jinrishici) -->
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    <script>
+        jinrishici.load(function(result) {
+            var sentence = document.querySelector("#poem_sentence");
+            var info = document.querySelector("#poem_info");
+            if (sentence && info) {
+                sentence.innerHTML = result.data.content;
+                info.innerHTML = '[' + result.data.origin.dynasty + '] ' + result.data.origin.author + ' - ' + result.data.origin.title + '';
+            }
+        });
+    </script>
+
+    <!-- Click Effect (Cute Text on Click) -->
+    <script>
+        var a_idx = 0;
+        jQuery(document).ready(function($) {
+            $("body").click(function(e) {
+                var a = new Array(
+                    "Live out yourself.",
+                    "A good plan today is better than a perfect plan tomorrow.",
+                    "Don't give up easily.",
+                    "Every moment is a fresh beginning.",
+                    "Change the game, don't let the game change you.",
+                    "Your actions define you.",
+                    "Take risks for your beliefs.",
+                    "Some birds cannot be caged.",
+                    "Our choices define who we become.",
+                    "Keep swimming forward.",
+                    "Some roads must be walked alone.",
+                    "May you have stars in your eyes.",
+                    "Ride dreams, cherish youth.",
+                    "Achievements come from spare time.",
+                    "Be happy.",
+                    "Be young, be emotional.",
+                    "I was born ordinary, born proud.",
+                    "I walk slowly, but never retreat.",
+                    "Stay innocent, stay happy.",
+                    "You look like good weather.",
+                    "Self-help is the best help."
+                );
+                var le = Math.ceil(Math.random() * a.length);
+                var $i = $("<span></span>").text(a[le]);
+                var x = e.pageX;
+                var y = e.pageY;
+                $i.css({
+                    "z-index": 999999999,
+                    "top": y - 20,
+                    "left": x,
+                    "position": "absolute",
+                    "font-weight": "bold",
+                    "color": "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+                });
+                $("body").append($i);
+                $i.animate({
+                    "top": y - 180,
+                    "opacity": 0
+                }, 2000, function() {
+                    $i.remove();
+                });
             });
         });
     </script>
