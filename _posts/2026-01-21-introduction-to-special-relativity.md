@@ -4,6 +4,7 @@ title: Introduction to Special Relativity
 icon: 🍊
 date: 2026-01-21 11:00:00 +0900
 categories: physics
+excerpt: Discover Einstein's theory of special relativity, including Lorentz transformations, time dilation, length contraction, and mass-energy equivalence.
 ---
 
 <div class="day">

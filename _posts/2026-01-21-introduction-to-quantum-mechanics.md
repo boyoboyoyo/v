@@ -4,6 +4,7 @@ title: Introduction to Quantum Mechanics
 icon: 🍓
 date: 2026-01-21 10:00:00 +0900
 categories: physics
+excerpt: Explore the fundamental theory of quantum mechanics, including the Schrödinger equation, wave functions, the uncertainty principle, and quantum superposition.
 ---
 
 <div class="day">

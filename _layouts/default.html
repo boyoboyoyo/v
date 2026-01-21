@@ -8,18 +8,18 @@
     <title>{% if page.title %}{{ page.title }} - {% endif %}barker - Blood Creation Platform</title>
 
     <!-- cute-cnblogs CSS -->
-    <link rel="stylesheet" href="/v/css/cute-cnblogs2.css">
-    <link rel="stylesheet" href="/v/css/animate.min.css">
-    <link rel="stylesheet" href="/v/icon/iconfont.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/cute-cnblogs2.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/animate.min.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/icon/iconfont.css">
 
     <!-- Icon Font -->
-    <script src="/v/js/font_1825850_klax1ao4o6.js"></script>
+    <script src="{{ site.baseurl }}/js/font_1825850_klax1ao4o6.js"></script>
 
     <!-- APlayer CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
 
     <!-- jQuery (must load before other scripts) -->
-    <script src="/v/js/jquery2.min.js"></script>
+    <script src="{{ site.baseurl }}/js/jquery2.min.js"></script>
 
     <!-- MathJax for LaTeX -->
     <script>
@@ -320,14 +320,15 @@
         <div id="header">
             <div id="blogTitle">
                 <div id="blogLogo">B</div>
-                <h1><a id="Header1_HeaderTitle" class="headermaintitle" href="/v/">barker</a></h1>
+                <h1><a id="Header1_HeaderTitle" class="headermaintitle" href="{{ site.baseurl }}/">barker</a></h1>
                 <h2>Blood Creation Platform</h2>
             </div>
             <div id="navigator">
                 <ul id="navList">
-                    <li><a class="menu" href="/v/">Home</a></li>
-                    <li><a class="menu" href="/v/quantum.html">Quantum</a></li>
-                    <li><a class="menu" href="/v/relativity.html">Relativity</a></li>
+                    <li><a class="menu" href="{{ site.baseurl }}/">Home</a></li>
+                    {% for post in site.posts %}
+                    <li><a class="menu" href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -401,8 +402,8 @@
     <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
 
     <!-- Three.js Star Effect -->
-    <script src="/v/js/three.min.js"></script>
-    <script src="/v/js/star.js"></script>
+    <script src="{{ site.baseurl }}/js/three.min.js"></script>
+    <script src="{{ site.baseurl }}/js/star.js"></script>
 
     <!-- Canvas Effect REMOVED - thumsCanvas element no longer exists -->
     <!-- <script src="js/canvas2.js"></script> -->
@@ -413,34 +414,30 @@
 
     <!-- cute-cnblogs Minimal Scripts -->
     <!-- milusidebar.js removed - depends on tippy.js which we removed -->
-    <script src="/v/js/cute-cnblogs-minimal.js"></script>
-    <script src="/v/js/monitoring2.js"></script>
+    <script src="{{ site.baseurl }}/js/cute-cnblogs-minimal.js"></script>
+    <script src="{{ site.baseurl }}/js/monitoring2.js"></script>
 
 
     <script>
         // ===== miluframe Configuration (Minimal) =====
         miluframe({
-            Youself: 'https://boyoboyoyo.github.io/v/',
+            Youself: '{{ site.url }}{{ site.baseurl }}/',
 
-            /* Navigation - Home, Quantum, and Relativity */
+            /* Navigation - Home and all posts */
             custom: [{
                 name: 'Home',
-                link: 'https://boyoboyoyo.github.io/v/',
+                link: '{{ site.url }}{{ site.baseurl }}/',
                 istarget: false
-            }, {
-                name: 'Quantum',
-                link: 'https://boyoboyoyo.github.io/v/quantum.html',
+            }{% for post in site.posts %}, {
+                name: '{{ post.title }}',
+                link: '{{ site.url }}{{ site.baseurl }}{{ post.url }}',
                 istarget: false
-            }, {
-                name: 'Relativity',
-                link: 'https://boyoboyoyo.github.io/v/relativity.html',
-                istarget: false
-            }],
+            }{% endfor %}],
 
             /* Profile */
             resume: {
                 "name": "barker",
-                "link": "https://boyoboyoyo.github.io/v/",
+                "link": '{{ site.url }}{{ site.baseurl }}/',
                 "headurl": "https://pic.cnblogs.com/avatar/default.jpg",
                 "introduction": "Blood Creation Platform"
             },
@@ -494,7 +491,7 @@
                 audio: [{
                     name: 'The Princess of Fake Moon Loop A',
                     artist: 'Unknown',
-                    url: '/v/siryou/The_Princess_of_Fake_Moon_Loop_A.mp3'
+                    url: '{{ site.baseurl }}/siryou/The_Princess_of_Fake_Moon_Loop_A.mp3'
                 }]
             });
 
@@ -506,7 +503,7 @@
             const tracks = [{
                 name: 'The Princess of Fake Moon Loop A',
                 artist: 'Unknown',
-                url: '/v/siryou/The_Princess_of_Fake_Moon_Loop_A.mp3'
+                url: '{{ site.baseurl }}/siryou/The_Princess_of_Fake_Moon_Loop_A.mp3'
             }];
             let currentTrack = 0;
 
@@ -640,7 +637,7 @@
     <div id="jsi-flying-fish-container"></div>
 
     <!-- Original Fish Animation -->
-    <script src="/v/js/fish.js"></script>
+    <script src="{{ site.baseurl }}/js/fish.js"></script>
 
 </body>
 </html>
