@@ -40,11 +40,17 @@
         /* Custom styles for barker */
         html {
             /* scroll-behavior: smooth; REMOVED - causes forced scroll issues */
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
         }
 
         body {
             font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Segoe UI", Helvetica, Arial, sans-serif;
             line-height: 1.6;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            position: relative !important;
+            min-height: 100vh !important;
         }
 
         /* Title centering - Override cute-cnblogs2.css */
@@ -174,11 +180,15 @@
             background: #66b1ff;
         }
 
-        /* Mobile scroll fixes - allow normal scrolling */
+        /* Mobile scroll fixes - ensure smooth scrolling */
         html, body {
-            overscroll-behavior: auto !important;
-            touch-action: auto !important;
             -webkit-overflow-scrolling: touch !important;
+        }
+
+        /* Ensure main content is scrollable */
+        #main, #mainContent, #home {
+            overflow: visible !important;
+            position: relative !important;
         }
 
         /* Disable fly_top button completely */
@@ -413,7 +423,7 @@
     <!-- cute-cnblogs Minimal Scripts -->
     <!-- milusidebar.js removed - depends on tippy.js which we removed -->
     <script src="{{ site.baseurl }}/js/cute-cnblogs-minimal.js"></script>
-    <script src="{{ site.baseurl }}/js/monitoring2.js"></script>
+    <!-- monitoring2.js disabled for testing -->
 
 
     <script>
