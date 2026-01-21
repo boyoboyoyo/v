@@ -7,11 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>barker - Blood Creation Platform</title>
 
-    <!-- cute-cnblogs Phase 2 CSS -->
+    <!-- cute-cnblogs CSS -->
     <link rel="stylesheet" href="css/cute-cnblogs2.css">
     <link rel="stylesheet" href="css/animate.min.css">
-    <link rel="stylesheet" href="css/tippy.min.css">
-    <link rel="stylesheet" href="css/OwO.min.css">
     <link rel="stylesheet" href="icon/iconfont.css">
 
     <!-- Icon Font -->
@@ -303,41 +301,10 @@
             transform: scale(1.1) !important;
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
         }
-
-        /* Make catalogue and sidebar more accessible */
-        #sideBar, #catalogue {
-            transition: clip-path 0.4s ease-in-out, visibility 0.4s;
-        }
-
-        #sideBar:hover, #catalogue:hover,
-        #sideBar:focus-within, #catalogue:focus-within {
-            /* Better visibility on desktop */
-        }
     </style>
 </head>
 <body>
-    <!-- Page Header Buttons (Phase 2) -->
-    <div id="set_btn_box">
-        <div class="set_btn fly_top fadeIn animated">
-            <svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhiding"></use></svg>
-        </div>
-        <div class="set_btn article_icon_btn catalogue_btn">
-            <svg class="icon" aria-hidden="true" style="color:#97A1A7"><use xlink:href="#icon-dagang"></use></svg>
-        </div>
-        <div class="set_btn article_icon_btn comment">
-            <a href="#comment_form_container"><svg class="icon" aria-hidden="true" style="color:#97A1A7"><use xlink:href="#icon-linedesign-01"></use></svg></a>
-        </div>
-        <div class="set_btn skin_btn">
-            <svg class="icon" aria-hidden="true" style="color:#97A1A7"><use xlink:href="#icon-pifu"></use></svg>
-        </div>
-        <div class="set_btn article_icon_btn artice_recommend">
-            <svg class="icon" aria-hidden="true" style="color:#97A1A7"><use xlink:href="#icon-tuijian2"></use></svg>
-        </div>
-        <canvas id="thumsCanvas" width="200" height="400" style="width:100px;height:200px"></canvas>
-        <div class="set_btn catalogue">
-            <svg class="icon" aria-hidden="true" style="color:#97A1A7"><use xlink:href="#icon-cebianlan-"></use></svg>
-        </div>
-    </div>
+    <!-- Page Buttons Removed - Only APlayer, Fish, and Icons kept -->
 
     <!-- Main Content -->
     <div id="home">
@@ -468,7 +435,6 @@
                     <h3 class="catListTitle">Statistics</h3>
                     <div id="blog-stats">
                         <div>Posts: <span id="post_count">0</span></div>
-                        <div>Comments: <span id="comment_count">0</span></div>
                         <div>Views: <span id="view_count">0</span></div>
                     </div>
                 </div>
@@ -489,13 +455,8 @@
     <!-- APlayer -->
     <div id="aplayer"></div>
 
-    <!-- APlayer -->
+    <!-- APlayer Script -->
     <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
-
-    <!-- Popper.js & Tippy.js -->
-    <script src="https://blog-static.cnblogs.com/files/miluluyo/popper.min.js"></script>
-    <script src="https://unpkg.com/@popperjs/core@2.4.2/dist/umd/popper.min.js"></script>
-    <script src="js/tippy.js"></script>
 
     <!-- Three.js Star Effect -->
     <script src="js/three.min.js"></script>
@@ -508,43 +469,25 @@
     <canvas width="1777" height="841" style="position: fixed; left: 0px; top: 0px; z-index: 2147483647; pointer-events: none;"></canvas>
     <script src="https://blog-static.cnblogs.com/files/miluluyo/mouse-click.js"></script>
 
-    <!-- OwO Emoji Picker -->
-    <script src="js/OwO.min.js"></script>
-
-    <!-- cute-cnblogs Phase 2 Scripts -->
+    <!-- cute-cnblogs Minimal Scripts -->
     <script src="js/milusidebar.js"></script>
-
-    <!-- SIMPLE VERSION - Working features + APlayer -->
-    <script src="js/cute-cnblogs-simple.js"></script>
-
+    <script src="js/cute-cnblogs-fixed.js"></script>
     <script src="js/monitoring2.js"></script>
 
 
     <script>
-        // ===== miluframe Configuration (Phase 2) =====
+        // ===== miluframe Configuration (Minimal) =====
         miluframe({
-            Youself: 'https://boyoboyoyo.github.io/v/', /* Personal blog URL */
+            Youself: 'https://boyoboyoyo.github.io/v/',
 
-            /* Navigation */
+            /* Navigation - Home only */
             custom: [{
                 name: 'Home',
                 link: 'https://boyoboyoyo.github.io/v/',
                 istarget: false
-            }, {
-                name: 'GitHub',
-                link: 'https://github.com/boyoboyoyo/v',
-                istarget: true
-            }, {
-                name: 'About',
-                link: '#about',
-                istarget: false
-            }, {
-                name: 'Contact',
-                link: '#contact',
-                istarget: false
             }],
 
-            /* Friend link info */
+            /* Profile */
             resume: {
                 "name": "barker",
                 "link": "https://boyoboyoyo.github.io/v/",
@@ -552,10 +495,10 @@
                 "introduction": "Blood Creation Platform"
             },
 
-            /* Friend links */
+            /* Empty - no friend links */
             unionbox: [],
 
-            /* Friend link table header */
+            /* Empty - no friend link table */
             details: [{
                 field: 'name',
                 literal: 'Name',
