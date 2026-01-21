@@ -471,7 +471,7 @@
 
     <!-- cute-cnblogs Minimal Scripts -->
     <script src="js/milusidebar.js"></script>
-    <script src="js/cute-cnblogs-fixed.js"></script>
+    <script src="js/cute-cnblogs-minimal.js"></script>
     <script src="js/monitoring2.js"></script>
 
 
@@ -542,12 +542,6 @@
             'popper_weixin': '<div class="popper_box"><p><b>Nice to meet you! (づ｡◕ᴗᴗ◕｡)づ</b></p></div>', /* WeChat popup */
             'portrait': 'https://pic.cnblogs.com/avatar/default.jpg' /* Avatar */
         });
-
-        // ===== Generate Table of Contents =====
-        // Call GenerateContentList function from cute-cnblogs-fixed.js
-        if (typeof GenerateContentList === 'function') {
-            GenerateContentList();
-        }
 
         // ===== APlayer Music Player =====
         const ap = new APlayer({
