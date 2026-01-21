@@ -191,6 +191,19 @@
             position: relative !important;
         }
 
+        /* Override cute-cnblogs2.css overflow settings */
+        html, body {
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            height: auto !important;
+            min-height: 100vh !important;
+        }
+
+        /* Remove all scroll restrictions */
+        * {
+            touch-action: auto !important;
+        }
+
         /* Disable fly_top button completely */
         .fly_top {
             display: none !important;
