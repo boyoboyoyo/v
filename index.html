@@ -462,15 +462,15 @@
     <script src="js/three.min.js"></script>
     <script src="js/star.js"></script>
 
-    <!-- Canvas Effect -->
-    <script src="js/canvas2.js"></script>
+    <!-- Canvas Effect REMOVED - thumsCanvas element no longer exists -->
+    <!-- <script src="js/canvas2.js"></script> -->
 
     <!-- Mouse Click Effect -->
     <canvas width="1777" height="841" style="position: fixed; left: 0px; top: 0px; z-index: 2147483647; pointer-events: none;"></canvas>
     <script src="https://blog-static.cnblogs.com/files/miluluyo/mouse-click.js"></script>
 
     <!-- cute-cnblogs Minimal Scripts -->
-    <script src="js/milusidebar.js"></script>
+    <!-- milusidebar.js removed - depends on tippy.js which we removed -->
     <script src="js/cute-cnblogs-minimal.js"></script>
     <script src="js/monitoring2.js"></script>
 
@@ -543,34 +543,36 @@
             'portrait': 'https://pic.cnblogs.com/avatar/default.jpg' /* Avatar */
         });
 
-        // ===== APlayer Music Player =====
-        const ap = new APlayer({
-            container: document.getElementById('aplayer'),
-            fixed: true,
-            theme: '#409EFF',
-            audio: [{
+        $(document).ready(function() {
+            console.log('barker - Blood Creation Platform Ready');
+
+            // ===== APlayer Music Player =====
+            const ap = new APlayer({
+                container: document.getElementById('aplayer'),
+                fixed: true,
+                theme: '#409EFF',
+                audio: [{
+                    name: 'The Princess of Fake Moon Loop A',
+                    artist: 'Unknown',
+                    url: 'siryou/The_Princess_of_Fake_Moon_Loop_A.mp3'
+                }]
+            });
+
+            console.log('APlayer initialized:', ap);
+
+            // ===== Custom Music Controls =====
+            let isPlaying = false;
+            const tracks = [{
                 name: 'The Princess of Fake Moon Loop A',
                 artist: 'Unknown',
                 url: 'siryou/The_Princess_of_Fake_Moon_Loop_A.mp3'
-            }]
-        });
+            }];
+            let currentTrack = 0;
 
-        // ===== Custom Music Controls =====
-        let isPlaying = false;
-        const tracks = [{
-            name: 'The Princess of Fake Moon Loop A',
-            artist: 'Unknown',
-            url: 'siryou/The_Princess_of_Fake_Moon_Loop_A.mp3'
-        }];
-        let currentTrack = 0;
-
-        function updateTrackInfo() {
-            $('#current-song').text(tracks[currentTrack].name);
-            $('#current-artist').text(tracks[currentTrack].artist);
-        }
-
-        $(document).ready(function() {
-            console.log('barker - Blood Creation Platform Ready');
+            function updateTrackInfo() {
+                $('#current-song').text(tracks[currentTrack].name);
+                $('#current-artist').text(tracks[currentTrack].artist);
+            }
 
             // Music controls
             $('#play-pause-btn').click(function() {
