@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-cross-origin" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{% if page.title %}{{ page.title }} - {% endif %}barker - Blood Creation Platform</title>
+
+    <!-- cute-cnblogs CSS -->
+    <link rel="stylesheet" href="/v/css/cute-cnblogs2.css">
+    <link rel="stylesheet" href="/v/css/animate.min.css">
+    <link rel="stylesheet" href="/v/icon/iconfont.css">
+
+    <!-- Icon Font -->
+    <script src="/v/js/font_1825850_klax1ao4o6.js"></script>
+
+    <!-- APlayer CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+
+    <!-- jQuery (must load before other scripts) -->
+    <script src="/v/js/jquery2.min.js"></script>
+
+    <!-- MathJax for LaTeX -->
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            tags: 'ams'
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* Custom styles for barker */
+        html {
+            /* scroll-behavior: smooth; REMOVED - causes forced scroll issues */
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Title centering - Override cute-cnblogs2.css */
+        #header {
+            text-align: center !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+        #blogTitle {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+        }
+        .vertical {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        #Header1_HeaderTitle {
+            display: block !important;
+            text-align: center !important;
+        }
+
+        /* Remove background images to fix about:blank errors */
+        body::after {
+            display: none !important;
+        }
+        div#home::after {
+            display: none !important;
+        }
+
+        /* Flying Fish Container Styles */
+        #jsi-flying-fish-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            z-index: 1;
+        }
+
+        /* Footnote Styles */
+        .footnote-ref {
+            font-size: 0.8em;
+            vertical-align: super;
+            color: #409EFF;
+            cursor: help;
+            font-weight: bold;
+        }
+        .footnotes {
+            font-size: 0.9em;
+            color: #666;
+            padding-left: 20px;
+            margin-top: 30px;
+        }
+        .footnotes li {
+            margin-bottom: 10px;
+        }
+        .footnotes li[id]::before {
+            content: attr(id) ". ";
+            font-weight: bold;
+            color: #409EFF;
+        }
+
+        /* Music player customization */
+        #aplayer {
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            z-index: 9999 !important;
+            display: block !important;
+        }
+
+        /* Ensure APlayer is visible */
+        .aplayer {
+            min-width: 300px !important;
+            margin: 0 !important;
+        }
+
+        .music-widget {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .music-player {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .music-info {
+            text-align: left;
+        }
+
+        .music-title {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .music-artist {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .music-controls {
+            display: flex;
+            gap: 5px;
+        }
+
+        .music-btn {
+            background: #409EFF;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .music-btn:hover {
+            background: #66b1ff;
+        }
+
+        /* Mobile scroll fixes - prevent forced scroll behavior */
+        html, body {
+            overscroll-behavior: none !important;
+            overscroll-behavior-x: none !important;
+            overscroll-behavior-y: none !important;
+            touch-action: pan-y pan-x !important;
+            -webkit-overflow-scrolling: auto !important;
+        }
+
+        /* Disable fly_top button completely */
+        .fly_top {
+            display: none !important;
+            pointer-events: none !important;
+        }
+
+        /* Mobile improvements */
+        @media (max-width: 1300px) {
+            #set_btn_box {
+                bottom: 120px;
+                right: 16px;
+            }
+
+            .set_btn {
+                width: 48px !important;
+                height: 48px !important;
+                line-height: 48px !important;
+                margin-bottom: 12px;
+                border-radius: 50% !important;
+            }
+
+            .set_btn svg {
+                width: 24px !important;
+                height: 24px !important;
+                margin: 12px auto !important;
+            }
+
+            /* Better sidebar transition */
+            #sideBar.show, #catalogue.show {
+                clip-path: circle(150% at 100% 100%) !important;
+                -webkit-clip-path: circle(150% at 100% 100%) !important;
+            }
+
+            /* Add close button for sidebar */
+            #sideBar::before, #catalogue::before {
+                content: '×';
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                font-size: 40px;
+                font-weight: bold;
+                color: #333;
+                z-index: 9999;
+                cursor: pointer;
+                display: block;
+            }
+        }
+
+        @media (max-width: 767px) {
+            #set_btn_box {
+                bottom: 80px;
+                right: 12px;
+            }
+
+            .set_btn {
+                width: 52px !important;
+                height: 52px !important;
+                line-height: 52px !important;
+            }
+
+            /* Improve navigation links for touch */
+            #navList li {
+                padding: 0.5rem;
+            }
+
+            #navList li a {
+                display: block;
+                padding: 12px 20px;
+                font-size: 1.1rem;
+            }
+
+            /* Better header on mobile */
+            #Header1_HeaderTitle {
+                font-size: 2rem !important;
+            }
+
+            .vertical h2 {
+                font-size: 0.9rem !important;
+            }
+        }
+
+        /* Typography improvements */
+        #cnblogs_post_body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        #cnblogs_post_body p {
+            margin-bottom: 1.2em;
+        }
+
+        #cnblogs_post_body h2 {
+            font-size: 1.8rem;
+            margin-top: 2em;
+            margin-bottom: 1em;
+            line-height: 1.4;
+        }
+
+        #cnblogs_post_body h3 {
+            font-size: 1.4rem;
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+        }
+
+        /* Better content readability */
+        .day .postCon {
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .postTitle2 {
+            font-size: 1.8rem !important;
+        }
+
+        /* Improve button visibility and usability */
+        .set_btn {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+            transition: transform 0.2s, box-shadow 0.2s !important;
+        }
+
+        .set_btn:hover, .set_btn:active {
+            transform: scale(1.1) !important;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Buttons Removed - Only APlayer, Fish, and Icons kept -->
+
+    <!-- Main Content -->
+    <div id="home">
+        <!-- Header -->
+        <div id="header">
+            <div id="blogTitle">
+                <div id="blogLogo">B</div>
+                <h1><a id="Header1_HeaderTitle" class="headermaintitle" href="/v/">barker</a></h1>
+                <h2>Blood Creation Platform</h2>
+            </div>
+            <div id="navigator">
+                <ul id="navList">
+                    <li><a class="menu" href="/v/">Home</a></li>
+                    <li><a class="menu" href="/v/quantum.html">Quantum</a></li>
+                    <li><a class="menu" href="/v/relativity.html">Relativity</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main -->
+        <div id="main">
+            <div id="mainContent">
+                <div class="forFlow">
+                    {{ content }}
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div id="sideBar">
+                <!-- milusidebar expects this structure -->
+                <div id="sidebar_news">
+                    <div class="newsItem">
+                    <h3 class="catListTitle">Music Player</h3>
+                    <div class="music-widget">
+                        <div class="music-player">
+                            <div class="music-info">
+                                <div class="music-title" id="current-song">The Princess of Fake Moon Loop A</div>
+                                <div class="music-artist" id="current-artist">Unknown</div>
+                            </div>
+                            <div class="music-controls">
+                                <button class="music-btn" id="prev-btn">Prev</button>
+                                <button class="music-btn play" id="play-pause-btn">Play</button>
+                                <button class="music-btn" id="next-btn">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="newsItem">
+                    <h3 class="catListTitle">Profile</h3>
+                    <div id="profile-block">
+                        <div id="blog-logo">
+                            <img id="blogLogo" src="https://pic.cnblogs.com/avatar/default.jpg" alt="avatar">
+                        </div>
+                        <div id="blog-signature">
+                            Creating blood through technology
+                        </div>
+                    </div>
+                </div>
+
+                <div class="newsItem">
+                    <h3 class="catListTitle">Statistics</h3>
+                    <div id="blog-stats">
+                        <div>Posts: <span id="post_count">{{ site.posts | size }}</span></div>
+                        <div>Views: <span id="view_count">0</span></div>
+                    </div>
+                </div>
+                </div>
+                <!-- End sidebar_news -->
+
+                <!-- Blog News (milusidebar expects this) -->
+                <div id="blog-news">
+                    <div id="p_b_follow" style="display:none;"></div>
+                    <div id="blog-calendar"></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <!-- APlayer -->
+    <div id="aplayer"></div>
+
+    <!-- APlayer Script -->
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+
+    <!-- Three.js Star Effect -->
+    <script src="/v/js/three.min.js"></script>
+    <script src="/v/js/star.js"></script>
+
+    <!-- Canvas Effect REMOVED - thumsCanvas element no longer exists -->
+    <!-- <script src="js/canvas2.js"></script> -->
+
+    <!-- Mouse Click Effect -->
+    <canvas width="1777" height="841" style="position: fixed; left: 0px; top: 0px; z-index: 2147483647; pointer-events: none;"></canvas>
+    <script src="https://blog-static.cnblogs.com/files/miluluyo/mouse-click.js"></script>
+
+    <!-- cute-cnblogs Minimal Scripts -->
+    <!-- milusidebar.js removed - depends on tippy.js which we removed -->
+    <script src="/v/js/cute-cnblogs-minimal.js"></script>
+    <script src="/v/js/monitoring2.js"></script>
+
+
+    <script>
+        // ===== miluframe Configuration (Minimal) =====
+        miluframe({
+            Youself: 'https://boyoboyoyo.github.io/v/',
+
+            /* Navigation - Home, Quantum, and Relativity */
+            custom: [{
+                name: 'Home',
+                link: 'https://boyoboyoyo.github.io/v/',
+                istarget: false
+            }, {
+                name: 'Quantum',
+                link: 'https://boyoboyoyo.github.io/v/quantum.html',
+                istarget: false
+            }, {
+                name: 'Relativity',
+                link: 'https://boyoboyoyo.github.io/v/relativity.html',
+                istarget: false
+            }],
+
+            /* Profile */
+            resume: {
+                "name": "barker",
+                "link": "https://boyoboyoyo.github.io/v/",
+                "headurl": "https://pic.cnblogs.com/avatar/default.jpg",
+                "introduction": "Blood Creation Platform"
+            },
+
+            /* Empty - no friend links */
+            unionbox: [],
+
+            /* Empty - no friend link table */
+            details: [{
+                field: 'name',
+                literal: 'Name',
+            }, {
+                field: 'introduction',
+                literal: 'Description',
+            }, {
+                field: 'url',
+                literal: 'URL',
+            }, {
+                field: 'headurl',
+                literal: 'Avatar',
+            }],
+
+            /* Browser tab icon */
+            logoimg: 'https://pic.cnblogs.com/avatar/default.jpg',
+
+            /* Article title icons */
+            cuteicon: ['icon-caomei', 'icon-boluo', 'icon-huolongguo', 'icon-chengzi', 'icon-hamigua', 'icon-lizhi', 'icon-mangguo', 'icon-liulian', 'icon-lizi', 'icon-lanmei', 'icon-longyan', 'icon-shanzhu', 'icon-pingguo', 'icon-mihoutao', 'icon-niuyouguo', 'icon-xigua', 'icon-putao', 'icon-xiangjiao', 'icon-ningmeng', 'icon-yingtao', 'icon-taozi', 'icon-shiliu', 'icon-ximei', 'icon-shizi'],
+
+            /* Show gratuity button */
+            isGratuity: false,
+
+            /* Gratuity content */
+            gratuity: ''
+        });
+
+        // ===== milusidebar REMOVED - Sidebar functionality disabled =====
+
+        $(document).ready(function() {
+            console.log('barker - Blood Creation Platform Ready');
+
+            // ===== APlayer Music Player =====
+            console.log('Initializing APlayer...');
+            const container = document.getElementById('aplayer');
+            console.log('APlayer container found:', container);
+
+            const ap = new APlayer({
+                container: container,
+                fixed: true,
+                theme: '#409EFF',
+                autoplay: false,
+                audio: [{
+                    name: 'The Princess of Fake Moon Loop A',
+                    artist: 'Unknown',
+                    url: '/v/siryou/The_Princess_of_Fake_Moon_Loop_A.mp3'
+                }]
+            });
+
+            console.log('APlayer initialized:', ap);
+            console.log('APlayer container dimensions:', container.offsetWidth, 'x', container.offsetHeight);
+
+            // ===== Custom Music Controls =====
+            let isPlaying = false;
+            const tracks = [{
+                name: 'The Princess of Fake Moon Loop A',
+                artist: 'Unknown',
+                url: '/v/siryou/The_Princess_of_Fake_Moon_Loop_A.mp3'
+            }];
+            let currentTrack = 0;
+
+            function updateTrackInfo() {
+                $('#current-song').text(tracks[currentTrack].name);
+                $('#current-artist').text(tracks[currentTrack].artist);
+            }
+
+            // Music controls
+            $('#play-pause-btn').click(function() {
+                if (isPlaying) {
+                    $(this).text('Play');
+                    ap.pause();
+                } else {
+                    $(this).text('Pause');
+                    ap.play();
+                }
+            });
+
+            $('#next-btn').click(function() {
+                currentTrack = (currentTrack + 1) % tracks.length;
+                updateTrackInfo();
+                ap.skipForward();
+            });
+
+            $('#prev-btn').click(function() {
+                currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+                updateTrackInfo();
+                ap.skipBack();
+            });
+
+            // APlayer events
+            ap.on('play', function() {
+                $('#play-pause-btn').text('Pause');
+                isPlaying = true;
+            });
+
+            ap.on('pause', function() {
+                $('#play-pause-btn').text('Play');
+                isPlaying = false;
+            });
+        });
+    </script>
+
+    <!-- Click Effect (Cute Text on Click) -->
+    <script>
+        var a_idx = 0;
+        jQuery(document).ready(function($) {
+            $("body").click(function(e) {
+                var a = new Array(
+                    "Live out yourself.",
+                    "A good plan today is better than a perfect plan tomorrow.",
+                    "Don't give up easily.",
+                    "Every moment is a fresh beginning.",
+                    "Change the game, don't let the game change you.",
+                    "Your actions define you.",
+                    "Take risks for your beliefs.",
+                    "Some birds cannot be caged.",
+                    "Our choices define who we become.",
+                    "Keep swimming forward.",
+                    "Some roads must be walked alone.",
+                    "May you have stars in your eyes.",
+                    "Ride dreams, cherish youth.",
+                    "Achievements come from spare time.",
+                    "Be happy.",
+                    "Be young, be emotional.",
+                    "I was born ordinary, born proud.",
+                    "I walk slowly, but never retreat.",
+                    "Stay innocent, stay happy.",
+                    "You look like good weather.",
+                    "Self-help is the best help."
+                );
+                var le = Math.ceil(Math.random() * a.length);
+                var $i = $("<span></span>").text(a[le]);
+                var x = e.pageX;
+                var y = e.pageY;
+                $i.css({
+                    "z-index": 999999999,
+                    "top": y - 20,
+                    "left": x,
+                    "position": "absolute",
+                    "font-weight": "bold",
+                    "color": "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+                });
+                $("body").append($i);
+                $i.animate({
+                    "top": y - 180,
+                    "opacity": 0
+                }, 2000, function() {
+                    $i.remove();
+                });
+            });
+        });
+    </script>
+
+    <!-- Mobile Responsive Style -->
+    <style id="ceshicss">
+        @media (max-width: 767px) {
+            #set_btn_box {
+                width: 100vw;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: hsla(0, 0%, 100%, .6);
+                height: 49px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 40px;
+                border-top: 1px solid #e8e8e8;
+                box-sizing: border-box;
+            }
+            .set_btn {
+                margin-top: 0;
+            }
+            .set_btn.fly_top.fadeIn.animated {
+                position: absolute;
+                right: 10px;
+                bottom: 60px;
+            }
+            .container {
+                bottom: 50px
+            }
+        }
+        #mainContent {
+            width: 90%
+        }
+    </style>
+
+    <!-- Flying Fish Container (Phase 1) -->
+    <div id="jsi-flying-fish-container"></div>
+
+    <!-- Original Fish Animation -->
+    <script src="/v/js/fish.js"></script>
+
+</body>
+</html>
