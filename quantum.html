@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="referrer" content="origin-when-cross-origin" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>barker - Blood Creation Platform</title>
+    <title>barker - Quantum Mechanics - Blood Creation Platform</title>
 
     <!-- cute-cnblogs CSS -->
     <link rel="stylesheet" href="css/cute-cnblogs2.css">
@@ -315,42 +315,94 @@
     <!-- Page Buttons Removed - Only APlayer, Fish, and Icons kept -->
 
     <!-- Main Content -->
-...ARTICLE CONTENT...
+    <div id="home">
+        <!-- Header -->
+        <div id="header">
+            <div id="blogTitle">
+                <div id="blogLogo">B</div>
+                <h1><a id="Header1_HeaderTitle" class="headermaintitle" href="#">barker</a></h1>
+                <h2>Blood Creation Platform</h2>
+            </div>
+            <div id="navigator">
+                <ul id="navList">
+                    <!-- Will be replaced by miluframe() -->
+                    <li><a class="menu" href="https://boyoboyoyo.github.io/v/">Home</a></li>
+                </ul>
+            </div>
+        </div>
 
-                    <!-- Article List -->
+        <!-- Main -->
+        <div id="main">
+            <div id="mainContent">
+                <div class="forFlow">
+                    <!-- Sample Post with LaTeX -->
                     <div class="day">
                         <div class="dayTitle">
-                            <a id="articles">Articles</a>
+                            <a id="post-sample">Sample Post - Introduction to Quantum Mechanics</a>
                         </div>
                     </div>
-
                     <div class="post">
                         <div class="postTitle">
-                            <a class="postTitle2" href="https://boyoboyoyo.github.io/v/quantum.html">🍓 Introduction to Quantum Mechanics</a>
+                            <a id="cb_post_title_url" class="postTitle2" href="https://boyoboyoyo.github.io/v/#post-sample">Introduction to Quantum Mechanics</a>
                         </div>
                         <div class="postCon">
-                            <div class="blogpost-body">
-                                <p>Explore the fundamental theory of quantum mechanics, including the Schrödinger equation, wave functions, the uncertainty principle, and quantum superposition.</p>
-                                <p><strong>Topics:</strong> Wave functions, Schrödinger equation, uncertainty principle, quantum superposition</p>
-                                <p style="margin-top: 15px;"><a href="https://boyoboyoyo.github.io/v/quantum.html" style="color: #409EFF; font-weight: bold;">→ Read Article</a></p>
-                            </div>
-                        </div>
-                    </div>
+                            <div id="cnblogs_post_body" class="blogpost-body">
+                                <h2>Introduction</h2>
+                                <p>Quantum mechanics is a fundamental theory in physics that provides a description of the physical properties of nature at the scale of atoms and subatomic particles.</p>
 
-                    <div class="post">
-                        <div class="postTitle">
-                            <a class="postTitle2" href="https://boyoboyoyo.github.io/v/relativity.html">🍊 Introduction to Special Relativity</a>
-                        </div>
-                        <div class="postCon">
-                            <div class="blogpost-body">
-                                <p>Discover Einstein's theory of special relativity, including Lorentz transformations, time dilation, length contraction, and mass-energy equivalence.</p>
-                                <p><strong>Topics:</strong> Lorentz transformations, time dilation, length contraction, E=mc²</p>
-                                <p style="margin-top: 15px;"><a href="https://boyoboyoyo.github.io/v/relativity.html" style="color: #409EFF; font-weight: bold;">→ Read Article</a></p>
+                                <h2>The Schrödinger Equation</h2>
+                                <p>The time-dependent Schrödinger equation is given by <span class="footnote-ref">[1]</span>:</p>
+
+                                <p>$$ i\hbar\frac{\partial}{\partial t}\Psi(x,t) = \hat{H}\Psi(x,t) $$</p>
+
+                                <p>Where:</p>
+                                <ul>
+                                    <li>$i$ is the imaginary unit</li>
+                                    <li>$\hbar$ is the reduced Planck constant</li>
+                                    <li>$\Psi(x,t)$ is the wave function</li>
+                                    <li>$\hat{H}$ is the Hamiltonian operator</li>
+                                </ul>
+
+                                <h2>Wave Function Properties</h2>
+                                <p>The wave function $\Psi(x,t)$ contains all information about the system. The probability density is given by <span class="footnote-ref">[2]</span>:</p>
+
+                                <p>$$ \rho(x,t) = |\Psi(x,t)|^2 $$</p>
+
+                                <h2>Heisenberg Uncertainty Principle</h2>
+                                <p>The uncertainty principle states that the more precisely the position of some particle is determined, the less precisely its momentum can be known, and vice versa:</p>
+
+                                <p>$$ \sigma_x \sigma_p \geq \frac{\hbar}{2} $$</p>
+
+                                <h2>Quantum Superposition</h2>
+                                <p>A quantum system can exist in a superposition of states:</p>
+
+                                <p>$$ |\Psi\rangle = \alpha|0\rangle + \beta|1\rangle $$</p>
+
+                                <p>Where $|\alpha|^2 + |\beta|^2 = 1$.</p>
+
+                                <h2>Conclusion</h2>
+                                <p>Quantum mechanics revolutionized our understanding of the microscopic world and continues to be fundamental to modern physics.</p>
+
+                                <hr>
+
+                                <h2>References</h2>
+                                <ol class="footnotes">
+                                    <li id="fn1">
+                                        Schrödinger, E. (1926). "An Undulatory Theory of the Mechanics of Atoms and Molecules". Physical Review. 28 (6): 1049–1070.
+                                    </li>
+                                    <li id="fn2">
+                                        Heisenberg, W. (1927). "Über den anschaulichen Inhalt der quantentheoretischen Kinematik und Mechanik". Zeitschrift für Physik. 43 (3-4): 172–198.
+                                    </li>
+                                    <li id="fn3">
+                                        Dirac, P. A. M. (1958). "The Principles of Quantum Mechanics" (4th ed.). Oxford University Press.
+                                    </li>
+                                </ol>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <!-- Sidebar -->
             <div id="sideBar">
@@ -434,14 +486,10 @@
         miluframe({
             Youself: 'https://boyoboyoyo.github.io/v/',
 
-            /* Navigation - Home, Quantum, and Relativity */
+            /* Navigation - Home and Relativity */
             custom: [{
                 name: 'Home',
                 link: 'https://boyoboyoyo.github.io/v/',
-                istarget: false
-            }, {
-                name: 'Quantum',
-                link: 'https://boyoboyoyo.github.io/v/quantum.html',
                 istarget: false
             }, {
                 name: 'Relativity',
