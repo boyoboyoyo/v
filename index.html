@@ -116,10 +116,18 @@
 
         /* Music player customization */
         #aplayer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            z-index: 9999;
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            z-index: 9999 !important;
+            display: block !important;
+        }
+
+        /* Ensure APlayer is visible */
+        .aplayer {
+            min-width: 300px !important;
+            margin: 0 !important;
         }
 
         .music-widget {
@@ -526,31 +534,21 @@
             gratuity: ''
         });
 
-        // ===== Sidebar Configuration (Phase 2) =====
-        milusidebar({
-            'names': 'barker', /* Blog name */
-            'notice': '<b>Welcome</b><span>Blood Creation Platform</span>', /* Notice content */
-            'headerUrl': 'https://images.cnblogs.com/cnblogs_com/miluluyo/1765646/o_200519075219notice5.png', /* Notice background */
-            'follow': '', /* Follow code */
-            'sidebarInfo': [[
-                {'icon': '#icon-github1', 'url': 'https://github.com/boyoboyoyo/v', 'title': 'GitHub'},
-                {'icon': '#icon-QQ', 'url': '', 'title': 'QQ'},
-                {'icon': '#icon-weibobangding', 'url': '', 'title': 'Weibo'},
-                {'icon': '#icon-bilibili', 'url': '', 'title': 'Bilibili'}
-            ]], /* Sidebar icons */
-            'signature': 'Creating blood through technology', /* Signature */
-            'popper_weixin': '<div class="popper_box"><p><b>Nice to meet you! (づ｡◕ᴗᴗ◕｡)づ</b></p></div>', /* WeChat popup */
-            'portrait': 'https://pic.cnblogs.com/avatar/default.jpg' /* Avatar */
-        });
+        // ===== milusidebar REMOVED - Sidebar functionality disabled =====
 
         $(document).ready(function() {
             console.log('barker - Blood Creation Platform Ready');
 
             // ===== APlayer Music Player =====
+            console.log('Initializing APlayer...');
+            const container = document.getElementById('aplayer');
+            console.log('APlayer container found:', container);
+
             const ap = new APlayer({
-                container: document.getElementById('aplayer'),
+                container: container,
                 fixed: true,
                 theme: '#409EFF',
+                autoplay: false,
                 audio: [{
                     name: 'The Princess of Fake Moon Loop A',
                     artist: 'Unknown',
@@ -559,6 +557,7 @@
             });
 
             console.log('APlayer initialized:', ap);
+            console.log('APlayer container dimensions:', container.offsetWidth, 'x', container.offsetHeight);
 
             // ===== Custom Music Controls =====
             let isPlaying = false;
