@@ -8,7 +8,6 @@ url: "https://boyoboyoyo.github.io"
 
 # Build settings
 markdown: kramdown
-theme: minima
 permalink: /:categories/:title/
 
 # Exclude from processing
@@ -16,23 +15,7 @@ exclude:
   - .git
   - .github
   - .gitignore
-  - index.html
   - index.html.backup
-  - quantum.html
-  - relativity.html
   - template-article.html
   - CONTENT-GUIDE.md
   - README.md
-
-# Plugins
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
-
-# Defaults
-defaults:
-  - scope:
-      path: ""
-      type: "posts"
-    values:
-      layout: "post"
