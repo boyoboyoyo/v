@@ -1,0 +1,13 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "barker",
+    "description": "",
+    "home_page_url": "https://boyoboyoyo.github.io/v",
+    "feed_url": "https://boyoboyoyo.github.io/v/feed.json",
+    "user_comment": "",
+    "author": {
+        "name": "v"
+    },
+    "items": [
+    ]
+}

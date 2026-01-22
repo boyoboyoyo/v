@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://boyoboyoyo.github.io/v/sitemap.xml
